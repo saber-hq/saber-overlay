@@ -18,7 +18,7 @@ let
     "solana-validator"
 
     # Speed up net.sh deploys by excluding unused binaries
-  ] ++ (lib.mkOptionals (validatorOnly == false) [
+  ] ++ (lib.optionals (validatorOnly == false) [
     "cargo-build-bpf"
     "cargo-test-bpf"
     "solana-dos"
@@ -56,5 +56,5 @@ in rustPlatform.buildRustPackage rec {
   strictDeps = true;
 
   # this is too slow
-  checkPhase = null;
+  doCheck = false;
 }

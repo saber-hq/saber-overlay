@@ -35,17 +35,17 @@ let
   ];
 in rustPlatform.buildRustPackage rec {
   pname = "solana";
-  version = "v1.6";
+  version = "v1.6.1";
 
   src = fetchFromGitHub {
     owner = "solana-labs";
     repo = pname;
     rev = version;
-    sha256 = "0gni7mvbyvqp0jzwsi37lailn9g4x1i2ai9ki7kf882j56dc9k68";
+    sha256 = "0pnrx1ama35yplfrbxy017bafya1yl329902dm3zvghjrz9pka04";
   };
 
   # partly inspired by https://github.com/obsidiansystems/solana-bridges/blob/develop/default.nix#L29
-  cargoSha256 = "0y6qrh1xlhfb9ga8nraw6kb8l9bs5c7z1bj0sbcp3sjl8dmhgsy8";
+  cargoSha256 = "1xliv17p3nbsd6cbpl6df457fc7m7cj553hyp6a35zgj47s3n3i0";
   verifyCargoDeps = true;
 
   cargoBuildFlags = builtins.map (name: "--bin=${name}") solanaPkgs;

@@ -1,6 +1,6 @@
-{ pkgs, validatorOnly ? false }:
+{ pkgs, lib ? pkgs.lib, validatorOnly ? false
+, buildRustPackage ? pkgs.rustPlatform.buildRustPackage }:
 
-with pkgs;
 let
   # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
   solanaPkgs = [
@@ -18,7 +18,7 @@ let
     "solana-validator"
 
     # Speed up net.sh deploys by excluding unused binaries
-  ] ++ (lib.optionals (validatorOnly == false) [
+  ] ++ (pkgs.lib.optionals (validatorOnly == false) [
     "cargo-build-bpf"
     "cargo-test-bpf"
     "solana-dos"
@@ -33,11 +33,12 @@ let
     # See https://github.com/solana-labs/solana/issues/5826
     "solana-genesis"
   ];
-in rustPlatform.buildRustPackage rec {
+
+in buildRustPackage rec {
   pname = "solana";
   version = "1.6.9";
 
-  src = fetchFromGitHub {
+  src = pkgs.fetchFromGitHub {
     owner = "solana-labs";
     repo = pname;
     rev = "v${version}";
@@ -50,9 +51,10 @@ in rustPlatform.buildRustPackage rec {
 
   cargoBuildFlags = builtins.map (name: "--bin=${name}") solanaPkgs;
 
-  LIBCLANG_PATH = "${llvmPackages.libclang}/lib";
-  nativeBuildInputs = [ clang llvm pkgconfig ];
-  buildInputs = [ openssl zlib ] ++ (lib.optionals stdenv.isLinux [ libudev ]);
+  LIBCLANG_PATH = "${pkgs.llvmPackages.libclang}/lib";
+  nativeBuildInputs = with pkgs; [ clang llvm pkgconfig ];
+  buildInputs = with pkgs;
+    ([ openssl zlib ] ++ (lib.optionals stdenv.isLinux [ libudev ]));
   strictDeps = true;
 
   # this is too slow

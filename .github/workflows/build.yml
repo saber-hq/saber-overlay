@@ -13,10 +13,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
     steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.9.0
-        with:
-          access_token: ${{ github.token }}
       - uses: actions/checkout@v2
       - uses: cachix/install-nix-action@v13
         with:
@@ -29,5 +25,5 @@ jobs:
         with:
           name: stableswap
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-      - run: nix build
-      - run: nix flake check
+      - run: nix build --show-trace
+      - run: nix flake check --show-trace

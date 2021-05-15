@@ -1,6 +1,5 @@
 { pkgs ? import <nixpkgs> { overlays = [ (import ./default.nix) ]; } }:
-with pkgs;
-buildEnv {
+pkgs.buildEnv {
   name = "stableswap-env";
-  paths = [ solana ];
+  paths = with pkgs.stableswap; [ solana anchor rustc cargo ];
 }

@@ -7,8 +7,11 @@ on:
     branches:
       - master
 jobs:
-  tests:
-    runs-on: [ubuntu-latest, macos-latest]
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.0

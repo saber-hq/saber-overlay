@@ -45,7 +45,7 @@ in rustPlatform.buildRustPackage rec {
   };
 
   # partly inspired by https://github.com/obsidiansystems/solana-bridges/blob/develop/default.nix#L29
-  cargoSha256 = "sha256-UVMozlOYxcgBDjOzTzAp6o1/wSITZRW/pPuxCdQvgqE=";
+  cargoSha256 = "sha256-jZtd4zj92dblR1VARaqgm7B6i//xllUyijO8mXo8e1U=";
   verifyCargoDeps = true;
 
   cargoBuildFlags = builtins.map (name: "--bin=${name}") solanaPkgs;

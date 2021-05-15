@@ -16,7 +16,9 @@
         };
         env = import ./shell.nix { inherit pkgs; };
       in {
-        packages = env.nativeBuildInputs;
+        packages = flake-utils.lib.flattenTree {
+          stableswap = pkgs.stableswap;
+        };
         devShell = env;
         defaultPackage = env;
       });

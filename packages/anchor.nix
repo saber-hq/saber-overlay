@@ -1,6 +1,6 @@
-{ pkgs, buildRustPackage ? pkgs.rustPlatform.buildRustPackage }:
+{ pkgs, rustPlatform ? pkgs.rustPlatform }:
 
-buildRustPackage rec {
+rustPlatform.buildRustPackage rec {
   pname = "anchor";
   version = "0.5.0";
 

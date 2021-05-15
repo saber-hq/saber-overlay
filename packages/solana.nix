@@ -1,5 +1,5 @@
-{ pkgs, lib ? pkgs.lib, validatorOnly ? false
-, buildRustPackage ? pkgs.rustPlatform.buildRustPackage }:
+{ pkgs, lib ? pkgs.lib, validatorOnly ? false, rustPlatform ? pkgs.rustPlatform
+}:
 
 let
   # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
@@ -34,7 +34,7 @@ let
     "solana-genesis"
   ];
 
-in buildRustPackage rec {
+in rustPlatform.buildRustPackage rec {
   pname = "solana";
   version = "1.6.9";
 

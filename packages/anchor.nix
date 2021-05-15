@@ -15,7 +15,8 @@ rustPlatform.buildRustPackage rec {
   verifyCargoDeps = true;
 
   nativeBuildInputs = with pkgs; [ pkgconfig ];
-  buildInputs = with pkgs; lib.optionals stdenv.isLinux [ libudev ];
+  buildInputs = with pkgs;
+    ([ openssl ] ++ (lib.optionals stdenv.isLinux [ libudev ]));
   strictDeps = true;
 
   # this is too slow

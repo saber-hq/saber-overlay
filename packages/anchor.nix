@@ -12,7 +12,8 @@ rustPlatform.buildRustPackage rec {
   };
 
   cargoSha256 = "sha256-X8C/VZV7VS/yUe2gouiQKG+PBMWsASQlQBHpfjSLH+g=";
-  verifyCargoDeps = true;
+  # this verifies differently on different operating systems
+  verifyCargoDeps = false;
 
   nativeBuildInputs = with pkgs; [ pkgconfig ];
   buildInputs = with pkgs;

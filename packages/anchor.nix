@@ -1,4 +1,4 @@
-{ pkgs, rustPlatform ? pkgs.rustPlatform }:
+{ pkgs, rustPlatform ? pkgs.rustPlatform, subPackages ? [ "anchor" ] }:
 
 rustPlatform.buildRustPackage rec {
   pname = "anchor";
@@ -13,6 +13,8 @@ rustPlatform.buildRustPackage rec {
 
   cargoSha256 = "sha256-6oBZphabvj1vOcrR03xq0uocRQShkVs3EzRw9iHDTvo=";
   verifyCargoDeps = true;
+
+  cargoBuildFlags = builtins.map (name: "--bin=${name}") subPackages;
 
   nativeBuildInputs = with pkgs; [ pkgconfig ];
   buildInputs = with pkgs;

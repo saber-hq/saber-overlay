@@ -11,7 +11,7 @@ _: pkgs: {
 
     anchor = pkgs.callPackage ./packages/anchor.nix {
       inherit rustPlatform pkgs;
-      inherit (pkgs.darwin.apple_sdk.frameworks) libobjc IOKit;
+      inherit (pkgs.darwin.apple_sdk.frameworks) IOKit;
     };
   };
 }

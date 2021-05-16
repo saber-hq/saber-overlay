@@ -18,7 +18,7 @@ rustPlatform.buildRustPackage rec {
   buildInputs = with pkgs;
     ([ openssl ] ++ (lib.optionals stdenv.isLinux [ libudev ]) ++ (
       # Fix for usb-related segmentation faults on darwin
-      lib.optionals stdenv.isDarwin [ libobjc IOKit ]));
+      lib.optionals stdenv.isDarwin [ IOKit ]));
   strictDeps = true;
 
   # this is too slow

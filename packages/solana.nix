@@ -1,5 +1,5 @@
-{ pkgs, lib ? pkgs.lib, validatorOnly ? false, rustPlatform ? pkgs.rustPlatform
-}:
+{ lib, validatorOnly ? false, rustPlatform, IOKit, clang, llvm, pkgconfig
+, libudev, openssl, zlib, libclang, fetchFromGitHub, stdenv }:
 
 let
   # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
@@ -18,7 +18,7 @@ let
     "solana-validator"
 
     # Speed up net.sh deploys by excluding unused binaries
-  ] ++ (pkgs.lib.optionals (validatorOnly == false) [
+  ] ++ (lib.optionals (validatorOnly == false) [
     "cargo-build-bpf"
     "cargo-test-bpf"
     "solana-dos"
@@ -38,7 +38,7 @@ in rustPlatform.buildRustPackage rec {
   pname = "solana";
   version = "1.6.9";
 
-  src = pkgs.fetchFromGitHub {
+  src = fetchFromGitHub {
     owner = "solana-labs";
     repo = pname;
     rev = "v${version}";
@@ -51,10 +51,12 @@ in rustPlatform.buildRustPackage rec {
 
   cargoBuildFlags = builtins.map (name: "--bin=${name}") solanaPkgs;
 
-  LIBCLANG_PATH = "${pkgs.llvmPackages.libclang}/lib";
-  nativeBuildInputs = with pkgs; [ clang llvm pkgconfig ];
-  buildInputs = with pkgs;
-    ([ openssl zlib ] ++ (lib.optionals stdenv.isLinux [ libudev ]));
+  LIBCLANG_PATH = "${libclang}/lib";
+  nativeBuildInputs = [ clang llvm pkgconfig ];
+  buildInputs = ([ openssl zlib ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
+    ++ (
+      # Fix for usb-related segmentation faults on darwin
+      lib.optionals stdenv.isDarwin [ IOKit ]);
   strictDeps = true;
 
   # this is too slow

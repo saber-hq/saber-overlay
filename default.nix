@@ -6,8 +6,13 @@ _: pkgs: {
       cargo = rust;
     });
 
-    solana =
-      pkgs.callPackage ./packages/solana.nix { inherit rustPlatform pkgs; };
+    solana = pkgs.callPackage ./packages/solana.nix {
+      inherit rustPlatform;
+      inherit (pkgs)
+        lib clang llvm pkgconfig libudev openssl zlib fetchFromGitHub stdenv;
+      inherit (pkgs.llvmPackages) libclang;
+      inherit (pkgs.darwin.apple_sdk.frameworks) IOKit;
+    };
 
     anchor = pkgs.callPackage ./packages/anchor.nix {
       inherit rustPlatform pkgs;

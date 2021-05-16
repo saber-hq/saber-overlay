@@ -9,7 +9,9 @@ _: pkgs: {
     solana =
       pkgs.callPackage ./packages/solana.nix { inherit rustPlatform pkgs; };
 
-    anchor =
-      pkgs.callPackage ./packages/anchor.nix { inherit rustPlatform pkgs; };
+    anchor = pkgs.callPackage ./packages/anchor.nix {
+      inherit rustPlatform pkgs;
+      inherit (pkgs.darwin.apple_sdk.frameworks) libobjc IOKit;
+    };
   };
 }

@@ -1,4 +1,5 @@
-{ pkgs, rustPlatform ? pkgs.rustPlatform, subPackages ? [ "anchor" ] }:
+{ pkgs, rustPlatform ? pkgs.rustPlatform, subPackages ? [ "anchor" ], libobjc
+, IOKit }:
 
 rustPlatform.buildRustPackage rec {
   pname = "anchor";
@@ -18,7 +19,9 @@ rustPlatform.buildRustPackage rec {
 
   nativeBuildInputs = with pkgs; [ pkgconfig ];
   buildInputs = with pkgs;
-    ([ openssl ] ++ (lib.optionals stdenv.isLinux [ libudev ]));
+    ([ openssl ] ++ (lib.optionals stdenv.isLinux [ libudev ]) ++ (
+      # Fix for usb-related segmentation faults on darwin
+      lib.optionals stdenv.isDarwin [ libobjc IOKit ]));
   strictDeps = true;
 
   # this is too slow

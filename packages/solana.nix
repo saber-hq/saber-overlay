@@ -1,5 +1,6 @@
-{ lib, validatorOnly ? false, rustPlatform, IOKit, clang, llvm, pkgconfig
-, libudev, openssl, zlib, libclang, fetchFromGitHub, stdenv }:
+{ lib, validatorOnly ? false, rustPlatform, IOKit, Security, CoreFoundation
+, AppKit, clang, llvm, pkgconfig, libudev, openssl, zlib, libclang
+, fetchFromGitHub, stdenv }:
 
 let
   # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
@@ -56,7 +57,7 @@ in rustPlatform.buildRustPackage rec {
   buildInputs = ([ openssl zlib ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
     ++ (
       # Fix for usb-related segmentation faults on darwin
-      lib.optionals stdenv.isDarwin [ IOKit ]);
+      lib.optionals stdenv.isDarwin [ IOKit Security CoreFoundation AppKit ]);
   strictDeps = true;
 
   # this is too slow

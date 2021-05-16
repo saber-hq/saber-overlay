@@ -11,7 +11,8 @@ _: pkgs: {
       inherit (pkgs)
         lib clang llvm pkgconfig libudev openssl zlib fetchFromGitHub stdenv;
       inherit (pkgs.llvmPackages) libclang;
-      inherit (pkgs.darwin.apple_sdk.frameworks) IOKit;
+      inherit (pkgs.darwin.apple_sdk.frameworks)
+        IOKit Security CoreFoundation AppKit;
     };
 
     anchor = pkgs.callPackage ./packages/anchor.nix {

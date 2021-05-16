@@ -1,4 +1,5 @@
-{ pkgs, rustPlatform ? pkgs.rustPlatform, IOKit }:
+{ pkgs, rustPlatform ? pkgs.rustPlatform, IOKit, Security, CoreFoundation
+, AppKit }:
 
 rustPlatform.buildRustPackage rec {
   pname = "anchor";
@@ -18,7 +19,7 @@ rustPlatform.buildRustPackage rec {
   buildInputs = with pkgs;
     ([ openssl ] ++ (lib.optionals stdenv.isLinux [ libudev ]) ++ (
       # Fix for usb-related segmentation faults on darwin
-      lib.optionals stdenv.isDarwin [ IOKit ]));
+      lib.optionals stdenv.isDarwin [ IOKit Security CoreFoundation AppKit ]));
   strictDeps = true;
 
   # this is too slow

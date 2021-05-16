@@ -14,11 +14,11 @@
           inherit system;
           overlays = [ rust-overlay.overlay (import ./default.nix) ];
         };
-        env = import ./shell.nix { inherit pkgs; };
+        env = import ./env.nix { inherit pkgs; };
       in {
         packages =
           flake-utils.lib.flattenTree { stableswap = pkgs.stableswap; };
-        devShell = env;
+        devShell = import ./shell.nix { inherit pkgs; };
         defaultPackage = env;
       });
 }

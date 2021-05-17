@@ -1,6 +1,6 @@
 { lib, validatorOnly ? false, rustPlatform, IOKit, Security, CoreFoundation
 , AppKit, clang, llvm, pkgconfig, libudev, openssl, zlib, libclang
-, fetchFromGitHub, stdenv }:
+, fetchFromGitHub, stdenv, System }:
 
 let
   # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84

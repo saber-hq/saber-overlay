@@ -17,3 +17,7 @@ in
     with nixpkgs;
 # ...
 ```
+
+## TODO
+
+- [ ] Make program compilation work on NixOS

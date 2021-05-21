@@ -8,15 +8,26 @@
   };
 
   outputs = { self, nixpkgs, rust-overlay, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
+    let
+      rustOverlay = import rust-overlay;
+
+      overlayBasic = import ./.;
+      overlayWithRust = final: prev:
+        (nixpkgs.lib.composeExtensions rustOverlay overlayBasic) final prev;
+    in {
+      overlay = overlayWithRust;
+      overlays = {
+        basic = overlayBasic;
+        withRust = overlayWithRust;
+      };
+    } // flake-utils.lib.eachDefaultSystem (system:
       let
-        stableswapOverlay = import ./.;
-        overlays = [ rust-overlay.overlay stableswapOverlay ];
-        pkgs = import nixpkgs { inherit system overlays; };
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ overlayWithRust ];
+        };
         env = import ./env.nix { inherit pkgs; };
       in {
-        inherit overlays;
-        overlay = stableswapOverlay;
         packages =
           flake-utils.lib.flattenTree { stableswap = pkgs.stableswap; };
         devShell = import ./shell.nix { inherit pkgs; };

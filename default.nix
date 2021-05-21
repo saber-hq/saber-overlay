@@ -20,5 +20,14 @@ _: pkgs: {
       inherit (pkgs.darwin.apple_sdk.frameworks)
         IOKit Security CoreFoundation AppKit;
     };
+
+    spl-token-cli = pkgs.callPackage ./packages/spl-token-cli.nix {
+      inherit rustPlatform;
+      inherit (pkgs)
+        lib clang llvm pkgconfig libudev openssl zlib stdenv fetchCrate;
+      inherit (pkgs.llvmPackages) libclang;
+      inherit (pkgs.darwin.apple_sdk.frameworks)
+        IOKit Security CoreFoundation AppKit;
+    };
   };
 }

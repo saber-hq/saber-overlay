@@ -10,11 +10,13 @@
   outputs = { self, nixpkgs, rust-overlay, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        overlays = [ rust-overlay.overlay (import ./default.nix) ];
+        stableswapOverlay = import ./.;
+        overlays = [ rust-overlay.overlay stableswapOverlay ];
         pkgs = import nixpkgs { inherit system overlays; };
         env = import ./env.nix { inherit pkgs; };
       in {
         inherit overlays;
+        overlay = stableswapOverlay;
         packages =
           flake-utils.lib.flattenTree { stableswap = pkgs.stableswap; };
         devShell = import ./shell.nix { inherit pkgs; };

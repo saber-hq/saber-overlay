@@ -1,5 +1,5 @@
 { pkgs }:
 pkgs.buildEnv {
   name = "stableswap-env";
-  paths = with pkgs.stableswap; [ solana anchor rust spl-token-cli ];
+  paths = with pkgs.stableswap; [ solana anchor spl-token-cli pkgs.python39 ];
 }

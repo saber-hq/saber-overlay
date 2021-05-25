@@ -22,4 +22,34 @@
     inherit (pkgs.darwin.apple_sdk.frameworks)
       IOKit Security CoreFoundation AppKit;
   };
+
+  solana-bpf-tools = with pkgs;
+    stdenv.mkDerivation rec {
+      name = "solana-bpf-tools";
+      version = "1.9";
+
+      src = fetchurl {
+        name = "solana-bpf-tools-linux";
+        url =
+          "https://github.com/solana-labs/bpf-tools/releases/download/v${version}/solana-bpf-tools-linux.tar.bz2";
+        sha256 = "sha256-+bHgqcIyrArTfP189un6Ip/BscrNARwtg9H8FfoYvvU=";
+      };
+      nativeBuildInputs = [ autoPatchelfHook stdenv.cc.cc.lib ];
+      buildInputs = [ openssl zlib ];
+
+      unpackPhase = ''
+        tar xjvf ${src}
+      '';
+
+      installPhase = ''
+        mkdir -p $out/bin
+        mkdir -p $out/lib
+
+        mv rust/bin/* $out/bin/
+        mv rust/lib/* $out/lib/
+
+        mv llvm/bin/* $out/bin/
+        mv llvm/lib/* $out/lib/
+      '';
+    };
 }

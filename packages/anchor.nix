@@ -3,7 +3,7 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "anchor";
-  version = "0.5.0";
+  version = "0.6.0";
 
   src = pkgs.fetchFromGitHub {
     owner = "project-serum";
@@ -12,7 +12,7 @@ rustPlatform.buildRustPackage rec {
     sha256 = "sha256-iTY6/jKeuyt1GFUjffQVkcl/vW8IdtwZ4ly9/KF0MGA=";
   };
 
-  cargoSha256 = "sha256-6oBZphabvj1vOcrR03xq0uocRQShkVs3EzRw9iHDTvo=";
+  cargoSha256 = "sha256-6zoucTtjgH+PhovkkyS/Y9tkcFLzzKEHR1P7jcvAto0=";
   verifyCargoDeps = true;
 
   nativeBuildInputs = with pkgs; [ pkgconfig ];

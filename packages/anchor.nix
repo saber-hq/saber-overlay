@@ -9,10 +9,10 @@ rustPlatform.buildRustPackage rec {
     owner = "project-serum";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-iTY6/jKeuyt1GFUjffQVkcl/vW8IdtwZ4ly9/KF0MGA=";
+    sha256 = "sha256-vMV3rhpvb9segy0V4E8Ym/i8KeafBnb0dxfj3i6RkO0=";
   };
 
-  cargoSha256 = "sha256-6zoucTtjgH+PhovkkyS/Y9tkcFLzzKEHR1P7jcvAto0=";
+  cargoSha256 = "sha256-IL87MSBUUNUeDWCZDtcwP5pqgeQCBEsHjM94Q8vu/dE=";
   verifyCargoDeps = true;
 
   nativeBuildInputs = with pkgs; [ pkgconfig ];

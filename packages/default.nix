@@ -26,13 +26,13 @@
   solana-bpf-tools = with pkgs;
     stdenv.mkDerivation rec {
       name = "solana-bpf-tools";
-      version = "1.9";
+      version = "1.5";
 
       src = fetchurl {
         name = "solana-bpf-tools-linux";
         url =
           "https://github.com/solana-labs/bpf-tools/releases/download/v${version}/solana-bpf-tools-linux.tar.bz2";
-        sha256 = "sha256-+bHgqcIyrArTfP189un6Ip/BscrNARwtg9H8FfoYvvU=";
+        sha256 = "sha256-UdqjoGh0kOaZdUNsUWqk64QE21VeC7GY30wjIalHq9U=";
       };
       nativeBuildInputs = [ autoPatchelfHook stdenv.cc.cc.lib ];
       buildInputs = [ openssl zlib ];

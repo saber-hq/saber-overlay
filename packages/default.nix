@@ -1,6 +1,7 @@
 { pkgs, rustPlatform }:
 let
-  darwinPackages = pkgs.lib.optionals pkgs.stdenv.isDarwin
+  darwinPackages =
+    pkgs.lib.optionals (pkgs.stdenv.isDarwin && pkgs.stdenv.isAarch64)
     (with pkgs.darwin.apple_sdk.frameworks; [
       IOKit
       Security

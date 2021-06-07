@@ -11,7 +11,7 @@
   anchor = pkgs.callPackage ./anchor.nix {
     inherit rustPlatform pkgs;
     inherit (pkgs.darwin.apple_sdk_11_0.frameworks)
-      IOKit Security CoreFoundation AppKit;
+      IOKit Security CoreFoundation AppKit System;
   };
 
   spl-token-cli = pkgs.callPackage ./spl-token-cli.nix {

@@ -15,7 +15,8 @@ rustPlatform.buildRustPackage rec {
 
   LIBCLANG_PATH = "${libclang}/lib";
   nativeBuildInputs = [ clang llvm pkgconfig ];
-  buildInputs = ([ openssl zlib ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
+  buildInputs =
+    ([ libclang openssl zlib ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
     ++ darwinPackages;
   strictDeps = true;
 }

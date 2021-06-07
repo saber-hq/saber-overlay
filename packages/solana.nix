@@ -53,7 +53,8 @@ in rustPlatform.buildRustPackage rec {
 
   LIBCLANG_PATH = "${libclang}/lib";
   nativeBuildInputs = [ clang llvm pkgconfig ];
-  buildInputs = ([ openssl zlib libclang ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
+  buildInputs =
+    ([ openssl zlib libclang ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
     ++ darwinPackages;
   strictDeps = true;
 

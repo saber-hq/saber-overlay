@@ -1,6 +1,5 @@
-{ lib, validatorOnly ? false, rustPlatform, IOKit, Security, CoreFoundation
-, AppKit, clang, llvm, pkgconfig, libudev, openssl, zlib, libclang
-, fetchFromGitHub, stdenv, System }:
+{ lib, validatorOnly ? false, rustPlatform, clang, llvm, pkgconfig, libudev
+, openssl, zlib, libclang, fetchFromGitHub, stdenv, darwinPackages }:
 
 let
   # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
@@ -55,13 +54,7 @@ in rustPlatform.buildRustPackage rec {
   LIBCLANG_PATH = "${libclang}/lib";
   nativeBuildInputs = [ clang llvm pkgconfig ];
   buildInputs = ([ openssl zlib ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
-    ++ (lib.optionals stdenv.isDarwin [
-      IOKit
-      Security
-      CoreFoundation
-      AppKit
-      System
-    ]);
+    ++ darwinPackages;
   strictDeps = true;
 
   # this is too slow

@@ -1,5 +1,4 @@
-{ pkgs, rustPlatform ? pkgs.rustPlatform, IOKit, Security, CoreFoundation
-, System, AppKit }:
+{ pkgs, rustPlatform ? pkgs.rustPlatform, darwinPackages }:
 
 rustPlatform.buildRustPackage rec {
   pname = "anchor";
@@ -17,14 +16,7 @@ rustPlatform.buildRustPackage rec {
 
   nativeBuildInputs = with pkgs; [ pkgconfig ];
   buildInputs = with pkgs;
-    ([ openssl ] ++ (lib.optionals stdenv.isLinux [ libudev ])
-      ++ (lib.optionals stdenv.isDarwin [
-        IOKit
-        Security
-        CoreFoundation
-        AppKit
-        System
-      ]));
+    [ openssl ] ++ (lib.optionals stdenv.isLinux [ libudev ]) ++ darwinPackages;
   strictDeps = true;
 
   # this is too slow

@@ -1,5 +1,5 @@
 { fetchCrate, lib, validatorOnly ? false, rustPlatform, IOKit, Security
-, CoreFoundation, AppKit, clang, llvm, pkgconfig, libudev, openssl, zlib
+, CoreFoundation, AppKit, clang, llvm, pkgconfig, libudev, openssl, zlib, System
 , libclang, stdenv }:
 
 rustPlatform.buildRustPackage rec {
@@ -17,8 +17,12 @@ rustPlatform.buildRustPackage rec {
   LIBCLANG_PATH = "${libclang}/lib";
   nativeBuildInputs = [ clang llvm pkgconfig ];
   buildInputs = ([ openssl zlib ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
-    ++ (
-      # Fix for usb-related segmentation faults on darwin
-      lib.optionals stdenv.isDarwin [ IOKit Security CoreFoundation AppKit ]);
+    ++ (lib.optionals stdenv.isDarwin [
+      IOKit
+      Security
+      CoreFoundation
+      AppKit
+      System
+    ]);
   strictDeps = true;
 }

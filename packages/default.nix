@@ -4,13 +4,13 @@
     inherit (pkgs)
       lib clang llvm pkgconfig libudev openssl zlib fetchFromGitHub stdenv;
     inherit (pkgs.llvmPackages) libclang;
-    inherit (pkgs.darwin.apple_sdk.frameworks)
-      IOKit Security CoreFoundation AppKit;
+    inherit (pkgs.darwin.apple_sdk_11_0.frameworks)
+      IOKit Security CoreFoundation AppKit System;
   };
 
   anchor = pkgs.callPackage ./anchor.nix {
     inherit rustPlatform pkgs;
-    inherit (pkgs.darwin.apple_sdk.frameworks)
+    inherit (pkgs.darwin.apple_sdk_11_0.frameworks)
       IOKit Security CoreFoundation AppKit;
   };
 
@@ -19,7 +19,7 @@
     inherit (pkgs)
       lib clang llvm pkgconfig libudev openssl zlib stdenv fetchCrate;
     inherit (pkgs.llvmPackages) libclang;
-    inherit (pkgs.darwin.apple_sdk.frameworks)
-      IOKit Security CoreFoundation AppKit;
+    inherit (pkgs.darwin.apple_sdk_11_0.frameworks)
+      IOKit Security CoreFoundation AppKit System;
   };
 }

@@ -1,6 +1,6 @@
 { lib, validatorOnly ? false, rustPlatform, IOKit, Security, CoreFoundation
 , AppKit, clang, llvm, pkgconfig, libudev, openssl, zlib, libclang
-, fetchFromGitHub, stdenv }:
+, fetchFromGitHub, stdenv, System }:
 
 let
   # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
@@ -37,17 +37,17 @@ let
 
 in rustPlatform.buildRustPackage rec {
   pname = "solana";
-  version = "1.6.9";
+  version = "1.6.10";
 
   src = fetchFromGitHub {
     owner = "solana-labs";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-U75eUp2ZFu/Fyg2/yTk1W3FFMr0yWfOloZFhf9fLxtE=";
+    sha256 = "sha256-07J2b4VylB5DlQ55pUcBVbtUy3kp7kQ+2QLTGqIjx/8=";
   };
 
   # partly inspired by https://github.com/obsidiansystems/solana-bridges/blob/develop/default.nix#L29
-  cargoSha256 = "sha256-jZtd4zj92dblR1VARaqgm7B6i//xllUyijO8mXo8e1U=";
+  cargoSha256 = "sha256-PgSz/84tKIq2yRHGGVROghlFhPwkbTGfdf0QUv0JpxQ=";
   verifyCargoDeps = true;
 
   cargoBuildFlags = builtins.map (name: "--bin=${name}") solanaPkgs;
@@ -55,9 +55,13 @@ in rustPlatform.buildRustPackage rec {
   LIBCLANG_PATH = "${libclang}/lib";
   nativeBuildInputs = [ clang llvm pkgconfig ];
   buildInputs = ([ openssl zlib ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
-    ++ (
-      # Fix for usb-related segmentation faults on darwin
-      lib.optionals stdenv.isDarwin [ IOKit Security CoreFoundation AppKit ]);
+    ++ (lib.optionals stdenv.isDarwin [
+      IOKit
+      Security
+      CoreFoundation
+      AppKit
+      System
+    ]);
   strictDeps = true;
 
   # this is too slow

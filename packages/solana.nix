@@ -51,7 +51,11 @@ in rustPlatform.buildRustPackage rec {
 
   cargoBuildFlags = builtins.map (name: "--bin=${name}") solanaPkgs;
 
-  LIBCLANG_PATH = "${libclang}/lib";
+  # weird errors. see https://github.com/NixOS/nixpkgs/issues/52447#issuecomment-852079285
+  LIBCLANG_PATH = "${libclang.lib}/lib";
+  BINDGEN_EXTRA_CLANG_ARGS =
+    "-isystem ${libclang.lib}/lib/clang/${lib.getVersion clang}/include";
+
   nativeBuildInputs = [ clang llvm pkgconfig ];
   buildInputs =
     ([ openssl zlib libclang ] ++ (lib.optionals stdenv.isLinux [ libudev ]))

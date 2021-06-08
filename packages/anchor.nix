@@ -1,25 +1,22 @@
-{ pkgs, rustPlatform ? pkgs.rustPlatform, IOKit, Security, CoreFoundation
-, AppKit }:
+{ pkgs, rustPlatform ? pkgs.rustPlatform, darwinPackages }:
 
 rustPlatform.buildRustPackage rec {
   pname = "anchor";
-  version = "0.6.0";
+  version = "0.7.0";
 
   src = pkgs.fetchFromGitHub {
     owner = "project-serum";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-vMV3rhpvb9segy0V4E8Ym/i8KeafBnb0dxfj3i6RkO0=";
+    sha256 = "sha256-3JdSjaGBCY/jV38RPeiVQZWkV8gGok8Od5Hl9O8QML4=";
   };
 
-  cargoSha256 = "sha256-IL87MSBUUNUeDWCZDtcwP5pqgeQCBEsHjM94Q8vu/dE=";
+  cargoSha256 = "sha256-iO/taWqyPww0yN24ZHKcOEZSBklMPsKiRBxxn+/aorc=";
   verifyCargoDeps = true;
 
   nativeBuildInputs = with pkgs; [ pkgconfig ];
   buildInputs = with pkgs;
-    ([ openssl ] ++ (lib.optionals stdenv.isLinux [ libudev ]) ++ (
-      # Fix for usb-related segmentation faults on darwin
-      lib.optionals stdenv.isDarwin [ IOKit Security CoreFoundation AppKit ]));
+    [ openssl ] ++ (lib.optionals stdenv.isLinux [ libudev ]) ++ darwinPackages;
   strictDeps = true;
 
   # this is too slow

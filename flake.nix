@@ -2,7 +2,7 @@
   description = "Nix overlay for StableSwap projects.";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/release-20.09";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     rust-overlay.url = "github:oxalica/rust-overlay";
     flake-utils.url = "github:numtide/flake-utils";
   };

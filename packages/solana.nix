@@ -1,6 +1,5 @@
-{ lib, validatorOnly ? false, rustPlatform, IOKit, Security, CoreFoundation
-, AppKit, clang, llvm, pkgconfig, libudev, openssl, zlib, libclang
-, fetchFromGitHub, stdenv }:
+{ lib, validatorOnly ? false, rustPlatform, clang, llvm, pkgconfig, libudev
+, openssl, zlib, libclang, fetchFromGitHub, stdenv, darwinPackages }:
 
 let
   # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
@@ -52,12 +51,15 @@ in rustPlatform.buildRustPackage rec {
 
   cargoBuildFlags = builtins.map (name: "--bin=${name}") solanaPkgs;
 
-  LIBCLANG_PATH = "${libclang}/lib";
+  # weird errors. see https://github.com/NixOS/nixpkgs/issues/52447#issuecomment-852079285
+  LIBCLANG_PATH = "${libclang.lib}/lib";
+  BINDGEN_EXTRA_CLANG_ARGS =
+    "-isystem ${libclang.lib}/lib/clang/${lib.getVersion clang}/include";
+
   nativeBuildInputs = [ clang llvm pkgconfig ];
-  buildInputs = ([ openssl zlib ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
-    ++ (
-      # Fix for usb-related segmentation faults on darwin
-      lib.optionals stdenv.isDarwin [ IOKit Security CoreFoundation AppKit ]);
+  buildInputs =
+    ([ openssl zlib libclang ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
+    ++ darwinPackages;
   strictDeps = true;
 
   # this is too slow

@@ -1,6 +1,5 @@
-{ fetchCrate, lib, validatorOnly ? false, rustPlatform, IOKit, Security
-, CoreFoundation, AppKit, clang, llvm, pkgconfig, libudev, openssl, zlib
-, libclang, stdenv }:
+{ fetchCrate, lib, validatorOnly ? false, rustPlatform, clang, llvm, pkgconfig
+, libudev, openssl, zlib, libclang, stdenv, darwinPackages }:
 
 rustPlatform.buildRustPackage rec {
   pname = "spl-token-cli";
@@ -16,9 +15,8 @@ rustPlatform.buildRustPackage rec {
 
   LIBCLANG_PATH = "${libclang}/lib";
   nativeBuildInputs = [ clang llvm pkgconfig ];
-  buildInputs = ([ openssl zlib ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
-    ++ (
-      # Fix for usb-related segmentation faults on darwin
-      lib.optionals stdenv.isDarwin [ IOKit Security CoreFoundation AppKit ]);
+  buildInputs =
+    ([ libclang openssl zlib ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
+    ++ darwinPackages;
   strictDeps = true;
 }

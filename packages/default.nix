@@ -17,7 +17,7 @@ in {
     inherit darwinPackages;
   };
 
-  anchor = pkgs.callPackage ./anchor.nix {
+  anchor = pkgs.callPackage ./anchor {
     inherit rustPlatform pkgs;
     inherit darwinPackages;
   };

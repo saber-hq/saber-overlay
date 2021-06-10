@@ -11,7 +11,11 @@ rustPlatform.buildRustPackage rec {
     sha256 = "sha256-3JdSjaGBCY/jV38RPeiVQZWkV8gGok8Od5Hl9O8QML4=";
   };
 
-  cargoSha256 = "sha256-iO/taWqyPww0yN24ZHKcOEZSBklMPsKiRBxxn+/aorc=";
+  cargoPatches = [
+    # a patch file to add/update Cargo.lock in the source code
+    ./update-Cargo.lock.patch
+  ];
+  cargoSha256 = "sha256-RjhR/mM3NpgbEhHkOIgTeqtds67ckte9xzAsmqkdRto=";
   verifyCargoDeps = true;
 
   nativeBuildInputs = with pkgs; [ pkgconfig ];

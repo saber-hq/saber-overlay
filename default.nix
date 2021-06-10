@@ -5,11 +5,13 @@ let
     rustc = rust;
     cargo = rust;
   });
-in {
   saber = {
     inherit rust rustPlatform;
   } // (import ./packages {
     inherit rustPlatform;
     pkgs = prev;
   });
+in {
+  inherit saber;
+  inherit (saber) solana spl-token-cli anchor;
 }

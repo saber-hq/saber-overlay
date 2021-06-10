@@ -11,9 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        # Don't currently support mac
-        # os: [ubuntu-latest, macos-latest]
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, macos-11]
     steps:
       - uses: actions/checkout@v2
       - uses: cachix/install-nix-action@v13

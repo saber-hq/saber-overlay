@@ -26,7 +26,7 @@ jobs:
       - name: Setup Cachix
         uses: cachix/cachix-action@v10
         with:
-          name: stableswap
+          name: saber
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - run: nix build --show-trace --print-build-logs
       - name: Check flake

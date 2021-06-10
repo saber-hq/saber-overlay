@@ -6,7 +6,7 @@ let
     cargo = rust;
   });
 in {
-  stableswap = {
+  saber = {
     inherit rust rustPlatform;
   } // (import ./packages {
     inherit rustPlatform;

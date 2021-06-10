@@ -1,5 +1,5 @@
 {
-  description = "Nix overlay for StableSwap projects.";
+  description = "Nix overlay for Saber projects.";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -28,8 +28,7 @@
         };
         env = import ./env.nix { inherit pkgs; };
       in {
-        packages =
-          flake-utils.lib.flattenTree { stableswap = pkgs.stableswap; };
+        packages = flake-utils.lib.flattenTree { saber = pkgs.saber; };
         devShell = import ./shell.nix { inherit pkgs; };
         defaultPackage = env;
       });

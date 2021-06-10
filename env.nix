@@ -1,7 +1,7 @@
 { pkgs }:
 pkgs.buildEnv {
-  name = "stableswap-env";
-  paths = with pkgs.stableswap; [
+  name = "saber-env";
+  paths = with pkgs.saber; [
     solana
     # TODO(igm): add anchor back in once it no longer uses a git dep
     # anchor 

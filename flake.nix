@@ -28,7 +28,10 @@
         };
         env = import ./env.nix { inherit pkgs; };
       in {
-        packages = flake-utils.lib.flattenTree { saber = pkgs.saber; };
+        packages = flake-utils.lib.flattenTree {
+          inherit (pkgs) solana spl-token-cli anchor;
+          inherit (pkgs) saber;
+        };
         devShell = import ./shell.nix { inherit pkgs; };
         defaultPackage = env;
       });

@@ -1,14 +1,18 @@
 final: prev:
 let
-  rust = prev.rust-bin.nightly."2021-06-09".default;
-  rustPlatform = prev.recurseIntoAttrs (prev.makeRustPlatform {
-    rustc = rust;
-    cargo = rust;
-  });
+  mkRust = rust: {
+    inherit rust;
+    rustPlatform = prev.recurseIntoAttrs (prev.makeRustPlatform {
+      rustc = rust;
+      cargo = rust;
+    });
+  };
+  rustNightly = mkRust prev.rust-bin.nightly."2021-06-09".default;
+  rustStable = mkRust prev.rust-bin.stable.latest.default;
   saber = {
-    inherit rust rustPlatform;
+    inherit rustNightly rustStable;
   } // (import ./packages {
-    inherit rustPlatform;
+    inherit rustNightly rustStable;
     pkgs = prev;
   });
 in {

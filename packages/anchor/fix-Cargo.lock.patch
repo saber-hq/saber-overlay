@@ -1,0 +1,13 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index d5f395d..4ada89d 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -2782,7 +2782,7 @@ dependencies = [
+ [[package]]
+ name = "serum_dex"
+ version = "0.3.1"
+-source = "git+https://github.com/project-serum/serum-dex?tag=v0.3.1#7d1d41538417aa8721aabea9503bf9d99eab7cc4"
++source = "git+https://github.com/project-serum/serum-dex#7d1d41538417aa8721aabea9503bf9d99eab7cc4"
+ dependencies = [
+  "arrayref",
+  "bincode",

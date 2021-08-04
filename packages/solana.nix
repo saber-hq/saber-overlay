@@ -24,7 +24,7 @@ let
     "solana-dos"
     "solana-install-init"
     "solana-stake-accounts"
-    "solana-stake-monitor"
+    # "solana-stake-monitor"
     "solana-test-validator"
     "solana-tokens"
     "solana-watchtower"
@@ -36,17 +36,17 @@ let
 
 in rustPlatform.buildRustPackage rec {
   pname = "solana";
-  version = "1.6.11";
+  version = "1.7.8";
 
   src = fetchFromGitHub {
     owner = "solana-labs";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-11QQAyJahOZaLnYL0xoi2FY+6VZm5FtzvCchwsXeRxQ=";
+    sha256 = "sha256-YMXDownw/vkgN9NW/BWk4z8sbugXDaAqRoMy3uDNnX4=";
   };
 
   # partly inspired by https://github.com/obsidiansystems/solana-bridges/blob/develop/default.nix#L29
-  cargoSha256 = "sha256-/iz5AUYnR3/v3mhFtrH6bX/0Nw+JqgrG9bbd01hd6zo=";
+  cargoSha256 = "sha256-7jsUzlvbTfk0rtj+VwVawLAn0bdftHJBQdj9Vyuf8wg=";
   verifyCargoDeps = true;
 
   cargoBuildFlags = builtins.map (name: "--bin=${name}") solanaPkgs;

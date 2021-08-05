@@ -9,11 +9,10 @@ let
   };
   rustNightly = mkRust prev.rust-bin.nightly."2021-08-01".minimal;
   rustStable = mkRust prev.rust-bin.stable.latest.minimal;
-  rustfmt = mkRust prev.rust-bin.stable.latest.rustfmt;
   saber = {
     inherit rustNightly rustStable;
   } // (import ./packages {
-    inherit rustNightly rustStable rustfmt;
+    inherit rustNightly rustStable;
     pkgs = prev;
   });
 in {

@@ -1,4 +1,4 @@
-{ pkgs, rustNightly, rustStable, rustfmt }:
+{ pkgs, rustNightly, rustStable }:
 let
   darwinPackages =
     pkgs.lib.optionals (pkgs.stdenv.isDarwin && pkgs.stdenv.isAarch64)
@@ -13,10 +13,10 @@ in {
   solana = pkgs.callPackage ./solana.nix {
     inherit (rustStable) rustPlatform;
     inherit (pkgs)
-      lib pkgconfig libudev openssl zlib fetchFromGitHub stdenv protobuf;
+      lib pkgconfig libudev openssl zlib fetchFromGitHub stdenv protobuf
+      rustfmt;
     inherit (pkgs.llvmPackages_12) clang llvm libclang;
     inherit darwinPackages;
-    inherit rustfmt;
   };
 
   anchor = pkgs.callPackage ./anchor {

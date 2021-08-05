@@ -1,4 +1,4 @@
-{ pkgs, rustNightly, rustStable }:
+{ pkgs, rustNightly, rustStable, rustfmt }:
 let
   darwinPackages =
     pkgs.lib.optionals (pkgs.stdenv.isDarwin && pkgs.stdenv.isAarch64)
@@ -16,6 +16,7 @@ in {
       lib pkgconfig libudev openssl zlib fetchFromGitHub stdenv protobuf;
     inherit (pkgs.llvmPackages_12) clang llvm libclang;
     inherit darwinPackages;
+    inherit rustfmt;
   };
 
   anchor = pkgs.callPackage ./anchor {

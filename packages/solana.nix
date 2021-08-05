@@ -56,9 +56,10 @@ in rustPlatform.buildRustPackage rec {
   BINDGEN_EXTRA_CLANG_ARGS =
     "-isystem ${libclang.lib}/lib/clang/${lib.getVersion clang}/include";
 
-  nativeBuildInputs = [ clang llvm pkgconfig ];
-  buildInputs = ([ openssl zlib libclang protobuf ]
-    ++ (lib.optionals stdenv.isLinux [ libudev ])) ++ darwinPackages;
+  nativeBuildInputs = [ clang llvm pkgconfig protobuf ];
+  buildInputs =
+    ([ openssl zlib libclang ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
+    ++ darwinPackages;
   strictDeps = true;
 
   # this is too slow

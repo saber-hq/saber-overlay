@@ -12,7 +12,9 @@ let
 in {
   solana = pkgs.callPackage ./solana.nix {
     inherit (rustStable) rustPlatform;
-    inherit (pkgs) lib pkgconfig libudev openssl zlib fetchFromGitHub stdenv;
+    inherit (pkgs)
+      lib pkgconfig libudev openssl zlib fetchFromGitHub stdenv protobuf
+      rustfmt;
     inherit (pkgs.llvmPackages_12) clang llvm libclang;
     inherit darwinPackages;
   };

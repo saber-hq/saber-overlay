@@ -21,7 +21,11 @@
         basic = overlayBasic;
         withRust = overlayWithRust;
       };
-    } // flake-utils.lib.eachDefaultSystem (system:
+    } // flake-utils.lib.eachSystem [
+      "aarch64-darwin"
+      "x86_64-darwin"
+      "x86_64-linux"
+    ] (system:
       let
         pkgs = import nixpkgs {
           inherit system;

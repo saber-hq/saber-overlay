@@ -2,20 +2,20 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "anchor";
-  version = "0.8.0";
+  version = "0.11.1";
 
   src = pkgs.fetchFromGitHub {
     owner = "project-serum";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-NmDaaRniiNb41Mw0Luql5/fCWs10PCj14iAyyBWcJE8=";
+    sha256 = "sha256-ZwYv3XZujMCcQUgd1AHn0xNE1TMcakm5PNsNrGe8LVU=";
   };
 
   cargoPatches = [
     # a patch file to add/update Cargo.lock in the source code
-    # ./fix-Cargo.lock.patch
+    ./fix-Cargo.lock.patch
   ];
-  cargoSha256 = "sha256-EdfPRX+yU22IXvc5BUpXJunwHhYqZpxT9IuetoN0XqY=";
+  cargoSha256 = "sha256-KNyb26+ZyNe9latyN5AlqglORQ0ZVLpzs7s7vhlXxc8=";
   verifyCargoDeps = false;
 
   nativeBuildInputs = with pkgs; [ pkgconfig ];

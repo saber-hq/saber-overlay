@@ -3,14 +3,14 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "spl-token-cli";
-  version = "2.0.11";
+  version = "2.0.14";
 
   src = fetchCrate {
     inherit pname version;
-    sha256 = "sha256-L3seP1m6vbVR26zVlWaj9DFL0Pv3jhIKfhWqEU99r1I=";
+    sha256 = "sha256-fdWQ9BE6q0fC7hOe8OAWeL6tu+fEdsGlKUbTd03O3yw=";
   };
 
-  cargoSha256 = "sha256-sZit1sgEljqO2XEOtxIkApnuAyQ0zfMbGFo5j+g6NEI=";
+  cargoSha256 = "sha256-tQ174s05PURD85BcdaaIOvJYgegGPcufnJl7tqVt7iM=";
   verifyCargoDeps = true;
 
   LIBCLANG_PATH = "${libclang}/lib";

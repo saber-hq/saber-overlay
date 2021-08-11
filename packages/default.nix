@@ -9,19 +9,18 @@ let
       AppKit
       System
     ]);
-in {
+  anchorPackages = import ./anchor {
+    inherit (rustNightly) rustPlatform;
+    inherit (pkgs) lib pkgconfig openssl libudev stdenv fetchFromGitHub;
+    inherit darwinPackages;
+  };
+in anchorPackages // {
   solana = pkgs.callPackage ./solana.nix {
     inherit (rustStable) rustPlatform;
     inherit (pkgs)
       lib pkgconfig libudev openssl zlib fetchFromGitHub stdenv protobuf
       rustfmt;
     inherit (pkgs.llvmPackages_12) clang llvm libclang;
-    inherit darwinPackages;
-  };
-
-  anchor = pkgs.callPackage ./anchor {
-    inherit (rustNightly) rustPlatform;
-    inherit pkgs;
     inherit darwinPackages;
   };
 
@@ -32,4 +31,7 @@ in {
     inherit (pkgs.llvmPackages) libclang;
     inherit darwinPackages;
   };
+
+  rust-nightly = rustNightly.rust;
+  rust-stable = rustStable.rust;
 }

@@ -15,7 +15,4 @@ let
     inherit rustNightly rustStable;
     pkgs = prev;
   });
-in {
-  inherit saber;
-  inherit (saber) solana spl-token-cli anchor;
-}
+in { inherit saber; } // saber

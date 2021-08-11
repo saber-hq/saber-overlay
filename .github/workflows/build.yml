@@ -37,6 +37,8 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         package:
+          - solana
+          - spl-token-cli
           - anchor-0_12_0
           - anchor-0_13_2
     steps:

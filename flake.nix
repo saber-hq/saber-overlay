@@ -36,8 +36,7 @@
         packages = flake-utils.lib.flattenTree {
           inherit (pkgs)
             solana spl-token-cli anchor anchor-0_12_0 anchor-0_13_2;
-          inherit (pkgs) saber;
-        } // pkgs;
+        };
         devShell = import ./shell.nix { inherit pkgs; };
         defaultPackage = env;
       });

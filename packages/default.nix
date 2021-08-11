@@ -31,4 +31,7 @@ in anchorPackages // {
     inherit (pkgs.llvmPackages) libclang;
     inherit darwinPackages;
   };
+
+  rust-nightly = rustNightly.rust;
+  rust-stable = rustStable.rust;
 }

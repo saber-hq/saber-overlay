@@ -2,6 +2,9 @@
 pkgs.buildEnv {
   name = "saber-env";
   paths = with pkgs;
-    [ spl-token-cli rust-nightly anchor ]
-    ++ (lib.optionals (!pkgs.stdenv.isAarch64) [ solana ]);
+    [ rust-nightly ]
+    ++ (lib.optionals (pkgs.stdenv.isAarch64 || !pkgs.stdenv.isDarwin) [
+      anchor
+      spl-token-cli
+    ]) ++ (lib.optionals (!pkgs.stdenv.isAarch64) [ solana ]);
 }

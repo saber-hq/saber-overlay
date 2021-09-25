@@ -7,7 +7,7 @@ let
       cargo = rust;
     });
   };
-  rustNightly = mkRust prev.rust-bin.nightly."2021-08-01".minimal;
+  rustNightly = mkRust prev.rust-bin.nightly."2021-09-24".minimal;
   rustStable = mkRust prev.rust-bin.stable.latest.minimal;
   saberPackages = (import ./packages {
     inherit rustNightly rustStable;

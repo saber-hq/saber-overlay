@@ -1,41 +1,40 @@
 { lib, validatorOnly ? false, rustPlatform, clang, llvm, pkgconfig, libudev
 , openssl, zlib, libclang, fetchFromGitHub, stdenv, darwinPackages, protobuf
-, rustfmt }:
+, rustfmt,
 
-let
-  # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
-  solanaPkgs = [
-    "solana"
-    "solana-bench-exchange"
-    "solana-bench-tps"
-    "solana-faucet"
-    "solana-gossip"
-    "solana-install"
-    "solana-keygen"
-    "solana-ledger-tool"
-    "solana-log-analyzer"
-    "solana-net-shaper"
-    "solana-sys-tuner"
-    "solana-validator"
+# Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
+solanaPkgs ? [
+  "solana"
+  "solana-bench-exchange"
+  "solana-bench-tps"
+  "solana-faucet"
+  "solana-gossip"
+  "solana-install"
+  "solana-keygen"
+  "solana-ledger-tool"
+  "solana-log-analyzer"
+  "solana-net-shaper"
+  "solana-sys-tuner"
+  "solana-validator"
 
-    # Speed up net.sh deploys by excluding unused binaries
-  ] ++ (lib.optionals (validatorOnly == false) [
-    "cargo-build-bpf"
-    "cargo-test-bpf"
-    "solana-dos"
-    "solana-install-init"
-    "solana-stake-accounts"
-    # "solana-stake-monitor"
-    "solana-test-validator"
-    "solana-tokens"
-    "solana-watchtower"
-  ]) ++ [
-    # XXX: Ensure `solana-genesis` is built LAST!
-    # See https://github.com/solana-labs/solana/issues/5826
-    "solana-genesis"
-  ];
+  # Speed up net.sh deploys by excluding unused binaries
+] ++ (lib.optionals (!validatorOnly) [
+  "cargo-build-bpf"
+  "cargo-test-bpf"
+  "solana-dos"
+  "solana-install-init"
+  "solana-stake-accounts"
+  # "solana-stake-monitor"
+  "solana-test-validator"
+  "solana-tokens"
+  "solana-watchtower"
+]) ++ [
+  # XXX: Ensure `solana-genesis` is built LAST!
+  # See https://github.com/solana-labs/solana/issues/5826
+  "solana-genesis"
+] }:
 
-in rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage rec {
   pname = "solana";
   version = "1.7.14";
 

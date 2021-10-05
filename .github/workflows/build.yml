@@ -37,10 +37,14 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         package:
-          - solana
+          - solana-cli
+          - solana-full
           - spl-token-cli
           - anchor-0_12_0
           - anchor-0_13_2
+          - anchor-0_15_0
+          - anchor-0_16_1
+          - anchor-0_17_0
     steps:
       - uses: actions/checkout@v2
       - uses: cachix/install-nix-action@v13

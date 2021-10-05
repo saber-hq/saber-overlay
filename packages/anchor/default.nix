@@ -2,7 +2,7 @@
 , fetchFromGitHub }:
 
 let
-  makeAnchorPackage = { version, srcHash, cargoHash, cargoPatches ? [] }:
+  makeAnchorPackage = { version, srcHash, cargoHash, cargoPatches ? [ ] }:
     (rustPlatform.buildRustPackage rec {
       inherit version;
       pname = "anchor";
@@ -27,6 +27,12 @@ let
       doCheck = false;
     });
 in rec {
+  anchor-0_17_0 = makeAnchorPackage {
+    version = "0.17.0";
+    srcHash = "sha256-jINbIWnE8IlhkRRfidGMp6RlLGpFxvy+hIWQ9CXDtPQ=";
+    cargoHash = "sha256-xKWITDeb2O8K7I5sS/s+AjXsC9oNeHbZGfMfEWbsxX0=";
+    cargoPatches = [ ./cargo-0.17.0.patch ];
+  };
   anchor-0_16_1 = makeAnchorPackage {
     version = "0.16.1";
     srcHash = "sha256-/u/6fX0ho9pjtGqgCro79Nchok8M//Gj60FMU/Hwwqs=";
@@ -48,5 +54,5 @@ in rec {
     srcHash = "sha256-87Q/mPF/7sLDiT9N1MqjEX5E3dsLJ+oO2iyx9RcsK1g=";
     cargoHash = "sha256-iaapemx8ZTdeDvDHfCxtrwUlo2U+Sr96EWWODeIMU1w=";
   };
-  anchor = anchor-0_16_1;
+  anchor = anchor-0_17_0;
 }

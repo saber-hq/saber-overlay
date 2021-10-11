@@ -4,7 +4,8 @@ pkgs.buildEnv {
   paths = with pkgs;
     ([ anchor rust-nightly spl-token-cli ] ++ (if pkgs.stdenv.isDarwin then [
       solana-cli
-      solana-test-validator
+      solana-keygen
+      solana-install
     ] else
       [ solana-full ]));
 }

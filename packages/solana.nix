@@ -1,12 +1,11 @@
 { name ? "solana", lib, validatorOnly ? false, rustPlatform, clang, llvm
 , pkgconfig, libudev, openssl, zlib, libclang, fetchFromGitHub, stdenv
 , darwinPackages, protobuf, rustfmt
-, cargoSha256 ? "sha256-cUQOJBsXD59+Y0WVIfuZnRa0Qb6dqEbvA9MeR/1C+Q4=",
+, cargoSha256 ? "sha256-oZGynLAa7Sb0QG+3qtu1mxwiKVq3uN+RJJUc8IFmjeU=",
 
 # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
 solanaPkgs ? [
   "solana"
-  "solana-bench-exchange"
   "solana-bench-tps"
   "solana-faucet"
   "solana-gossip"
@@ -17,6 +16,7 @@ solanaPkgs ? [
   "solana-net-shaper"
   "solana-sys-tuner"
   "solana-validator"
+  "rbpf-cli"
 
   # Speed up net.sh deploys by excluding unused binaries
 ] ++ (lib.optionals (!validatorOnly) [
@@ -25,7 +25,6 @@ solanaPkgs ? [
   "solana-dos"
   "solana-install-init"
   "solana-stake-accounts"
-  # "solana-stake-monitor"
   "solana-test-validator"
   "solana-tokens"
   "solana-watchtower"
@@ -48,26 +47,14 @@ rustPlatform.buildRustPackage rec {
 
   # partly inspired by https://github.com/obsidiansystems/solana-bridges/blob/develop/default.nix#L29
   inherit cargoSha256;
-  verifyCargoDeps =
-    !(stdenv.hostPlatform.isDarwin && !stdenv.hostPlatform.isAarch64);
+  verifyCargoDeps = true;
 
   cargoBuildFlags = builtins.map (n: "--bin=${n}") solanaPkgs;
-
-  __impureHostDeps =
-    lib.optionals (stdenv.isDarwin && !stdenv.hostPlatform.isAarch64)
-    [
-      "/System/Library/Frameworks/System.framework"
-      ];
-  __propagatedImpureHostDeps =
-    lib.optionals (stdenv.isDarwin && !stdenv.hostPlatform.isAarch64)
-    [ "/System/Library/Frameworks/System.framework" ];
 
   # weird errors. see https://github.com/NixOS/nixpkgs/issues/52447#issuecomment-852079285
   LIBCLANG_PATH = "${libclang.lib}/lib";
   BINDGEN_EXTRA_CLANG_ARGS =
     "-isystem ${libclang.lib}/lib/clang/${lib.getVersion clang}/include";
-
-  NIX_LDFLAGS = "-F/System/Library/Frameworks -framework System";
 
   nativeBuildInputs = [ clang llvm pkgconfig protobuf rustfmt ];
   buildInputs =

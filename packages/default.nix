@@ -18,9 +18,20 @@ let
       inherit (pkgs.llvmPackages_12) clang llvm libclang;
       inherit darwinPackages;
     } // args));
+  mkSolanaPackage = name:
+    mkSolana {
+      inherit name;
+      solanaPkgs = [ name ];
+    };
 in anchorPackages // {
   solana-full = mkSolana { };
-  solana-cli = mkSolana { solanaPkgs = [ "solana" "solana-keygen" ]; };
+  solana-cli = mkSolana {
+    name = "solana-cli";
+    solanaPkgs = [ "solana" ];
+    cargoSha256 = "sha256-GoLalVtKTi8Szqgc+Z8X4pYHNBGosVDDjb+QpmEwnEA=";
+  };
+  solana-keygen = mkSolanaPackage "solana-keygen";
+  solana-test-validator = mkSolanaPackage "solana-test-validator";
 
   spl-token-cli = pkgs.callPackage ./spl-token-cli.nix {
     inherit (rustNightly) rustPlatform;

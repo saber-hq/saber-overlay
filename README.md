@@ -51,3 +51,7 @@ in
 ## TODO
 
 - [ ] Make program compilation work on NixOS
+
+## Other useful links
+
+- https://github.com/cideM/solana-nix

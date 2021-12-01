@@ -1,0 +1,31 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index 82374fc..b19ec53 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -2752,7 +2752,7 @@ dependencies = [
+ [[package]]
+ name = "serum_dex"
+ version = "0.4.0"
+-source = "git+https://github.com/project-serum/serum-dex?rev=1be91f2#1be91f2863d8ecede32daaae7e768034e24bbc79"
++source = "git+https://github.com/project-serum/serum-dex#6b1f166e9b1a01e84041759838ffb47459da9c07"
+ dependencies = [
+  "arrayref",
+  "bincode",
+diff --git a/spl/Cargo.toml b/spl/Cargo.toml
+index fd17c94..36bafb3 100644
+--- a/spl/Cargo.toml
++++ b/spl/Cargo.toml
+@@ -18,7 +18,11 @@ dex = ["serum_dex"]
+ 
+ [dependencies]
+ anchor-lang = { path = "../lang", version = "0.18.2", features = ["derive"] }
+-serum_dex = { git = "https://github.com/project-serum/serum-dex", rev = "1be91f2", version = "0.4.0", features = ["no-entrypoint"], optional = true }
++serum_dex = { git = "https://github.com/project-serum/serum-dex", features = [
++    "no-entrypoint"
++], optional = true }
+ solana-program = "1.8.0"
+ spl-token = { version = "3.1.1", features = ["no-entrypoint"] }
+-spl-associated-token-account = { version = "1.0.3", features = ["no-entrypoint"] }
++spl-associated-token-account = { version = "1.0.3", features = [
++    "no-entrypoint"
++] }

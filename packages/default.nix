@@ -54,6 +54,13 @@ in anchorPackages // {
     inherit darwinPackages;
   };
 
+  cargo-workspaces = pkgs.callPackage ./cargo-workspaces.nix {
+    inherit (rustNightly) rustPlatform;
+    inherit (pkgs)
+      lib pkgconfig libudev openssl zlib stdenv fetchCrate libssh2 libgit2;
+    inherit darwinPackages;
+  };
+
   rust-nightly = rustNightly.rust;
   rust-stable = rustStable.rust;
 }

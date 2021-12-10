@@ -1,7 +1,6 @@
 { name ? "solana", lib, validatorOnly ? false, rustPlatform, clang, llvm
 , pkgconfig, libudev, openssl, zlib, libclang, fetchFromGitHub, stdenv
-, darwinPackages, protobuf, rustfmt
-, cargoSha256 ? "sha256-oZGynLAa7Sb0QG+3qtu1mxwiKVq3uN+RJJUc8IFmjeU=",
+, darwinPackages, protobuf, rustfmt, cargoSha256, version, githubSha256,
 
 # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
 solanaPkgs ? [
@@ -36,13 +35,13 @@ solanaPkgs ? [
 
 rustPlatform.buildRustPackage rec {
   pname = name;
-  version = "1.7.14";
+  inherit version;
 
   src = fetchFromGitHub {
     owner = "solana-labs";
     repo = "solana";
     rev = "v${version}";
-    sha256 = "sha256-oEGYrAdSvS2W2AjUNOUHK4IeSzGWWDzQTmE2zkDFQVM=";
+    sha256 = githubSha256;
   };
 
   # partly inspired by https://github.com/obsidiansystems/solana-bridges/blob/develop/default.nix#L29

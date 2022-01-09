@@ -9,7 +9,8 @@ let
     inherit (pkgs) lib pkgconfig openssl libudev stdenv fetchFromGitHub;
     inherit darwinPackages;
   };
-  solanaPackages = import ./solana { inherit pkgs rustStable darwinPackages; };
+  solanaPackages =
+    (import ./solana { inherit pkgs rustStable darwinPackages; }).solana-1_7_14;
 in anchorPackages // solanaPackages // {
   spl-token-cli = pkgs.callPackage ./spl-token-cli.nix {
     inherit (rustNightly) rustPlatform;

@@ -12,20 +12,19 @@
     let
       rustOverlay = import rust-overlay;
 
+      supportedSystems = [ "aarch64-darwin" "x86_64-darwin" "x86_64-linux" ];
+
       overlayBasic = import ./.;
       overlayWithRust = final: prev:
         (nixpkgs.lib.composeExtensions rustOverlay overlayBasic) final prev;
     in {
+      inherit supportedSystems;
       overlay = overlayWithRust;
       overlays = {
         basic = overlayBasic;
         withRust = overlayWithRust;
       };
-    } // flake-utils.lib.eachSystem [
-      "aarch64-darwin"
-      "x86_64-darwin"
-      "x86_64-linux"
-    ] (system:
+    } // flake-utils.lib.eachSystem supportedSystems (system:
       let
         pkgs = import nixpkgs {
           inherit system;

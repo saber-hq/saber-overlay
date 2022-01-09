@@ -63,4 +63,11 @@ rustPlatform.buildRustPackage rec {
 
   # this is too slow
   doCheck = false;
+
+  meta = with lib; {
+    homepage = "https://solana.com/";
+    description =
+      "Solana is a decentralized blockchain built to enable scalable, user-friendly apps for the world.";
+    platforms = platforms.unix ++ platforms.darwin;
+  };
 }

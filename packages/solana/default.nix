@@ -1,5 +1,4 @@
 { pkgs, rustStable, darwinPackages, version ? "1.7.14"
-, cargoSha256 ? "sha256-oZGynLAa7Sb0QG+3qtu1mxwiKVq3uN+RJJUc8IFmjeU="
 , githubSha256 ? "sha256-oEGYrAdSvS2W2AjUNOUHK4IeSzGWWDzQTmE2zkDFQVM=" }:
 let
   mkSolana = args:
@@ -10,7 +9,7 @@ let
         rustfmt;
       inherit (pkgs.llvmPackages_12) clang llvm libclang;
       inherit darwinPackages;
-      inherit version cargoSha256 githubSha256;
+      inherit version githubSha256;
     } // args));
   mkSolanaPackage = name: cargoSha256:
     mkSolana {

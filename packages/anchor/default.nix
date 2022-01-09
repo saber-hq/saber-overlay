@@ -27,6 +27,12 @@ let
       doCheck = false;
     });
 in rec {
+  anchor-0_20_0 = makeAnchorPackage {
+    version = "0.20.0";
+    srcHash = "sha256-w3hqCZJZXLl3Tanx3LkrLceqOp5A8Mp+Zt05Saewa9E=";
+    cargoHash = "sha256-WeMXs3Y/HV0F/AjcdMrcHbfwehHlaj24mx5T69pV9YQ=";
+    cargoPatches = [ ./cargo-0.20.0.patch ];
+  };
   anchor-0_19_0 = makeAnchorPackage {
     version = "0.19.0";
     srcHash = "sha256-mQJJew66Xfj1MGI2u2iRmy3fsYqeaBXJq/S6QyHygqM=";
@@ -72,5 +78,5 @@ in rec {
     srcHash = "sha256-87Q/mPF/7sLDiT9N1MqjEX5E3dsLJ+oO2iyx9RcsK1g=";
     cargoHash = "sha256-iaapemx8ZTdeDvDHfCxtrwUlo2U+Sr96EWWODeIMU1w=";
   };
-  anchor = anchor-0_19_0;
+  anchor = anchor-0_20_0;
 }

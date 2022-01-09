@@ -51,6 +51,8 @@ jobs:
           - anchor-0_18_0
           - anchor-0_18_2
           - anchor-0_19_0
+          - anchor-0_20_0
+          - anchor-0_20_1
           - cargo-workspaces
     steps:
       - uses: actions/checkout@v2

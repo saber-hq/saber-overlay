@@ -1,10 +1,10 @@
-{ pkgs }:
+{ pkgs, anchor, solana-basic, cargo-workspaces }:
 with pkgs;
 buildEnv {
   name = "saber-ci";
   paths = (lib.optionals stdenv.isLinux ([ libudev ])) ++ [
-    solana.solana-basic
-    anchor-0_20_1
+    solana-basic
+    anchor
     cargo-workspaces
 
     # sdk

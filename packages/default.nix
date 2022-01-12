@@ -11,7 +11,7 @@ let
   };
   solanaPackages =
     (import ./solana { inherit pkgs rustStable darwinPackages; });
-in anchorPackages // solanaPackages // {
+in anchorPackages // solanaPackages // rec {
   spl-token-cli = pkgs.callPackage ./spl-token-cli.nix {
     inherit (rustNightly) rustPlatform;
     inherit (pkgs)
@@ -29,5 +29,10 @@ in anchorPackages // solanaPackages // {
 
   rust-nightly = rustNightly.rust;
   rust-stable = rustStable.rust;
-  saber-ci = import ./saber-ci.nix { inherit pkgs; };
+  saber-ci = import ./saber-ci.nix {
+    inherit pkgs;
+    inherit (anchorPackages) anchor;
+    inherit (solanaPackages.solana) solana-basic;
+    inherit cargo-workspaces;
+  };
 }

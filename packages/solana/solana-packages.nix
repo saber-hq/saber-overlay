@@ -36,16 +36,4 @@ in {
     ];
     cargoSha256 = cargoHashes.solana-basic;
   };
-
-  solana-cli = mkSolana {
-    name = "solana-cli";
-    solanaPkgs = [ "solana" ];
-    cargoSha256 = cargoHashes.solana-cli;
-  };
-  solana-keygen = mkSolanaPackage "solana-keygen" cargoHashes.solana-keygen;
-  solana-install = mkSolana {
-    name = "solana-install";
-    solanaPkgs = [ "solana-install" "solana-install-init" ];
-    cargoSha256 = cargoHashes.solana-install;
-  };
 }

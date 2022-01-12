@@ -5,7 +5,7 @@ let
       inherit (rustStable) rustPlatform;
       inherit (pkgs)
         lib pkgconfig libudev openssl zlib fetchFromGitHub stdenv protobuf
-        rustfmt;
+        rustfmt perl;
       inherit (pkgs.llvmPackages_12) clang llvm libclang;
       inherit darwinPackages;
       inherit version githubSha256;

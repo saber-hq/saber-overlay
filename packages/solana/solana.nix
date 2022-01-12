@@ -1,6 +1,6 @@
 { name ? "solana", lib, validatorOnly ? false, rustPlatform, clang, llvm
 , pkgconfig, libudev, openssl, zlib, libclang, fetchFromGitHub, stdenv
-, darwinPackages, protobuf, rustfmt, cargoSha256, version, githubSha256,
+, darwinPackages, protobuf, rustfmt, cargoSha256, version, githubSha256, perl,
 
 # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
 solanaPkgs ? [
@@ -56,9 +56,8 @@ rustPlatform.buildRustPackage rec {
     "-isystem ${libclang.lib}/lib/clang/${lib.getVersion clang}/include";
 
   nativeBuildInputs = [ clang llvm pkgconfig protobuf rustfmt ];
-  buildInputs =
-    ([ openssl zlib libclang ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
-    ++ darwinPackages;
+  buildInputs = ([ openssl zlib libclang perl ]
+    ++ (lib.optionals stdenv.isLinux [ libudev ])) ++ darwinPackages;
   strictDeps = true;
 
   # this is too slow

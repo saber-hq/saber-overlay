@@ -10,7 +10,7 @@ let
     inherit darwinPackages;
   };
   solanaPackages =
-    (import ./solana { inherit pkgs rustStable darwinPackages; }).solana-1_7_14;
+    (import ./solana { inherit pkgs rustStable darwinPackages; });
 in anchorPackages // solanaPackages // {
   spl-token-cli = pkgs.callPackage ./spl-token-cli.nix {
     inherit (rustNightly) rustPlatform;
@@ -29,4 +29,5 @@ in anchorPackages // solanaPackages // {
 
   rust-nightly = rustNightly.rust;
   rust-stable = rustStable.rust;
+  solana-devenv = import ./solana-devenv { inherit pkgs; };
 }

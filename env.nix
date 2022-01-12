@@ -2,7 +2,7 @@
 let
   solanaPkgs = with pkgs;
     if stdenv.hostPlatform.isDarwin then
-      [ solana.solana-full ]
+      [ solana.solana-basic ]
     else
       [ solana.solana-full ];
 in pkgs.buildEnv {

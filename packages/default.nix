@@ -30,4 +30,5 @@ in anchorPackages // solanaPackages // {
   rust-nightly = rustNightly.rust;
   rust-stable = rustStable.rust;
   solana-devenv = import ./solana-devenv { inherit pkgs; };
+  saber-ci = import ./saber-ci { inherit pkgs; };
 }

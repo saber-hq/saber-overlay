@@ -36,8 +36,10 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-11.0]
         package:
-          - solana-basic
-          - solana-full
+          - solana-1_7_14.solana-basic
+          - solana-1_7_14.solana-full
+          - solana-1_8_12.solana-basic
+          - solana-1_8_12.solana-full
           - spl-token-cli
           - anchor-0_12_0
           - anchor-0_13_2

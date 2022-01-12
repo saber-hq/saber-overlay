@@ -32,7 +32,7 @@
         };
         env = import ./env.nix { inherit pkgs; };
       in {
-        packages = pkgs.saberPackages;
+        packages = flake-utils.lib.flattenTree pkgs.saberPackages;
         devShell = import ./shell.nix { inherit pkgs; };
         defaultPackage = env;
       });

@@ -39,9 +39,7 @@ jobs:
           - solana-1_7_14-basic
           - solana-1_7_14-full
           - solana-1_8_12-basic
-          - solana-1_8_12-full
           - solana-basic
-          - solana-full
           - spl-token-cli
           - anchor-0_12_0
           - anchor-0_13_2
@@ -55,6 +53,30 @@ jobs:
           - anchor-0_20_1
           - anchor
           - cargo-workspaces
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cachix/install-nix-action@v14
+        with:
+          install_url: https://nixos-nix-install-tests.cachix.org/serve/vij683ly7sl95nnhb67bdjjfabclr85m/install
+          install_options: "--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve"
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v10
+        with:
+          name: saber
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - run: nix build --show-trace --print-build-logs .#${{ matrix.package }}
+
+  build-packages-linux-only:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        package:
+          - solana-1_8_12-full
+          - solana-full
     steps:
       - uses: actions/checkout@v2
       - uses: cachix/install-nix-action@v14

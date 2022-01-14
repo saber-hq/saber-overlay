@@ -23,8 +23,6 @@ in {
   solana-basic = mkSolana {
     name = "solana-basic";
     solanaPkgs = [
-      "cargo-build-bpf"
-      "cargo-test-bpf"
       "solana"
       "solana-install"
       "solana-install-init"

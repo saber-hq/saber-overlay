@@ -7,6 +7,11 @@ let
       [ solana.solana-full ];
 in pkgs.buildEnv {
   name = "saber-env";
-  paths = solanaPkgs
-    ++ (with pkgs; [ anchor rust-nightly spl-token-cli cargo-workspaces ]);
+  paths = solanaPkgs ++ (with pkgs; [
+    anchor
+    rust-nightly
+    spl-token-cli
+    cargo-workspaces
+    saber-devenv
+  ]);
 }

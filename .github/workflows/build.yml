@@ -47,6 +47,7 @@ jobs:
           - anchor-0_21_0
           - anchor
           - cargo-workspaces
+          - saber-devenv
     steps:
       - uses: actions/checkout@v2
       - uses: cachix/install-nix-action@v16

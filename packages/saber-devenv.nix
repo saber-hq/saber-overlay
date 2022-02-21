@@ -1,11 +1,14 @@
 { pkgs, anchor, solana-basic, cargo-workspaces }:
 with pkgs;
 buildEnv {
-  name = "saber-ci";
+  name = "saber-devenv";
   paths = (lib.optionals stdenv.isLinux ([ libudev ])) ++ [
     solana-basic
     anchor
+
     cargo-workspaces
+    cargo-expand
+    cargo-deps
 
     # sdk
     nodejs

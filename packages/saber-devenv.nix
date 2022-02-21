@@ -9,6 +9,7 @@ buildEnv {
     cargo-workspaces
     cargo-expand
     cargo-deps
+    cargo-readme
 
     # sdk
     nodejs

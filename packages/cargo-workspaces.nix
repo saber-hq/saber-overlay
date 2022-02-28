@@ -1,4 +1,4 @@
-{ fetchCrate, lib, rustPlatform, pkgconfig, libudev, openssl, zlib, stdenv
+{ fetchCrate, lib, rustPlatform, pkgconfig, openssl, zlib, stdenv
 , darwinPackages, libssh2, libgit2 }:
 
 with rustPlatform;
@@ -20,8 +20,7 @@ buildRustPackage rec {
   LIBSSH2_SYS_USE_PKG_CONFIG = true;
 
   nativeBuildInputs = [ pkgconfig libssh2 ];
-  buildInputs = ([ openssl zlib libssh2 libgit2 ]
-    ++ (lib.optionals stdenv.isLinux [ libudev ])) ++ darwinPackages;
+  buildInputs = [ openssl zlib libssh2 libgit2 ] ++ darwinPackages;
   strictDeps = true;
 
   # skip tests, because for some reason they fail...

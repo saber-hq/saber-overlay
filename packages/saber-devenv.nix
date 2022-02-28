@@ -2,7 +2,7 @@
 with pkgs;
 buildEnv {
   name = "saber-devenv";
-  paths = (lib.optionals stdenv.isLinux ([ libudev ])) ++ [
+  paths = (lib.optionals stdenv.isLinux ([ udev ])) ++ [
     solana-basic
     anchor
 

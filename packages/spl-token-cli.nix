@@ -1,5 +1,5 @@
-{ fetchCrate, lib, validatorOnly ? false, rustPlatform, clang, llvm, pkgconfig
-, libudev, openssl, zlib, libclang, stdenv, darwinPackages }:
+{ fetchCrate, lib, validatorOnly ? false, rustPlatform, clang, llvm, udev
+, pkgconfig, openssl, zlib, libclang, stdenv, darwinPackages }:
 
 rustPlatform.buildRustPackage rec {
   pname = "spl-token-cli";
@@ -15,8 +15,7 @@ rustPlatform.buildRustPackage rec {
 
   LIBCLANG_PATH = "${libclang}/lib";
   nativeBuildInputs = [ clang llvm pkgconfig ];
-  buildInputs =
-    ([ libclang openssl zlib ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
-    ++ darwinPackages;
+  buildInputs = [ libclang openssl zlib ] ++ darwinPackages
+    ++ (lib.optionals stdenv.isLinux [ udev ]);
   strictDeps = true;
 }

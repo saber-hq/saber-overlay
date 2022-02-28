@@ -1,4 +1,4 @@
-{ rustPlatform, darwinPackages, pkgconfig, openssl, libudev, lib, stdenv
+{ rustPlatform, darwinPackages, pkgconfig, openssl, lib, udev, stdenv
 , fetchFromGitHub }:
 
 let
@@ -19,8 +19,8 @@ let
       verifyCargoDeps = false;
 
       nativeBuildInputs = [ pkgconfig ];
-      buildInputs = [ openssl ] ++ (lib.optionals stdenv.isLinux [ libudev ])
-        ++ darwinPackages;
+      buildInputs = [ openssl ] ++ darwinPackages
+        ++ (lib.optionals stdenv.isLinux [ udev ]);
       strictDeps = true;
 
       # this is too slow

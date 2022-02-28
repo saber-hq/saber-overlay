@@ -57,7 +57,7 @@ rustPlatform.buildRustPackage rec {
 
   nativeBuildInputs = [ clang llvm pkgconfig protobuf rustfmt perl ];
   buildInputs =
-    ([ openssl zlib libclang ] ++ (lib.optionals stdenv.isLinux [ libudev ]))
+    ([ openssl zlib libclang ] ++ (lib.optionals stdenv.isLinux [ udev ]))
     ++ darwinPackages;
   strictDeps = true;
 

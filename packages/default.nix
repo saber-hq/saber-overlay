@@ -6,7 +6,7 @@ let
         ++ (pkgs.lib.optionals pkgs.stdenv.isAarch64 [ System ])));
   anchorPackages = import ./anchor {
     inherit (rustNightly) rustPlatform;
-    inherit (pkgs) lib pkgconfig openssl stdenv fetchFromGitHub;
+    inherit (pkgs) lib pkgconfig openssl stdenv udev fetchFromGitHub;
     inherit darwinPackages;
   };
   solanaPackages =
@@ -14,7 +14,7 @@ let
 in anchorPackages // solanaPackages // rec {
   spl-token-cli = pkgs.callPackage ./spl-token-cli.nix {
     inherit (rustNightly) rustPlatform;
-    inherit (pkgs) lib clang llvm pkgconfig openssl zlib stdenv fetchCrate;
+    inherit (pkgs) lib clang llvm pkgconfig openssl zlib udev stdenv fetchCrate;
     inherit (pkgs.llvmPackages) libclang;
     inherit darwinPackages;
   };

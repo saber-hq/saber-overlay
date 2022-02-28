@@ -1,5 +1,5 @@
-{ rustPlatform, darwinPackages, pkgconfig, openssl, lib, stdenv, fetchFromGitHub
-}:
+{ rustPlatform, darwinPackages, pkgconfig, openssl, lib, udev, stdenv
+, fetchFromGitHub }:
 
 let
   makeAnchorPackage = { version, srcHash, cargoHash, cargoPatches ? [ ] }:
@@ -19,7 +19,8 @@ let
       verifyCargoDeps = false;
 
       nativeBuildInputs = [ pkgconfig ];
-      buildInputs = [ openssl ] ++ darwinPackages;
+      buildInputs = [ openssl ] ++ darwinPackages
+        ++ (lib.optionals stdenv.isLinux [ udev ]);
       strictDeps = true;
 
       # this is too slow

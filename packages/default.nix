@@ -30,7 +30,7 @@ in anchorPackages // solanaPackages // rec {
   saber-devenv = import ./saber-devenv.nix {
     inherit pkgs;
     inherit (anchorPackages) anchor;
-    inherit (solanaPackages.solana) solana-basic;
+    inherit (solanaPackages.solana) solana-basic solana-full;
     inherit cargo-workspaces;
   };
 }

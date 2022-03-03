@@ -3,7 +3,7 @@ let
   mkSolana = (args:
     import ./solana-packages.nix {
       inherit pkgs rustStable darwinPackages;
-      inherit (args) version githubSha256 cargoHashes;
+      inherit (args) version githubSha256 cargoHashes patches;
     });
 in rec {
   solana-1_7_14 = mkSolana {
@@ -21,6 +21,7 @@ in rec {
       solana-full = "sha256-vuqpC3ts92RPpQ/vy/OBDW0heL/3EfhAZhddsW5A2tA=";
       solana-basic = "sha256-h6uqKCTrWJz/83HP5VhMShvcZQn6IVUaRNpnbGUnXTk=";
     };
+    patches = [ ./patches/solana-1.8.12.patch ];
   };
   solana = solana-1_8_12;
 }

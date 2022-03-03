@@ -1,0 +1,34 @@
+diff --git a/sdk/cargo-build-bpf/src/main.rs b/sdk/cargo-build-bpf/src/main.rs
+index 5b449d021f..d4611db05c 100644
+--- a/sdk/cargo-build-bpf/src/main.rs
++++ b/sdk/cargo-build-bpf/src/main.rs
+@@ -483,29 +483,6 @@ fn build_bpf_package(config: &Config, target_directory: &Path, package: &cargo_m
+         .join("solana")
+         .join(version)
+         .join(package);
+-    install_if_missing(
+-        config,
+-        package,
+-        version,
+-        "https://github.com/solana-labs/bpf-tools/releases/download",
+-        bpf_tools_download_file_name,
+-        &target_path,
+-    )
+-    .unwrap_or_else(|err| {
+-        // The package version directory doesn't contain a valid
+-        // installation, and it should be removed.
+-        let target_path_parent = target_path.parent().expect("Invalid package path");
+-        fs::remove_dir_all(&target_path_parent).unwrap_or_else(|err| {
+-            eprintln!(
+-                "Failed to remove {} while recovering from installation failure: {}",
+-                target_path_parent.to_string_lossy(),
+-                err,
+-            );
+-            exit(1);
+-        });
+-        eprintln!("Failed to install bpf-tools: {}", err);
+-        exit(1);
+-    });
+     link_bpf_toolchain(config);
+ 
+     let llvm_bin = config

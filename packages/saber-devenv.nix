@@ -1,9 +1,9 @@
-{ pkgs, anchor, solana-basic, cargo-workspaces }:
+{ pkgs, anchor, solana-basic, cargo-workspaces, solana-full, ... }:
 with pkgs;
 buildEnv {
   name = "saber-devenv";
-  paths = (lib.optionals stdenv.isLinux ([ udev ])) ++ [
-    solana-basic
+  paths = (lib.optionals stdenv.isLinux ([ udev solana-full ])) ++ [
+    # solana-basic
     anchor
 
     cargo-workspaces

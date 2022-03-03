@@ -1,6 +1,7 @@
-{ name ? "solana", lib, validatorOnly ? false, rustPlatform, clang, llvm
+{ name ? "solana", pkgs, lib, validatorOnly ? false, rustPlatform, clang, llvm
 , pkgconfig, udev, openssl, zlib, libclang, fetchFromGitHub, stdenv
-, darwinPackages, protobuf, rustfmt, cargoSha256, version, githubSha256, perl,
+, darwinPackages, protobuf, rustfmt, cargoSha256, version, githubSha256, perl
+, patches ? [ ],
 
 # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
 solanaPkgs ? [
@@ -33,7 +34,27 @@ solanaPkgs ? [
   "solana-genesis"
 ] }:
 
-rustPlatform.buildRustPackage rec {
+let
+  bpfTools = stdenv.mkDerivation {
+    name = "bpf-tools";
+    version = "v1.23";
+    src = builtins.fetchurl (if stdenv.isDarwin then {
+      sha256 = "1n538g50f7jscigrlhyfpd554jrha03bn80j7ly2kln87rj2a77k";
+      url =
+        "https://github.com/solana-labs/bpf-tools/releases/download/v1.23/solana-bpf-tools-osx.tar.bz2";
+    } else {
+      sha256 = "0qp297s5mmv8r5xac92si9mq3lf6gigsm8npvp2rpnx0lp9byj29";
+      url =
+        "https://github.com/solana-labs/bpf-tools/releases/download/v1.23/solana-bpf-tools-linux.tar.bz2";
+    });
+    sourceRoot = ".";
+    dontBuild = true;
+    installPhase = ''
+      mkdir $out
+      cp -R . $out/
+    '';
+  };
+in rustPlatform.buildRustPackage rec {
   pname = name;
   inherit version;
 
@@ -63,6 +84,18 @@ rustPlatform.buildRustPackage rec {
 
   # this is too slow
   doCheck = false;
+
+  # BPF SDK. See https://github.com/cideM/solana-nix/pull/4/files.
+  inherit patches;
+
+  preInstall = ''
+    mkdir -p $out/bin/sdk/bpf/dependencies
+  '';
+
+  postInstall = ''
+    ${pkgs.rsync}/bin/rsync -a ${src}/sdk $out/bin/
+    ln -s ${bpfTools} $out/bin/sdk/bpf/dependencies/bpf-tools
+  '';
 
   meta = with lib; {
     homepage = "https://solana.com/";

@@ -5,7 +5,7 @@ let
       ([ IOKit Security CoreFoundation AppKit ]
         ++ (pkgs.lib.optionals pkgs.stdenv.isAarch64 [ System ])));
   anchorPackages = import ./anchor {
-    inherit (rustNightly) rustPlatform;
+    inherit (rustStable) rustPlatform;
     inherit (pkgs) lib pkgconfig openssl stdenv udev fetchFromGitHub;
     inherit darwinPackages;
   };
@@ -13,14 +13,14 @@ let
     (import ./solana { inherit pkgs rustStable darwinPackages; });
 in anchorPackages // solanaPackages // rec {
   spl-token-cli = pkgs.callPackage ./spl-token-cli.nix {
-    inherit (rustNightly) rustPlatform;
+    inherit (rustStable) rustPlatform;
     inherit (pkgs) lib clang llvm pkgconfig openssl zlib udev stdenv fetchCrate;
     inherit (pkgs.llvmPackages) libclang;
     inherit darwinPackages;
   };
 
   cargo-workspaces = pkgs.callPackage ./cargo-workspaces.nix {
-    inherit (rustNightly) rustPlatform;
+    inherit (rustStable) rustPlatform;
     inherit (pkgs) lib pkgconfig openssl zlib stdenv fetchCrate libssh2 libgit2;
     inherit darwinPackages;
   };

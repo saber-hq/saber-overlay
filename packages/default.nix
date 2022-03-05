@@ -33,4 +33,6 @@ in anchorPackages // solanaPackages // rec {
     inherit (solanaPackages.solana) solana-basic;
     inherit cargo-workspaces;
   };
+
+  solana-bpf-tools = import ./solana-bpf-tools.nix { inherit pkgs; };
 }

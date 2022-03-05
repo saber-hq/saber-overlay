@@ -1,11 +1,11 @@
 { fetchurl, autoPatchelfHook, stdenv, openssl, zlib }:
 let
-  version = "1.5";
+  version = "1.23";
   src = fetchurl {
     name = "solana-bpf-tools-linux";
     url =
       "https://github.com/solana-labs/bpf-tools/releases/download/v${version}/solana-bpf-tools-linux.tar.bz2";
-    sha256 = "sha256-UdqjoGh0kOaZdUNsUWqk64QE21VeC7GY30wjIalHq9U=";
+    sha256 = "sha256-SUi/0qWg25vF3deiql98xtGBa4paJKZ6yWjXWvRJ4mI=";
   };
 
   solana-bpf-tools-rustbin = stdenv.mkDerivation rec {

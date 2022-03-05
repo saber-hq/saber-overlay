@@ -11,23 +11,68 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        # TODO(igm): fix darwin build when System.framework is added to nixpkgs
-        # os: [ubuntu-latest, macos-latest]
         os: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v2
-      - uses: cachix/install-nix-action@v13
-        with:
-          nix_path: nixpkgs=channel:nixos-20.09
-          install_url: https://nixos-nix-install-tests.cachix.org/serve/lb41az54kzk6j12p81br4bczary7m145/install
-          install_options: "--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve"
-          extra_nix_config: |
-            experimental-features = nix-command flakes
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v16
       - name: Setup Cachix
         uses: cachix/cachix-action@v10
         with:
-          name: stableswap
+          name: saber
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-      - run: nix build --show-trace --print-build-logs
       - name: Check flake
         run: nix flake check -v --show-trace --no-update-lock-file
+      - run: nix build --show-trace --print-build-logs
+
+  build-packages:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-11.0]
+        package:
+          - solana-1_7_14-basic
+          - solana-1_8_12-basic
+          - solana-basic
+          - spl-token-cli
+          - anchor-0_12_0
+          - anchor-0_13_2
+          - anchor-0_15_0
+          - anchor-0_16_1
+          - anchor-0_17_0
+          - anchor-0_18_0
+          - anchor-0_18_2
+          - anchor-0_19_0
+          - anchor-0_20_0
+          - anchor-0_20_1
+          - anchor-0_21_0
+          - anchor
+          - cargo-workspaces
+          - saber-devenv
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v16
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v10
+        with:
+          name: saber
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - run: nix build --show-trace --print-build-logs .#${{ matrix.package }}
+
+  build-packages-linux-only:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        package:
+          - solana-1_7_14-full
+          - solana-1_8_12-full
+          - solana-full
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v16
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v10
+        with:
+          name: saber
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - run: nix build --show-trace --print-build-logs .#${{ matrix.package }}

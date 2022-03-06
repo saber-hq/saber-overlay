@@ -25,7 +25,6 @@ flake-utils.lib.eachSystem supportedSystems (system:
         meta.description = "Environment used for generating Anchor IDLs.";
 
         phases = [ "installPhase" ];
-        installPhase = "true";
 
         paths = [
           tool-anchor
@@ -47,7 +46,6 @@ flake-utils.lib.eachSystem supportedSystems (system:
         meta.description = "Environment used for building Anchor packages.";
 
         phases = [ "installPhase" ];
-        installPhase = "true";
 
         buildInputs = [
           env-anchor-idls
@@ -76,7 +74,6 @@ flake-utils.lib.eachSystem supportedSystems (system:
       stdenvNoCC.mkDerivation {
         name = "saber-env-devshell";
         phases = [ "installPhase" ];
-        installPhase = "true";
 
         buildInputs =
           [ env-anchor-build env-release-crates saber-dev-utilities ];

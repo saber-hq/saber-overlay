@@ -56,7 +56,7 @@ flake-utils.lib.eachSystem supportedSystems (system:
       buildEnv {
         name = "saber-env-release-crates";
         meta.description = "Environment used for releasing Crates.";
-        paths = [ rust-stable cargo-workspaces ] ++ rust-build-common;
+        paths = [ rust-stable cargo-workspaces saber-rust-build-common ];
       };
 
     env-release-npm = with pkgs;

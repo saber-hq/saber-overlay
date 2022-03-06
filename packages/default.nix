@@ -34,4 +34,12 @@ in anchorPackages // solanaPackages // rec {
     inherit (solanaPackages.solana) solana-basic;
     inherit cargo-workspaces;
   };
+
+  saber-rust-build-common = with pkgs;
+    buildEnv {
+      paths = [ pkgconfig openssl zlib libiconv ]
+        ++ (lib.optionals stdenv.isLinux ([ udev ]))
+        ++ (lib.optionals stdenv.isDarwin
+          (with darwin.apple_sdk.frameworks; [ AppKit IOKit Foundation ]));
+    };
 }

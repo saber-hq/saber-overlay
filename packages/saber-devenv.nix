@@ -1,27 +1,17 @@
-{ pkgs, anchor, solana-basic, cargo-workspaces }:
+{ pkgs, anchor, solana-basic, saber-dev-utilities, saber-rust-build-common }:
 with pkgs;
 buildEnv {
   name = "saber-devenv";
-  paths = (lib.optionals stdenv.isLinux ([ udev ])) ++ [
+  paths = [
     solana-basic
     anchor
 
-    cargo-workspaces
-    cargo-expand
-    cargo-deps
-    cargo-readme
+    saber-dev-utilities
+    saber-rust-build-common
 
-    # sdk
+    # NodeJS stuff
     nodejs
     yarn
     python3
-
-    pkgconfig
-    openssl
-    jq
-    gnused
-
-    libiconv
-  ] ++ (lib.optionals stdenv.isDarwin
-    (with darwin.apple_sdk.frameworks; [ AppKit IOKit Foundation ]));
+  ];
 }

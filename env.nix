@@ -1,5 +1,6 @@
 { pkgs }:
-pkgs.buildEnv {
+with pkgs;
+buildEnv {
   name = "saber-env";
-  paths = (with pkgs; [ rust-nightly spl-token-cli saber-devenv ]);
+  paths = [ spl-token-cli saber-devenv ];
 }

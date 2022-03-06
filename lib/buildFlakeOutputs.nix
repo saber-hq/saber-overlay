@@ -20,11 +20,9 @@ flake-utils.lib.eachSystem supportedSystems (system:
     tool-solana = buildTools.solana;
 
     env-anchor-idls = with pkgs;
-      stdenvNoCC.mkDerivation {
+      symlinkJoin {
         name = "saber-env-anchor-idls";
         meta.description = "Environment used for generating Anchor IDLs.";
-
-        phases = [ "installPhase" ];
 
         paths = [
           tool-anchor
@@ -41,11 +39,9 @@ flake-utils.lib.eachSystem supportedSystems (system:
       };
 
     env-anchor-build = with pkgs;
-      stdenvNoCC.mkDerivation {
+      symlinkJoin {
         name = "saber-env-anchor-build";
         meta.description = "Environment used for building Anchor packages.";
-
-        phases = [ "installPhase" ];
 
         buildInputs = [
           env-anchor-idls
@@ -71,9 +67,8 @@ flake-utils.lib.eachSystem supportedSystems (system:
       };
 
     devShell = with pkgs;
-      stdenvNoCC.mkDerivation {
+      symlinkJoin {
         name = "saber-env-devshell";
-        phases = [ "installPhase" ];
 
         buildInputs =
           [ env-anchor-build env-release-crates saber-dev-utilities ];

@@ -78,5 +78,8 @@ flake-utils.lib.eachSystem supportedSystems (system:
       inherit env-anchor-idls env-anchor-build env-release-crates
         env-release-npm;
       rust = rust-stable;
+
+      anchor = tool-anchor;
+      solana = tool-solana;
     };
   })

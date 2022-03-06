@@ -43,7 +43,7 @@ flake-utils.lib.eachSystem supportedSystems (system:
         name = "saber-env-anchor-build";
         meta.description = "Environment used for building Anchor packages.";
 
-        buildInputs = [
+        paths = [
           env-anchor-idls
 
           # Rust build tools

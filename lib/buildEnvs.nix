@@ -21,7 +21,7 @@ flake-utils.lib.eachSystem supportedSystems (system:
 
     env-anchor-idls = with pkgs;
       buildEnv {
-        name = "env-anchor-idls";
+        name = "saber-env-anchor-idls";
         description = "Environment used for generating Anchor IDLs.";
 
         paths = [
@@ -40,7 +40,7 @@ flake-utils.lib.eachSystem supportedSystems (system:
 
     env-anchor-build = with pkgs;
       buildEnv {
-        name = "env-anchor-build";
+        name = "saber-env-anchor-build";
         description = "Environment used for building Anchor packages.";
 
         paths = [
@@ -54,27 +54,37 @@ flake-utils.lib.eachSystem supportedSystems (system:
 
     env-release-crates = with pkgs;
       buildEnv {
-        name = "env-release-crates";
+        name = "saber-env-release-crates";
         description = "Environment used for releasing Crates.";
         paths = [ rust-stable cargo-workspaces ] ++ rust-build-common;
       };
 
     env-release-npm = with pkgs;
       buildEnv {
-        name = "env-release-npm";
+        name = "saber-env-release-npm";
         description = "Environment used for releasing NPM packages.";
         paths = [ env-anchor-idls ];
       };
 
     devShell = with pkgs;
       stdenvNoCC.mkDerivation {
-        name = "saber-devenv";
-        buildInputs = [ ci rustup gh cargo-deps cargo-readme nixfmt ];
+        name = "saber-env-devshell";
+        buildInputs = [
+          env-anchor-build
+          env-release-crates
+
+          rustup
+          gh
+          cargo-deps
+          cargo-readme
+          nixfmt
+        ];
       };
   in {
     inherit devShell;
     packages = {
-      inherit ci env-anchor-build env-release-crates env-release-npm;
+      inherit env-anchor-idls env-anchor-build env-release-crates
+        env-release-npm;
       rust = rust-stable;
     };
   })

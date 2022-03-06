@@ -28,15 +28,40 @@ in anchorPackages // solanaPackages // rec {
 
   rust-nightly = rustNightly.rust;
   rust-stable = rustStable.rust;
+
+  saber-dev-utilities = with pkgs;
+    buildEnv {
+      name = "saber-dev-utilities";
+      meta.description = "Various CLI tools commonly used in development.";
+
+      paths = [
+        cargo-workspaces
+        cargo-expand
+        cargo-deps
+        cargo-readme
+
+        curl
+        gh
+        gnused
+        jq
+        nixfmt
+        rustup
+        yj
+      ];
+    };
+
   saber-devenv = import ./saber-devenv.nix {
     inherit pkgs;
     inherit (anchorPackages) anchor;
     inherit (solanaPackages.solana) solana-basic;
-    inherit cargo-workspaces;
+    inherit saber-dev-utilities saber-rust-build-common;
   };
 
   saber-rust-build-common = with pkgs;
     buildEnv {
+      name = "saber-rust-build-common";
+      meta.description = "Common utilities for building Rust packages.";
+
       paths = [ pkgconfig openssl zlib libiconv ]
         ++ (lib.optionals stdenv.isLinux ([ udev ]))
         ++ (lib.optionals stdenv.isDarwin

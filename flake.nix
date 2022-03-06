@@ -48,7 +48,7 @@
       lib = {
         inherit supportedSystems;
         rustPlatformStable = overlayWithRust.rustStable.rustPlatform;
-        buildEnvs = import ./lib/buildEnvs.nix {
+        buildFlakeOutputs = import ./lib/buildFlakeOutputs.nix {
           inherit nixpkgs flake-utils;
           inherit supportedSystems systemOutputs;
         };

@@ -1,15 +1,15 @@
 { nixpkgs, flake-utils, supportedSystems, systemOutputs }:
 {
 # Override packages
-overrides ? { },
+buildToolOverrides ? { },
 # Setup overrides from packages
-setupOverrides ? { pkgs }: { },
+setupBuildToolOverrides ? { pkgs }: { },
 # Set up build tools
 setupBuildTools ? { pkgs }:
   {
     anchor = pkgs.anchor;
     solana = pkgs.solana-basic;
-  } // overrides // (setupOverrides { inherit pkgs; }) }:
+  } // buildToolOverrides // (setupBuildToolOverrides { inherit pkgs; }) }:
 flake-utils.lib.eachSystem supportedSystems (system:
   let
     pkgs = import nixpkgs { inherit system; }
@@ -20,9 +20,9 @@ flake-utils.lib.eachSystem supportedSystems (system:
     tool-solana = buildTools.solana;
 
     env-anchor-idls = with pkgs;
-      buildEnv {
+      stdenvNoCC.mkDerivation {
         name = "saber-env-anchor-idls";
-        description = "Environment used for generating Anchor IDLs.";
+        meta.description = "Environment used for generating Anchor IDLs.";
 
         paths = [
           tool-anchor
@@ -39,11 +39,11 @@ flake-utils.lib.eachSystem supportedSystems (system:
       };
 
     env-anchor-build = with pkgs;
-      buildEnv {
+      stdenvNoCC.mkDerivation {
         name = "saber-env-anchor-build";
-        description = "Environment used for building Anchor packages.";
+        meta.description = "Environment used for building Anchor packages.";
 
-        paths = [
+        buildInputs = [
           env-anchor-idls
 
           # Rust build tools
@@ -55,30 +55,22 @@ flake-utils.lib.eachSystem supportedSystems (system:
     env-release-crates = with pkgs;
       buildEnv {
         name = "saber-env-release-crates";
-        description = "Environment used for releasing Crates.";
+        meta.description = "Environment used for releasing Crates.";
         paths = [ rust-stable cargo-workspaces ] ++ rust-build-common;
       };
 
     env-release-npm = with pkgs;
       buildEnv {
         name = "saber-env-release-npm";
-        description = "Environment used for releasing NPM packages.";
+        meta.description = "Environment used for releasing NPM packages.";
         paths = [ env-anchor-idls ];
       };
 
     devShell = with pkgs;
       stdenvNoCC.mkDerivation {
         name = "saber-env-devshell";
-        buildInputs = [
-          env-anchor-build
-          env-release-crates
-
-          rustup
-          gh
-          cargo-deps
-          cargo-readme
-          nixfmt
-        ];
+        buildInputs =
+          [ env-anchor-build env-release-crates saber-dev-utilities ];
       };
   in {
     inherit devShell;

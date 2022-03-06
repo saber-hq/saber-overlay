@@ -67,9 +67,10 @@ flake-utils.lib.eachSystem supportedSystems (system:
       };
 
     devShell = with pkgs;
-      symlinkJoin {
+      stdenvNoCC.mkDerivation {
         name = "saber-env-devshell";
-        paths = [ env-anchor-build env-release-crates saber-dev-utilities ];
+        buildInputs =
+          [ env-anchor-build env-release-crates saber-dev-utilities ];
       };
   in {
     inherit devShell;

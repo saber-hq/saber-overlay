@@ -26,12 +26,18 @@
           };
           env = import ./env.nix { inherit pkgs; };
         in {
+          inherit (pkgs) saberPackages;
           packages = (flake-utils.lib.flattenTree pkgs.saberPackages)
             // (with pkgs.saberPackages; {
-              solana-1_7_14-basic = solana-1_7_14.solana-basic;
-              solana-1_7_14-full = solana-1_7_14.solana-full;
-              solana-1_8_12-basic = solana-1_8_12.solana-basic;
-              solana-1_8_12-full = solana-1_8_12.solana-full;
+              solana-1_7-basic = solana-1_7.solana-basic;
+              solana-1_7-full = solana-1_7.solana-full;
+
+              solana-1_8-basic = solana-1_8.solana-basic;
+              solana-1_8-full = solana-1_8.solana-full;
+
+              solana-1_9-basic = solana-1_9.solana-basic;
+              solana-1_9-full = solana-1_9.solana-full;
+
               solana-basic = solana.solana-basic;
               solana-full = solana.solana-full;
             });

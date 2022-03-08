@@ -30,8 +30,10 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-11.0]
         package:
-          - solana-1_7_14-basic
-          - solana-1_8_12-basic
+          - solana-1_7-basic
+          - solana-1_8-basic
+          - solana-1_9-basic
+          - solana-1_10-basic
           - solana-basic
           - spl-token-cli
           - anchor-0_12_0
@@ -64,8 +66,10 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         package:
-          - solana-1_7_14-full
-          - solana-1_8_12-full
+          - solana-1_7-full
+          - solana-1_8-full
+          - solana-1_9-full
+          - solana-1_10-full
           - solana-full
     steps:
       - uses: actions/checkout@v3

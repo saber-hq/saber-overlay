@@ -33,13 +33,4 @@ in anchorPackages // solanaPackages // rec {
     inherit (solanaPackages.solana) solana-basic;
     inherit cargo-workspaces;
   };
-
-  solana-bpf-tools = pkgs.callPackage ./solana-bpf-tools.nix {
-    inherit (pkgs) autoPatchelfHook stdenv openssl zlib fetchurl;
-  };
-
-  solana-bpf-sdk = pkgs.callPackage ./solana-bpf-sdk.nix {
-    inherit solana-bpf-tools;
-    inherit (pkgs) fetchFromGitHub stdenv;
-  };
 }

@@ -1,6 +1,7 @@
 { name ? "solana", lib, validatorOnly ? false, rustPlatform, clang, llvm
 , pkgconfig, udev, openssl, zlib, libclang, fetchFromGitHub, stdenv
-, darwinPackages, protobuf, rustfmt, cargoSha256, version, githubSha256, perl,
+, darwinPackages, protobuf, rustfmt, cargoSha256, version, githubSha256, perl
+, solana-bpf-tools, pkgs,
 
 # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
 solanaPkgs ? [
@@ -33,6 +34,7 @@ solanaPkgs ? [
   "solana-genesis"
 ] }:
 
+with pkgs;
 rustPlatform.buildRustPackage rec {
   pname = name;
   inherit version;
@@ -56,13 +58,22 @@ rustPlatform.buildRustPackage rec {
     "-isystem ${libclang.lib}/lib/clang/${lib.getVersion clang}/include";
 
   nativeBuildInputs = [ clang llvm pkgconfig protobuf rustfmt perl ];
-  buildInputs =
-    ([ openssl zlib libclang ] ++ (lib.optionals stdenv.isLinux [ udev ]))
-    ++ darwinPackages;
+  buildInputs = with pkgs;
+    ([ openssl zlib libclang xorg.lndir solana-bpf-tools ]
+      ++ (lib.optionals stdenv.isLinux [ udev ])) ++ darwinPackages;
   strictDeps = true;
 
   # this is too slow
   doCheck = false;
+
+  postInstall = ''
+    ls -lR $out/bin/
+    cp -R $src/sdk/ $out/bin/sdk/
+
+    mkdir -p $out/bin/sdk/bpf/dependencies
+    ${xorg.lndir}/bin/lndir ${solana-bpf-tools} $out/bin/sdk/bpf/dependencies/bpf-tools
+    touch $out/bin/sdk/bpf/dependencies/bpf-tools-v${solana-bpf-tools.version}.md
+  '';
 
   meta = with lib; {
     homepage = "https://solana.com/";

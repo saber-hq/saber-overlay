@@ -1,9 +1,13 @@
 { pkgs, rustStable, darwinPackages }:
 let
+  solana-bpf-tools = pkgs.callPackage ./bpf-tools.nix {
+    inherit (pkgs) autoPatchelfHook stdenv openssl zlib fetchurl;
+  };
   mkSolana = (args:
     import ./solana-packages.nix {
       inherit pkgs rustStable darwinPackages;
       inherit (args) version githubSha256 cargoHashes;
+      inherit solana-bpf-tools;
     });
 in rec {
   solana-1_7_14 = mkSolana {
@@ -22,5 +26,21 @@ in rec {
       solana-basic = "sha256-h6uqKCTrWJz/83HP5VhMShvcZQn6IVUaRNpnbGUnXTk=";
     };
   };
-  solana = solana-1_8_12;
+  solana-1_8_16 = mkSolana {
+    version = "1.8.16";
+    githubSha256 = "sha256-bU76hCsKlPCcTvEFJh95CIEzz47QlmU4mpFZXpP/erc=";
+    cargoHashes = {
+      solana-full = "sha256-E6K/kb2ScClo+BpJJLrYvB6omQcPhNY/hizINlNkCWk=";
+      solana-basic = "sha256-i6uqKCTrWJz/83HP5VhMShvcZQn6IVUaRNpnbGUnXTk=";
+    };
+  };
+  solana-1_9_8 = mkSolana {
+    version = "1.9.8";
+    githubSha256 = "sha256-cU76hCsKlPCcTvEFJh95CIEzz47QlmU4mpFZXpP/erc=";
+    cargoHashes = {
+      solana-full = "sha256-F6K/kb2ScClo+BpJJLrYvB6omQcPhNY/hizINlNkCWk=";
+      solana-basic = "sha256-j6uqKCTrWJz/83HP5VhMShvcZQn6IVUaRNpnbGUnXTk=";
+    };
+  };
+  solana = solana-1_8_16;
 }

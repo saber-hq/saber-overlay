@@ -1,14 +1,17 @@
-{ pkgs, rustStable, darwinPackages, version, githubSha256, cargoHashes }:
+{ pkgs, rustStable, darwinPackages, version, githubSha256, cargoHashes
+, solana-bpf-tools }:
 let
   mkSolana = args:
     (pkgs.callPackage ./solana.nix ({
       inherit (rustStable) rustPlatform;
+      inherit pkgs;
       inherit (pkgs)
         lib pkgconfig udev openssl zlib fetchFromGitHub stdenv protobuf rustfmt
         perl;
       inherit (pkgs.llvmPackages_12) clang llvm libclang;
       inherit darwinPackages;
       inherit version githubSha256;
+      inherit solana-bpf-tools;
     } // args));
   mkSolanaPackage = name: cargoSha256:
     mkSolana {

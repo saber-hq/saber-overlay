@@ -38,10 +38,10 @@ in rec {
 
   solana-1_10_0 = mkSolana {
     version = "1.10.0";
-    githubSha256 = "sha256-Uac1kQFWmmBEkN175ppevCJeeupKvztOgy90FyM5Ca0=";
+    githubSha256 = "sha256-4XKvhHEr/eo+jZd0ElBDI0/tYBnQBGr3pgNk5mdVAaI=";
     cargoHashes = {
-      solana-full = "sha256-xuqpC3ts92RPpQ/vy/OBDW0heL/3EfhAZhddsW5A2tA=";
-      solana-basic = "sha256-w6fVYYJJ1MnffmnnuP3f7KHb9md0s9OvdjCd+oab/TI=";
+      solana-full = "sha256-MuLC1rqWTbC10tz647SkXXQRB/EI37qDdqYn10KjjTk=";
+      solana-basic = "sha256-y4q4MRnvThrfloXt7WkDO8/YIl81QtC1vgVdpjjXNWU=";
     };
   };
   solana-1_10 = solana-1_10_0;

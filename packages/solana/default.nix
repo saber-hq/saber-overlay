@@ -34,7 +34,15 @@ in rec {
       solana-basic = "sha256-v6fVYYJJ1MnffmnnuP3f7KHb9md0s9OvdjCd+oab/TI=";
     };
   };
-  solana-1_9 = solana-1_9_9;
+  solana-1_9_12 = mkSolana {
+    version = "1.9.12";
+    githubSha256 = "sha256-1j/kULI+X4VfHgm0OnBmgMIccPvXW6z5LmJ2i4kVpA4=";
+    cargoHashes = {
+      solana-full = "sha256-LHhUc4FM9Vo4QcBStNyDXAnJhNRWkKQSmnuwcQEcIvE=";
+      solana-basic = "sha256-b7QeAsFvwLfvFlHvD+YA2R0TCEdkaD9VBjPj8xn/Eio=";
+    };
+  };
+  solana-1_9 = solana-1_9_12;
 
   solana-1_10_0 = mkSolana {
     version = "1.10.0";

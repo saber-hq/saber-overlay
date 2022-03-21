@@ -1,0 +1,30 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index e355a0e..9a91f77 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -2902,7 +2902,8 @@ dependencies = [
+ [[package]]
+ name = "serum_dex"
+ version = "0.4.0"
+-source = "git+https://github.com/project-serum/serum-dex?rev=1be91f2#1be91f2863d8ecede32daaae7e768034e24bbc79"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "02705854bae4622e552346c8edd43ab90c7425da35d63d2c689f39238f8d8b25"
+ dependencies = [
+  "arrayref",
+  "bincode",
+diff --git a/spl/Cargo.toml b/spl/Cargo.toml
+index 83b21f3..7a4d4db 100644
+--- a/spl/Cargo.toml
++++ b/spl/Cargo.toml
+@@ -19,7 +19,9 @@ dex = ["serum_dex"]
+ 
+ [dependencies]
+ anchor-lang = { path = "../lang", version = "0.23.0", features = ["derive"] }
+-serum_dex = { git = "https://github.com/project-serum/serum-dex", rev = "1be91f2", version = "0.4.0", features = ["no-entrypoint"], optional = true }
++serum_dex = { version = "0.4.0", features = ["no-entrypoint"], optional = true }
+ solana-program = "~1.8.14"
+ spl-token = { version = "3.1.1", features = ["no-entrypoint"], optional = true }
+-spl-associated-token-account = { version = "1.0.3", features = ["no-entrypoint"], optional = true }
++spl-associated-token-account = { version = "1.0.3", features = [
++    "no-entrypoint"
++], optional = true }

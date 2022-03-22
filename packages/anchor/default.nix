@@ -1,5 +1,12 @@
-{ rustPlatform, darwinPackages, pkgconfig, openssl, lib, udev, stdenv
-, fetchFromGitHub }:
+{ rustPlatform
+, darwinPackages
+, pkgconfig
+, openssl
+, lib
+, udev
+, stdenv
+, fetchFromGitHub
+}:
 
 let
   makeAnchorPackage = { version, srcHash, cargoHash, cargoPatches ? [ ] }:
@@ -14,6 +21,8 @@ let
         sha256 = srcHash;
       };
 
+      cargoBuildFlags = [ "--package=anchor-cli" ];
+
       inherit cargoPatches;
       cargoSha256 = cargoHash;
       verifyCargoDeps = false;
@@ -26,7 +35,14 @@ let
       # this is too slow
       doCheck = false;
     });
-in rec {
+in
+rec {
+  anchor-0_23_0 = makeAnchorPackage {
+    version = "0.23.0";
+    srcHash = "sha256-P9cnFkHK3avjH/z4ptAkeZ8gG5hhi19CfbuvAJvZKo0=";
+    cargoHash = "sha256-X5wPDeUdNR2nNcOvoSdXwOT2K7KZLU/hCj4yCqkXrVg=";
+    cargoPatches = [ ./cargo-0.23.0.patch ];
+  };
   anchor-0_22_0 = makeAnchorPackage {
     version = "0.22.0";
     srcHash = "sha256-uUDBTDss6cX7+v9Y9ttlp77PgeH0DQW+zluT6A8/il8=";
@@ -96,5 +112,5 @@ in rec {
     srcHash = "sha256-87Q/mPF/7sLDiT9N1MqjEX5E3dsLJ+oO2iyx9RcsK1g=";
     cargoHash = "sha256-iaapemx8ZTdeDvDHfCxtrwUlo2U+Sr96EWWODeIMU1w=";
   };
-  anchor = anchor-0_22_0;
+  anchor = anchor-0_23_0;
 }

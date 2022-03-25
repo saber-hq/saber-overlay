@@ -1,15 +1,16 @@
 { nixpkgs, flake-utils, supportedSystems, systemOutputs }:
 {
-# Override packages
-buildToolOverrides ? { },
-# Setup overrides from packages
-setupBuildToolOverrides ? { pkgs }: { },
-# Set up build tools
-setupBuildTools ? { pkgs }:
-  {
-    anchor = pkgs.anchor;
-    solana = pkgs.solana-basic;
-  } // buildToolOverrides // (setupBuildToolOverrides { inherit pkgs; }) }:
+  # Override packages
+  buildToolOverrides ? { }
+, # Setup overrides from packages
+  setupBuildToolOverrides ? { pkgs }: { }
+, # Set up build tools
+  setupBuildTools ? { pkgs }:
+    {
+      anchor = pkgs.anchor;
+      solana = pkgs.solana-basic;
+    } // buildToolOverrides // (setupBuildToolOverrides { inherit pkgs; })
+}:
 flake-utils.lib.eachSystem supportedSystems (system:
   let
     pkgs = import nixpkgs { inherit system; }
@@ -71,7 +72,8 @@ flake-utils.lib.eachSystem supportedSystems (system:
         name = "saber-env-devshell";
         buildInputs = [ env-anchor-build saber-dev-utilities ];
       };
-  in {
+  in
+  {
     inherit devShell;
     packages = {
       inherit env-anchor-idls env-anchor-build env-release-crates

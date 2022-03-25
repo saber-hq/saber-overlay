@@ -1,5 +1,17 @@
-{ fetchCrate, lib, validatorOnly ? false, rustPlatform, clang, llvm, udev
-, pkgconfig, openssl, zlib, libclang, stdenv, darwinPackages }:
+{ fetchCrate
+, lib
+, validatorOnly ? false
+, rustPlatform
+, clang
+, llvm
+, udev
+, pkgconfig
+, openssl
+, zlib
+, libclang
+, stdenv
+, darwinPackages
+}:
 
 rustPlatform.buildRustPackage rec {
   pname = "spl-token-cli";

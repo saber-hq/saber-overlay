@@ -15,7 +15,8 @@ let
       inherit name cargoSha256;
       solanaPkgs = [ name ];
     };
-in {
+in
+{
   # This is the ideal package to use.
   # However, it does not build on Darwin.
   solana-full = mkSolana { cargoSha256 = cargoHashes.solana-full; };

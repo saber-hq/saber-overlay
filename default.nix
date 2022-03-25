@@ -13,4 +13,5 @@ let
     inherit rustNightly rustStable;
     pkgs = prev;
   });
-in saberPackages // { inherit saberPackages; }
+in
+saberPackages // { inherit saberPackages; }

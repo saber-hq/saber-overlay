@@ -1,5 +1,14 @@
-{ fetchCrate, lib, rustPlatform, pkgconfig, openssl, zlib, stdenv
-, darwinPackages, libssh2, libgit2 }:
+{ fetchCrate
+, lib
+, rustPlatform
+, pkgconfig
+, openssl
+, zlib
+, stdenv
+, darwinPackages
+, libssh2
+, libgit2
+}:
 
 with rustPlatform;
 

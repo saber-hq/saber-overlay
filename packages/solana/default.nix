@@ -5,7 +5,8 @@ let
       inherit pkgs rustStable darwinPackages;
       inherit (args) version githubSha256 cargoHashes;
     });
-in rec {
+in
+rec {
   solana-1_7_14 = mkSolana {
     version = "1.7.14";
     githubSha256 = "sha256-oEGYrAdSvS2W2AjUNOUHK4IeSzGWWDzQTmE2zkDFQVM=";

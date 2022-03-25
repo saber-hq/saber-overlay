@@ -25,29 +25,31 @@
             overlays = [ overlayWithRust ];
           };
           env = import ./env.nix { inherit pkgs; };
-        in {
+        in
+        {
           inherit (pkgs) saberPackages;
           packages = (flake-utils.lib.flattenTree pkgs.saberPackages)
             // (with pkgs.saberPackages; {
-              solana-1_7-basic = solana-1_7.solana-basic;
-              solana-1_7-full = solana-1_7.solana-full;
+            solana-1_7-basic = solana-1_7.solana-basic;
+            solana-1_7-full = solana-1_7.solana-full;
 
-              solana-1_8-basic = solana-1_8.solana-basic;
-              solana-1_8-full = solana-1_8.solana-full;
+            solana-1_8-basic = solana-1_8.solana-basic;
+            solana-1_8-full = solana-1_8.solana-full;
 
-              solana-1_9-basic = solana-1_9.solana-basic;
-              solana-1_9-full = solana-1_9.solana-full;
+            solana-1_9-basic = solana-1_9.solana-basic;
+            solana-1_9-full = solana-1_9.solana-full;
 
-              solana-1_10-basic = solana-1_10.solana-basic;
-              solana-1_10-full = solana-1_10.solana-full;
+            solana-1_10-basic = solana-1_10.solana-basic;
+            solana-1_10-full = solana-1_10.solana-full;
 
-              solana-basic = solana.solana-basic;
-              solana-full = solana.solana-full;
-            });
+            solana-basic = solana.solana-basic;
+            solana-full = solana.solana-full;
+          });
           devShell = import ./shell.nix { inherit pkgs; };
           defaultPackage = env;
         });
-    in {
+    in
+    {
       overlay = overlayWithRust;
       overlays = {
         basic = overlayBasic;

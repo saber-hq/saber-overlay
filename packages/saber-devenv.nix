@@ -1,10 +1,11 @@
-{ pkgs, anchor, solana-basic, saber-dev-utilities, saber-rust-build-common }:
+{ pkgs, anchor, solana-basic, saber-dev-utilities, saber-rust-build-common, soteria }:
 with pkgs;
 buildEnv {
   name = "saber-devenv";
   paths = [
     solana-basic
     anchor
+    soteria
 
     saber-dev-utilities
     saber-rust-build-common

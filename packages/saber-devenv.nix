@@ -5,7 +5,6 @@ buildEnv {
   paths = [
     solana-basic
     anchor
-    soteria
 
     saber-dev-utilities
     saber-rust-build-common
@@ -14,5 +13,5 @@ buildEnv {
     nodejs
     yarn
     python3
-  ];
+  ] ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [ soteria ]);
 }

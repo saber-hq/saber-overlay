@@ -8,25 +8,29 @@ Overlay containing Saber packages.
 
 ```nix
 {
-  description = "My configuration";
+  description = "My development environment.";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     saber-overlay.url = "github:saber-hq/saber-overlay";
   };
 
-  outputs = { nixpkgs, saber-overlay, ... }: {
-    nixosConfigurations = {
-      hostname = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./configuration.nix # Your system configuration.
-          ({ pkgs, ... }: {
-            nixpkgs.overlays = [ saber-overlay.overlay ];
-            environment.systemPackages = [ pkgs.saber.solana ];
-          })
-        ];
-      };
+  outputs = { self, saber-overlay }: saber-overlay.lib.defaultFlakeOutputs;
+}
+```
+
+or
+
+```nix
+{
+  description = "My development environment.";
+
+  inputs = {
+    saber-overlay.url = "github:saber-hq/saber-overlay";
+  };
+
+  outputs = { self, saber-overlay }: saber-overlay.lib.buildFlakeOutputs {
+    setupBuildTools = { pkgs }: {
+      anchor = pkgs.anchor-0_23_0;
     };
   };
 }

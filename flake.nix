@@ -56,13 +56,14 @@
         withRust = overlayWithRust;
       };
 
-      lib = {
+      lib = rec {
         inherit supportedSystems;
         rustPlatformStable = overlayWithRust.rustStable.rustPlatform;
         buildFlakeOutputs = import ./lib/buildFlakeOutputs.nix {
           inherit nixpkgs flake-utils;
           inherit supportedSystems systemOutputs;
         };
+        defaultFlakeOutputs = buildFlakeOutputs { };
       };
     } // systemOutputs;
 }

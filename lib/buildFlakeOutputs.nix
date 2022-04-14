@@ -17,8 +17,8 @@ flake-utils.lib.eachSystem supportedSystems (system:
       // systemOutputs.packages.${system};
 
     buildTools = setupBuildTools { inherit pkgs; };
-    tool-anchor = buildTools.anchor ? pkgs.anchor;
-    tool-solana = buildTools.solana ? pkgs.solana-basic;
+    tool-anchor = if (builtins.hasAttr "anchor" buildTools) then buildTools.anchor else pkgs.anchor;
+    tool-solana = if (builtins.hasAttr "solana" buildTools) then buildTools.solana else pkgs.solana-basic;
 
     env-anchor-idls = with pkgs;
       symlinkJoin {

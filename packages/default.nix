@@ -60,7 +60,6 @@ anchorPackages // solanaPackages // rec {
     inherit (anchorPackages) anchor;
     inherit (solanaPackages.solana) solana-basic;
     inherit saber-dev-utilities saber-rust-build-common;
-    inherit soteria;
   };
 
   saber-rust-build-common = with pkgs;

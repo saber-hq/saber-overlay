@@ -27,10 +27,6 @@ anchorPackages // solanaPackages // rec {
     inherit darwinPackages;
   };
 
-  soteria = pkgs.callPackage ./soteria.nix {
-    inherit (pkgs) stdenv autoPatchelfHook lib fetchurl zlib glibc;
-  };
-
   rust-nightly = rustNightly.rust;
   rust-stable = rustStable.rust;
 

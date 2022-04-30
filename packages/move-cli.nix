@@ -4,10 +4,7 @@
 , pkgconfig
 , openssl
 , zlib
-, stdenv
 , darwinPackages
-, libssh2
-, libgit2
 , enableAddress32 ? false
 }:
 

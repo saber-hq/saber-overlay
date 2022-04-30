@@ -37,6 +37,8 @@ anchorPackages // solanaPackages // rec {
     inherit darwinPackages;
   };
 
+  move-cli-address32 = move-cli.override { enableAddress32 = true; };
+
   saber-dev-utilities = with pkgs;
     buildEnv {
       name = "saber-dev-utilities";

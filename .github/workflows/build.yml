@@ -55,6 +55,7 @@ jobs:
           - cargo-workspaces
           - saber-devenv
           - move-cli
+          - move-cli-address32
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v16

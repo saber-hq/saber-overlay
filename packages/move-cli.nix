@@ -8,22 +8,25 @@
 , darwinPackages
 , libssh2
 , libgit2
+, enableAddress32 ? false
 }:
 
 with rustPlatform;
 
 buildRustPackage rec {
   pname = "move";
-  version = "ae12f353227a01da84efeec99943c6185afec338";
+  version = "c2ced3f9571176bd1df5946c1cdb8f40bbdb18d4";
 
   src = fetchFromGitHub {
     owner = "move-language";
     repo = "move";
     rev = version;
-    sha256 = "sha256-cyXxLEEHRpzmymX+WPKvtx/FDip1eiMIpbW47bJBxfc=";
+    sha256 = "sha256-24qIPFX5fUi7AEdYT4qfX+BeTFrreGloII2tljOwDm0=";
   };
 
-  cargoSha256 = "sha256-67jz3KBYJ0MwAlh/OMS0cgOhJq+3tba/EqKI4TqiqRs=";
+  buildFeatures = lib.optionals enableAddress32 [ "address32" ];
+
+  cargoSha256 = "sha256-cuoQDOBhEzrDUaJOqJzDgb3FNyU7D1Rp5wOzZJp5KoI=";
   verifyCargoDeps = true;
 
   nativeBuildInputs = [ pkgconfig ];

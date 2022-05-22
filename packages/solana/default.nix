@@ -73,7 +73,7 @@ rec {
     version = "1.10.0";
     githubSha256 = "sha256-4XKvhHEr/eo+jZd0ElBDI0/tYBnQBGr3pgNk5mdVAaI=";
     cargoHashes = {
-      solana-full = "sha256-W/wJT/Og0AwyZyywxtuGm7888fvmcE4UOWC4LE6Iqwk=";
+      solana-full = "sha256-MuLC1rqWTbC10tz647SkXXQRB/EI37qDdqYn10KjjTk=";
       solana-basic = "sha256-y4q4MRnvThrfloXt7WkDO8/YIl81QtC1vgVdpjjXNWU=";
     };
   };
@@ -81,7 +81,7 @@ rec {
     version = "1.10.17";
     githubSha256 = "sha256-iiBbmpiNGow6vfKvkMv+1vNPRk/GKCoehCdbbtn8MU4=";
     cargoHashes = {
-      solana-full = "sha256-NuLC1rqWTbC10tz647SkXXQRB/EI37qDdqYn10KjjTk=";
+      solana-full = "sha256-W/wJT/Og0AwyZyywxtuGm7888fvmcE4UOWC4LE6Iqwk=";
       solana-basic = "sha256-IFOEP2AZ2mLvlOGc4J9I9HHJuTzRd4aeythPPO5+8Ks=";
     };
   };

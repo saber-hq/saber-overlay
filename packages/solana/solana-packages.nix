@@ -4,7 +4,7 @@ let
     (pkgs.callPackage ./solana.nix ({
       inherit (rustStable) rustPlatform;
       inherit (pkgs)
-        lib pkg-config udev openssl zlib fetchFromGitHub stdenv protobuf rustfmt rocksdb;
+        lib pkg-config udev openssl zlib fetchFromGitHub stdenv protobuf rustfmt;
       inherit darwinPackages;
       inherit version githubSha256;
     } // args));

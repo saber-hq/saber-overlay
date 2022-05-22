@@ -17,10 +17,10 @@ rec {
   };
   solana-1_7_17 = mkSolana {
     version = "1.7.17";
-    githubSha256 = "sha256-pEGYrAdSvS2W2AjUNOUHK4IeSzGWWDzQTmE2zkDFQVM=";
+    githubSha256 = "sha256-PSAalxB9pHFHoUfw5UvpGWqmURT/3R3jK6PdMQoiDXc=";
     cargoHashes = {
       solana-full = "sha256-pZGynLAa7Sb0QG+3qtu1mxwiKVq3uN+RJJUc8IFmjeU=";
-      solana-basic = "sha256-esY1/xk90gQ3fQtGwdkPGDWYAHR3CttJ7r692e1Mpno=";
+      solana-basic = "sha256-J/Wvbp50cUDw07eYNOLniE5N8zIQ/0iE6pWhSsuIORc=";
     };
   };
   solana-1_7 = solana-1_7_17;

@@ -75,40 +75,18 @@
         "type": "github"
       }
     },
-    "gitignore": {
-      "inputs": {
-        "nixpkgs": [
-          "goki-cli",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1646480205,
-        "narHash": "sha256-kekOlTlu45vuK2L9nq8iVN17V3sB0WWPqTTW3a2SQG0=",
-        "owner": "hercules-ci",
-        "repo": "gitignore.nix",
-        "rev": "bff2832ec341cf30acb3a4d3e2e7f1f7b590116a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "gitignore.nix",
-        "type": "github"
-      }
-    },
     "goki-cli": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "gitignore": "gitignore",
         "nixpkgs": "nixpkgs",
         "saber-overlay": "saber-overlay"
       },
       "locked": {
-        "lastModified": 1653237797,
-        "narHash": "sha256-1xk3I7Jf835xq+X0g4ee+XQ70r0x5xhZiZ26gYgt8UM=",
+        "lastModified": 1653242884,
+        "narHash": "sha256-PyhEkdVJDz1Yq9+XniJXFRj0888fJVi28OcQwQT+MwY=",
         "owner": "GokiProtocol",
         "repo": "goki-cli",
-        "rev": "122ad772bc3ce9cc6faa77dfd1eda70a177c3808",
+        "rev": "4346316e65d6aa703e964ff66bfb3e42a5595223",
         "type": "github"
       },
       "original": {

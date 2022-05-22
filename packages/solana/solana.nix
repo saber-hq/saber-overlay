@@ -14,6 +14,7 @@
 , cargoSha256
 , version
 , githubSha256
+, rocksdb
 , # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
   solanaPkgs ? [
     "solana"
@@ -63,7 +64,7 @@ rustPlatform.buildRustPackage rec {
 
   cargoBuildFlags = builtins.map (n: "--bin=${n}") solanaPkgs;
 
-  nativeBuildInputs = [ pkg-config protobuf ];
+  nativeBuildInputs = [ pkg-config protobuf rustfmt ];
   buildInputs =
     ([ openssl zlib ] ++ (lib.optionals stdenv.isLinux [ udev ]))
     ++ darwinPackages;
@@ -76,6 +77,11 @@ rustPlatform.buildRustPackage rec {
   OPENSSL_NO_VENDOR = 1;
   OPENSSL_LIB_DIR = "${lib.getLib openssl}/lib";
   OPENSSL_DIR = "${lib.getDev openssl}";
+
+  # Used by build.rs in the rocksdb-sys crate. If we don't set these, it would
+  # try to build RocksDB from source.
+  ROCKSDB_INCLUDE_DIR = "${rocksdb}/include";
+  ROCKSDB_LIB_DIR = "${rocksdb}/lib";
 
   meta = with lib; {
     description = "Web-Scale Blockchain for fast, secure, scalable, decentralized apps and marketplaces. ";

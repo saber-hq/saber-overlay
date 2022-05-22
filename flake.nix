@@ -23,7 +23,12 @@
         let
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [ overlayWithRust ];
+            overlays = [
+              (final: prev: {
+                goki-cli = goki-cli.defaultPackage.${system};
+              })
+              overlayWithRust
+            ];
           };
           env = import ./env.nix { inherit pkgs; };
         in
@@ -47,14 +52,17 @@
 
             solana-basic = solana.solana-basic;
             solana-full = solana.solana-full;
+
+            default = env;
           });
-          devShell = import ./shell.nix { inherit pkgs; };
-          defaultPackage = env;
+          devShells = {
+            default = import ./shell.nix { inherit pkgs; };
+          };
         });
     in
     {
-      overlay = overlayWithRust;
       overlays = {
+        default = overlayWithRust;
         basic = overlayBasic;
         withRust = overlayWithRust;
       };

@@ -6,9 +6,10 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
+    goki-cli.url = "github:GokiProtocol/goki-cli";
   };
 
-  outputs = { self, nixpkgs, rust-overlay, flake-utils, ... }:
+  outputs = { self, nixpkgs, rust-overlay, flake-utils, goki-cli }:
     let
       rustOverlay = import rust-overlay;
 
@@ -30,6 +31,8 @@
           inherit (pkgs) saberPackages;
           packages = (flake-utils.lib.flattenTree pkgs.saberPackages)
             // (with pkgs.saberPackages; {
+            goki-cli = goki-cli.defaultPackage.${system};
+
             solana-1_7-basic = solana-1_7.solana-basic;
             solana-1_7-full = solana-1_7.solana-full;
 

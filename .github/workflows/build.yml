@@ -56,6 +56,7 @@ jobs:
           - saber-devenv
           - move-cli
           - move-cli-address32
+          - goki-cli
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v17

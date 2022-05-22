@@ -66,7 +66,7 @@ rustPlatform.buildRustPackage rec {
 
   nativeBuildInputs = [ pkg-config protobuf rustfmt ];
   buildInputs =
-    ([ openssl zlib ] ++ (lib.optionals stdenv.isLinux [ udev ]))
+    ([ openssl zlib rocksdb ] ++ (lib.optionals stdenv.isLinux [ udev ]))
     ++ darwinPackages;
   strictDeps = true;
 

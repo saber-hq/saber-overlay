@@ -27,7 +27,7 @@ rec {
   };
   solana-1_8_16 = mkSolana {
     version = "1.8.16";
-    githubSha256 = "sha256-cY1mYxQ9NZtb+TuZrLNUCm2IS23WygY7vcmgPnSRa3w=";
+    githubSha256 = "sha256-bU76hCsKlPCcTvEFJh95CIEzz47QlmU4mpFZXpP/erc=";
     cargoHashes = {
       solana-full = "sha256-xuqpC3ts92RPpQ/vy/OBDW0heL/3EfhAZhddsW5A2tA=";
       solana-basic = "sha256-j6uqKCTrWJz/83HP5VhMShvcZQn6IVUaRNpnbGUnXTk=";

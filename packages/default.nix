@@ -44,6 +44,8 @@ anchorPackages // solanaPackages // rec {
       meta.description = "Various CLI tools commonly used in development.";
 
       paths = [
+        goki-cli
+
         cargo-workspaces
         cargo-expand
         cargo-deps

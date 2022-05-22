@@ -3,7 +3,7 @@ let
   darwinPackages = pkgs.lib.optionals pkgs.stdenv.isDarwin
     (with pkgs.darwin.apple_sdk.frameworks;
     ([ IOKit Security CoreFoundation AppKit ]
-      ++ (pkgs.lib.optionals pkgs.stdenv.isAarch64 [ System ])));
+      ++ (pkgs.lib.optionals pkgs.stdenv.isAarch64 [ pkgs.darwin.Libsystem ])));
   anchorPackages = import ./anchor {
     inherit (rustStable) rustPlatform;
     inherit (pkgs) lib pkgconfig openssl stdenv udev fetchFromGitHub;

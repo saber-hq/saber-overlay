@@ -6,15 +6,16 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
+    goki-cli.url = "github:GokiProtocol/goki-cli";
   };
 
-  outputs = { self, nixpkgs, rust-overlay, flake-utils, ... }:
+  outputs = { self, nixpkgs, rust-overlay, flake-utils, goki-cli }:
     let
       rustOverlay = import rust-overlay;
 
       supportedSystems = flake-utils.lib.defaultSystems;
 
-      overlayBasic = import ./.;
+      overlayBasic = import ./overlay.nix;
       overlayWithRust = final: prev:
         (nixpkgs.lib.composeExtensions rustOverlay overlayBasic) final prev;
 
@@ -22,36 +23,23 @@
         let
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [ overlayWithRust ];
+            overlays = [
+              goki-cli.overlays.default
+              overlayWithRust
+            ];
           };
           env = import ./env.nix { inherit pkgs; };
         in
         {
-          inherit (pkgs) saberPackages;
-          packages = (flake-utils.lib.flattenTree pkgs.saberPackages)
-            // (with pkgs.saberPackages; {
-            solana-1_7-basic = solana-1_7.solana-basic;
-            solana-1_7-full = solana-1_7.solana-full;
-
-            solana-1_8-basic = solana-1_8.solana-basic;
-            solana-1_8-full = solana-1_8.solana-full;
-
-            solana-1_9-basic = solana-1_9.solana-basic;
-            solana-1_9-full = solana-1_9.solana-full;
-
-            solana-1_10-basic = solana-1_10.solana-basic;
-            solana-1_10-full = solana-1_10.solana-full;
-
-            solana-basic = solana.solana-basic;
-            solana-full = solana.solana-full;
-          });
-          devShell = import ./shell.nix { inherit pkgs; };
-          defaultPackage = env;
+          packages = pkgs.saber;
+          devShells = {
+            default = import ./shell.nix { inherit pkgs; };
+          };
         });
     in
     {
-      overlay = overlayWithRust;
       overlays = {
+        default = overlayWithRust;
         basic = overlayBasic;
         withRust = overlayWithRust;
       };

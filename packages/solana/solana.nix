@@ -2,13 +2,10 @@
 , lib
 , validatorOnly ? false
 , rustPlatform
-, clang
-, llvm
-, pkgconfig
+, pkg-config
 , udev
 , openssl
 , zlib
-, libclang
 , fetchFromGitHub
 , stdenv
 , darwinPackages
@@ -17,7 +14,6 @@
 , cargoSha256
 , version
 , githubSha256
-, perl
 , # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
   solanaPkgs ? [
     "solana"
@@ -67,24 +63,24 @@ rustPlatform.buildRustPackage rec {
 
   cargoBuildFlags = builtins.map (n: "--bin=${n}") solanaPkgs;
 
-  # weird errors. see https://github.com/NixOS/nixpkgs/issues/52447#issuecomment-852079285
-  LIBCLANG_PATH = "${libclang.lib}/lib";
-  BINDGEN_EXTRA_CLANG_ARGS =
-    "-isystem ${libclang.lib}/lib/clang/${lib.getVersion clang}/include";
-
-  nativeBuildInputs = [ clang llvm pkgconfig protobuf rustfmt perl ];
+  nativeBuildInputs = [ pkg-config protobuf rustfmt ];
   buildInputs =
-    ([ openssl zlib libclang ] ++ (lib.optionals stdenv.isLinux [ udev ]))
+    ([ openssl zlib ] ++ (lib.optionals stdenv.isLinux [ udev ]))
     ++ darwinPackages;
   strictDeps = true;
 
   # this is too slow
   doCheck = false;
 
+  # Needed to get openssl-sys to use pkg-config.
+  OPENSSL_NO_VENDOR = 1;
+  OPENSSL_LIB_DIR = "${lib.getLib openssl}/lib";
+  OPENSSL_DIR = "${lib.getDev openssl}";
+
   meta = with lib; {
-    homepage = "https://solana.com/";
-    description =
-      "Solana is a decentralized blockchain built to enable scalable, user-friendly apps for the world.";
+    description = "Web-Scale Blockchain for fast, secure, scalable, decentralized apps and marketplaces. ";
+    homepage = "https://solana.com";
+    license = licenses.asl20;
     platforms = platforms.unix ++ platforms.darwin;
   };
 }

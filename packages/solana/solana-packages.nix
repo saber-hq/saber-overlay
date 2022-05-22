@@ -4,9 +4,7 @@ let
     (pkgs.callPackage ./solana.nix ({
       inherit (rustStable) rustPlatform;
       inherit (pkgs)
-        lib pkgconfig udev openssl zlib fetchFromGitHub stdenv protobuf rustfmt
-        perl;
-      inherit (pkgs.llvmPackages_12) clang llvm libclang;
+        lib pkg-config udev openssl zlib fetchFromGitHub stdenv protobuf rustfmt;
       inherit darwinPackages;
       inherit version githubSha256;
     } // args));
@@ -31,6 +29,8 @@ in
       "solana-faucet"
       "solana-stake-accounts"
       "solana-tokens"
+
+      "solana-test-validator"
       # solana-test-validator fails with System.framework not found error
     ];
     cargoSha256 = cargoHashes.solana-basic;

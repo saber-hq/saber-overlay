@@ -28,7 +28,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-11.0]
+        os: [ubuntu-latest, macos-11.0, macos-12]
         package:
           - solana-1_7-basic
           - solana-1_8-basic
@@ -56,6 +56,7 @@ jobs:
           - saber-devenv
           - move-cli
           - move-cli-address32
+          - goki-cli
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v17

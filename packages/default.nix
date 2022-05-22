@@ -3,7 +3,7 @@ let
   darwinPackages = pkgs.lib.optionals pkgs.stdenv.isDarwin
     (with pkgs.darwin.apple_sdk.frameworks;
     ([ IOKit Security CoreFoundation AppKit ]
-      ++ (pkgs.lib.optionals pkgs.stdenv.isAarch64 [ System ])));
+      ++ (pkgs.lib.optionals pkgs.stdenv.isAarch64 [ pkgs.darwin.Libsystem ])));
   anchorPackages = import ./anchor {
     inherit (rustStable) rustPlatform;
     inherit (pkgs) lib pkgconfig openssl stdenv udev fetchFromGitHub;
@@ -11,8 +11,25 @@ let
   };
   solanaPackages =
     (import ./solana { inherit pkgs rustStable darwinPackages; });
+
+  solanaFlattened = with solanaPackages; {
+    solana-1_7-basic = solana-1_7.solana-basic;
+    solana-1_7-full = solana-1_7.solana-full;
+
+    solana-1_8-basic = solana-1_8.solana-basic;
+    solana-1_8-full = solana-1_8.solana-full;
+
+    solana-1_9-basic = solana-1_9.solana-basic;
+    solana-1_9-full = solana-1_9.solana-full;
+
+    solana-1_10-basic = solana-1_10.solana-basic;
+    solana-1_10-full = solana-1_10.solana-full;
+
+    solana-basic = solana.solana-basic;
+    solana-full = solana.solana-full;
+  };
 in
-anchorPackages // solanaPackages // rec {
+anchorPackages // solanaFlattened // rec {
   spl-token-cli = pkgs.callPackage ./spl-token-cli.nix {
     inherit (rustStable) rustPlatform;
     inherit (pkgs) lib clang llvm pkgconfig openssl zlib udev stdenv fetchCrate;
@@ -44,6 +61,8 @@ anchorPackages // solanaPackages // rec {
       meta.description = "Various CLI tools commonly used in development.";
 
       paths = [
+        goki-cli
+
         cargo-workspaces
         cargo-expand
         cargo-deps

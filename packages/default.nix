@@ -1,4 +1,4 @@
-{ pkgs, rustNightly, rustStable }:
+{ pkgs, rustNightly, rustStable, rust-1_60 }:
 let
   darwinPackages = pkgs.lib.optionals pkgs.stdenv.isDarwin
     (with pkgs.darwin.apple_sdk.frameworks;
@@ -10,9 +10,26 @@ let
     inherit darwinPackages;
   };
   solanaPackages =
-    (import ./solana { inherit pkgs rustStable darwinPackages; });
+    (import ./solana { inherit pkgs rustStable darwinPackages rust-1_60; });
+
+  solanaFlattened = with solanaPackages; {
+    solana-1_7-basic = solana-1_7.solana-basic;
+    solana-1_7-full = solana-1_7.solana-full;
+
+    solana-1_8-basic = solana-1_8.solana-basic;
+    solana-1_8-full = solana-1_8.solana-full;
+
+    solana-1_9-basic = solana-1_9.solana-basic;
+    solana-1_9-full = solana-1_9.solana-full;
+
+    solana-1_10-basic = solana-1_10.solana-basic;
+    solana-1_10-full = solana-1_10.solana-full;
+
+    solana-basic = solana.solana-basic;
+    solana-full = solana.solana-full;
+  };
 in
-anchorPackages // solanaPackages // rec {
+anchorPackages // solanaFlattened // rec {
   spl-token-cli = pkgs.callPackage ./spl-token-cli.nix {
     inherit (rustStable) rustPlatform;
     inherit (pkgs) lib clang llvm pkgconfig openssl zlib udev stdenv fetchCrate;
@@ -44,6 +61,8 @@ anchorPackages // solanaPackages // rec {
       meta.description = "Various CLI tools commonly used in development.";
 
       paths = [
+        goki-cli
+
         cargo-workspaces
         cargo-expand
         cargo-deps

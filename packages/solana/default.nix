@@ -1,10 +1,12 @@
-{ pkgs, rustStable, darwinPackages }:
+{ pkgs, rustStable, darwinPackages, rust-1_60 }:
 let
-  mkSolana = (args:
+  mkSolana = (
+    { rust ? rustStable, ... }@args:
     import ./solana-packages.nix {
-      inherit pkgs rustStable darwinPackages;
+      inherit pkgs rust darwinPackages;
       inherit (args) version githubSha256 cargoHashes;
-    });
+    }
+  );
 in
 rec {
   solana-1_7_14 = mkSolana {
@@ -14,8 +16,18 @@ rec {
       solana-full = "sha256-oZGynLAa7Sb0QG+3qtu1mxwiKVq3uN+RJJUc8IFmjeU=";
       solana-basic = "sha256-qsY1/xk90gQ3fQtGwdkPGDWYAHR3CttJ7r692e1Mpno=";
     };
+    rust = rust-1_60;
   };
-  solana-1_7 = solana-1_7_14;
+  solana-1_7_17 = mkSolana {
+    version = "1.7.17";
+    githubSha256 = "sha256-PSAalxB9pHFHoUfw5UvpGWqmURT/3R3jK6PdMQoiDXc=";
+    cargoHashes = {
+      solana-full = "sha256-Gbf0lpMmhEv//uRWWOBXbwm0FBueD/kK6k3Cljxc0Gk=";
+      solana-basic = "sha256-J/Wvbp50cUDw07eYNOLniE5N8zIQ/0iE6pWhSsuIORc=";
+    };
+    rust = rust-1_60;
+  };
+  solana-1_7 = solana-1_7_17;
 
   solana-1_8_12 = mkSolana {
     version = "1.8.12";
@@ -24,8 +36,18 @@ rec {
       solana-full = "sha256-vuqpC3ts92RPpQ/vy/OBDW0heL/3EfhAZhddsW5A2tA=";
       solana-basic = "sha256-h6uqKCTrWJz/83HP5VhMShvcZQn6IVUaRNpnbGUnXTk=";
     };
+    rust = rust-1_60;
   };
-  solana-1_8 = solana-1_8_12;
+  solana-1_8_16 = mkSolana {
+    version = "1.8.16";
+    githubSha256 = "sha256-bU76hCsKlPCcTvEFJh95CIEzz47QlmU4mpFZXpP/erc=";
+    cargoHashes = {
+      solana-full = "sha256-E6K/kb2ScClo+BpJJLrYvB6omQcPhNY/hizINlNkCWk=";
+      solana-basic = "sha256-pGqt30UivScwsNnmdTfqGajCSmB6hCrk7SJgUnC9iHg=";
+    };
+    rust = rust-1_60;
+  };
+  solana-1_8 = solana-1_8_16;
 
   solana-1_9_9 = mkSolana {
     version = "1.9.9";
@@ -43,7 +65,15 @@ rec {
       solana-basic = "sha256-b7QeAsFvwLfvFlHvD+YA2R0TCEdkaD9VBjPj8xn/Eio=";
     };
   };
-  solana-1_9 = solana-1_9_12;
+  solana-1_9_22 = mkSolana {
+    version = "1.9.22";
+    githubSha256 = "sha256-hdB/iKCMZqFo9kUWSxVZfqjJ7HH6qj1jRqcMd5ZQf7M=";
+    cargoHashes = {
+      solana-full = "sha256-w1Tcn1nZDDWcHfVUlemLYAKuDWHlIhHKCk/EOP4auRI=";
+      solana-basic = "sha256-ZqCnksil7mP8ucW+zgSzYZYAuomZEr+F9jK0IZojZsk=";
+    };
+  };
+  solana-1_9 = solana-1_9_22;
 
   solana-1_10_0 = mkSolana {
     version = "1.10.0";
@@ -53,7 +83,15 @@ rec {
       solana-basic = "sha256-y4q4MRnvThrfloXt7WkDO8/YIl81QtC1vgVdpjjXNWU=";
     };
   };
-  solana-1_10 = solana-1_10_0;
+  solana-1_10_17 = mkSolana {
+    version = "1.10.17";
+    githubSha256 = "sha256-iiBbmpiNGow6vfKvkMv+1vNPRk/GKCoehCdbbtn8MU4=";
+    cargoHashes = {
+      solana-full = "sha256-W/wJT/Og0AwyZyywxtuGm7888fvmcE4UOWC4LE6Iqwk=";
+      solana-basic = "sha256-IFOEP2AZ2mLvlOGc4J9I9HHJuTzRd4aeythPPO5+8Ks=";
+    };
+  };
+  solana-1_10 = solana-1_10_17;
 
-  solana = solana-1_9;
+  solana = solana-1_10;
 }

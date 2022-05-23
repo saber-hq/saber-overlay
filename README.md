@@ -1,10 +1,18 @@
 # saber-overlay
 
-Overlay containing Saber packages.
+Overlay containing Nix packages used within the Saber ecosystem.
 
 ## Usage
 
 ### Nix flakes (recommended)
+
+The following helper exports several packages:
+
+- `env-anchor-idls` - environment which allows the use of the `anchor idl` command
+- `env-anchor-build` - exposes tools to create verifiable Anchor builds
+- `rust` - exposes Cargo/Rustc as used in CI
+
+To use these in GitHub Actions, you may reference [the Saber Periphery GitHub actions](https://github.com/saber-hq/saber-periphery/blob/master/.github/workflows) and pick one of the below flake formats:
 
 ```nix
 {
@@ -18,7 +26,7 @@ Overlay containing Saber packages.
 }
 ```
 
-or
+#### Locking a specific Anchor/Solana version
 
 ```nix
 {
@@ -30,6 +38,7 @@ or
 
   outputs = { self, saber-overlay }: saber-overlay.lib.buildFlakeOutputs {
     setupBuildTools = { pkgs }: {
+      solana = pkgs.solana-1_9;
       anchor = pkgs.anchor-0_23_0;
     };
   };

@@ -1,4 +1,4 @@
-{ pkgs, rustNightly, rustStable }:
+{ pkgs, rustNightly, rustStable, rust-1_60 }:
 let
   darwinPackages = pkgs.lib.optionals pkgs.stdenv.isDarwin
     (with pkgs.darwin.apple_sdk.frameworks;
@@ -10,7 +10,7 @@ let
     inherit darwinPackages;
   };
   solanaPackages =
-    (import ./solana { inherit pkgs rustStable darwinPackages; });
+    (import ./solana { inherit pkgs rustStable darwinPackages rust-1_60; });
 
   solanaFlattened = with solanaPackages; {
     solana-1_7-basic = solana-1_7.solana-basic;

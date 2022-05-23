@@ -1,10 +1,12 @@
-{ pkgs, rustStable, darwinPackages }:
+{ pkgs, rustStable, darwinPackages, rust-1_60 }:
 let
-  mkSolana = (args:
+  mkSolana = (
+    { rust ? rustStable, ... }@args:
     import ./solana-packages.nix {
-      inherit pkgs rustStable darwinPackages;
+      inherit pkgs rust darwinPackages;
       inherit (args) version githubSha256 cargoHashes;
-    });
+    }
+  );
 in
 rec {
   solana-1_7_14 = mkSolana {
@@ -14,6 +16,7 @@ rec {
       solana-full = "sha256-oZGynLAa7Sb0QG+3qtu1mxwiKVq3uN+RJJUc8IFmjeU=";
       solana-basic = "sha256-qsY1/xk90gQ3fQtGwdkPGDWYAHR3CttJ7r692e1Mpno=";
     };
+    rust = rust-1_60;
   };
   solana-1_7_17 = mkSolana {
     version = "1.7.17";
@@ -22,6 +25,7 @@ rec {
       solana-full = "sha256-Gbf0lpMmhEv//uRWWOBXbwm0FBueD/kK6k3Cljxc0Gk=";
       solana-basic = "sha256-J/Wvbp50cUDw07eYNOLniE5N8zIQ/0iE6pWhSsuIORc=";
     };
+    rust = rust-1_60;
   };
   solana-1_7 = solana-1_7_17;
 
@@ -32,6 +36,7 @@ rec {
       solana-full = "sha256-vuqpC3ts92RPpQ/vy/OBDW0heL/3EfhAZhddsW5A2tA=";
       solana-basic = "sha256-h6uqKCTrWJz/83HP5VhMShvcZQn6IVUaRNpnbGUnXTk=";
     };
+    rust = rust-1_60;
   };
   solana-1_8_16 = mkSolana {
     version = "1.8.16";
@@ -40,6 +45,7 @@ rec {
       solana-full = "sha256-E6K/kb2ScClo+BpJJLrYvB6omQcPhNY/hizINlNkCWk=";
       solana-basic = "sha256-pGqt30UivScwsNnmdTfqGajCSmB6hCrk7SJgUnC9iHg=";
     };
+    rust = rust-1_60;
   };
   solana-1_8 = solana-1_8_16;
 

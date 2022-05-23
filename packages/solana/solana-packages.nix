@@ -1,8 +1,8 @@
-{ pkgs, rustStable, darwinPackages, version, githubSha256, cargoHashes }:
+{ pkgs, rust, darwinPackages, version, githubSha256, cargoHashes }:
 let
   mkSolana = args:
     (pkgs.callPackage ./solana.nix ({
-      inherit (rustStable) rustPlatform;
+      inherit (rust) rustPlatform;
       inherit (pkgs)
         lib pkgconfig udev openssl zlib fetchFromGitHub stdenv protobuf rustfmt
         perl;

@@ -19,6 +19,9 @@
       overlayWithRust = final: prev:
         (nixpkgs.lib.composeExtensions rustOverlay overlayBasic) final prev;
 
+      overlayDefault = final: prev:
+        (nixpkgs.lib.composeExtensions overlayWithRust goki-cli.overlays.default) final prev;
+
       systemOutputs = flake-utils.lib.eachDefaultSystem (system:
         let
           pkgs = import nixpkgs {
@@ -39,7 +42,7 @@
     in
     {
       overlays = {
-        default = overlayWithRust;
+        default = overlayDefault;
         basic = overlayBasic;
         withRust = overlayWithRust;
       };

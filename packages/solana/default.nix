@@ -103,7 +103,7 @@ rec {
     version = "1.10.23";
     githubSha256 = "sha256-LR18TyJIwGcNP+CSyVzm9InlkxmnwgNd2sFE05VD99k=";
     cargoHashes = {
-      solana-full = "sha256-X/wJT/Og0AwyZyywxtuGm7888fvmcE4UOWC4LE6Iqwk=";
+      solana-full = "sha256-CG/CxLTGqe8qhu2YttTwRU1V3PJ2+mgy1NhZa8rmjBI=";
       solana-basic = "sha256-ajoCGS4gZVEBjHzf4JWrh/RSP1OgvMUPF/tcYgYavoY=";
     };
   };

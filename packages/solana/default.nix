@@ -77,7 +77,7 @@ rec {
     version = "1.9.28";
     githubSha256 = "sha256-r11K/3XajpIKuqb8mBvn0ynvMx5jtTjhOTZFxb0x2no=";
     cargoHashes = {
-      solana-full = "sha256-x1Tcn1nZDDWcHfVUlemLYAKuDWHlIhHKCk/EOP4auRI=";
+      solana-full = "sha256-0a/dRAMd8BFFefr7pMh08OyPf7H5VuXU9nHxUHBXWsY=";
       solana-basic = "sha256-SUzWADF7r119jY4PQp/1DwlkTCEdnGE01U5tSkzH/6s=";
     };
   };

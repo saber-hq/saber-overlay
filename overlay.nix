@@ -14,13 +14,9 @@ let
     inherit rustNightly rustStable rust-1_60;
     pkgs = prev;
   });
-
-  packages = saberPackages // (with saberPackages; {
-    inherit (prev) goki-cli;
-  });
 in
-packages // {
-  saber = packages // {
-    default = import ./env.nix { pkgs = prev // packages; };
+saberPackages // {
+  saber = saberPackages // {
+    default = import ./env.nix { pkgs = prev // saberPackages; };
   };
 }

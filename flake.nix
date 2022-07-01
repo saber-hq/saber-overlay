@@ -7,6 +7,7 @@
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
     goki-cli.url = "github:GokiProtocol/goki-cli/master";
+    goki-cli.flake = false;
   };
 
   outputs = { self, nixpkgs, rust-overlay, flake-utils, goki-cli }:
@@ -15,21 +16,20 @@
 
       supportedSystems = flake-utils.lib.defaultSystems;
 
+      gokiOverlay = import "${goki-cli}/overlay.nix";
+
       overlayBasic = import ./overlay.nix;
       overlayWithRust = final: prev:
         (nixpkgs.lib.composeExtensions rustOverlay overlayBasic) final prev;
 
       overlayDefault = final: prev:
-        (nixpkgs.lib.composeExtensions overlayWithRust) final prev;
+        (nixpkgs.lib.composeExtensions overlayWithRust gokiOverlay) final prev;
 
       systemOutputs = flake-utils.lib.eachDefaultSystem (system:
         let
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [
-              goki-cli.overlays.default
-              overlayWithRust
-            ];
+            overlays = [ overlayDefault ];
           };
           env = import ./env.nix { inherit pkgs; };
         in

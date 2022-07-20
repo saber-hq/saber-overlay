@@ -10,8 +10,9 @@ let
   rustNightly = mkRust prev.rust-bin.nightly."2022-05-21".minimal;
   rust-1_60 = mkRust prev.rust-bin.stable."1.60.0".minimal;
   rustStable = mkRust prev.rust-bin.stable."1.61.0".minimal;
+  rust-full = mkRust prev.rust-bin.stable."1.62.0".default;
   saberPackages = (import ./packages {
-    inherit rustNightly rustStable rust-1_60;
+    inherit rustNightly rustStable rust-1_60 rust-full;
     pkgs = prev;
   });
 in

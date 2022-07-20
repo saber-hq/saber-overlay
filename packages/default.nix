@@ -1,4 +1,4 @@
-{ pkgs, rustNightly, rustStable, rust-1_60 }:
+{ pkgs, rustNightly, rustStable, rust-1_60, rust-full }:
 let
   darwinPackages = pkgs.lib.optionals pkgs.stdenv.isDarwin
     (with pkgs.darwin.apple_sdk.frameworks;
@@ -30,6 +30,8 @@ let
   };
 in
 anchorPackages // solanaFlattened // rec {
+  inherit rust-full;
+
   spl-token-cli = pkgs.callPackage ./spl-token-cli.nix {
     inherit (rustStable) rustPlatform;
     inherit (pkgs) lib clang llvm pkgconfig openssl zlib udev stdenv fetchCrate;

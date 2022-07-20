@@ -78,7 +78,7 @@ in
   packages = {
     inherit env-anchor-idls env-anchor-build env-release-crates
       env-release-npm;
-    rust = pkgs.rust-stable;
+    rust = pkgs.rust-full;
 
     anchor = tool-anchor;
     solana = tool-solana;

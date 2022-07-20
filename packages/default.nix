@@ -1,4 +1,4 @@
-{ pkgs, rustNightly, rustStable, rust-1_60 }:
+{ pkgs, rustNightly, rustStable, rust-1_60, rust-full }:
 let
   darwinPackages = pkgs.lib.optionals pkgs.stdenv.isDarwin
     (with pkgs.darwin.apple_sdk.frameworks;

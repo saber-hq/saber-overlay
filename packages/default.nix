@@ -40,14 +40,6 @@ anchorPackages // solanaFlattened // rec {
   rust-nightly = rustNightly.rust;
   rust-stable = rustStable.rust;
 
-  move-cli = pkgs.callPackage ./move-cli.nix {
-    inherit (rustStable) rustPlatform;
-    inherit (pkgs) lib pkgconfig openssl zlib fetchFromGitHub;
-    inherit darwinPackages;
-  };
-
-  move-cli-address32 = move-cli.override { enableAddress32 = true; };
-
   saber-dev-utilities = with pkgs;
     buildEnv {
       name = "saber-dev-utilities";

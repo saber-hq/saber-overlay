@@ -54,7 +54,6 @@ jobs:
           - anchor-0_24_0
           - anchor-0_24_2
           - anchor
-          - cargo-workspaces
           - saber-devenv
           - move-cli
           - move-cli-address32

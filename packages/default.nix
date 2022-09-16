@@ -37,13 +37,6 @@ anchorPackages // solanaFlattened // rec {
     inherit darwinPackages;
   };
 
-  cargo-workspaces = pkgs.callPackage ./cargo-workspaces.nix {
-    inherit (rustStable) rustPlatform;
-    inherit (pkgs) lib pkgconfig openssl zlib stdenv fetchCrate libssh2;
-    libgit2 = pkgs.libgit2_1_3_0;
-    inherit darwinPackages;
-  };
-
   rust-nightly = rustNightly.rust;
   rust-stable = rustStable.rust;
 

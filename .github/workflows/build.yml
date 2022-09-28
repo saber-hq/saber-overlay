@@ -78,6 +78,7 @@ jobs:
           - solana-1_8-full
           - solana-1_9-full
           - solana-1_10-full
+          - solana-1_11-full
           - solana-full
     steps:
       - uses: actions/checkout@v3

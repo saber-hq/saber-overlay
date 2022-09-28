@@ -107,7 +107,25 @@ rec {
       solana-basic = "sha256-ajoCGS4gZVEBjHzf4JWrh/RSP1OgvMUPF/tcYgYavoY=";
     };
   };
-  solana-1_10 = solana-1_10_23;
+  solana-1_10_39 = mkSolana {
+    version = "1.10.39";
+    githubSha256 = "sha256-3zcIIcgGcMuQz46e7lxBiOcIBi37VHQYArp6xCKGJa4=";
+    cargoHashes = {
+      solana-full = "sha256-NGs85HcL0Zrhoomzeioj3ouBQb0gHm0a1xuskS/fG50=";
+      solana-basic = "sha256-qRePqTUYdnD7EQOkoZRU/qfw8euxTjAzrooYjMB3qXQ=";
+    };
+  };
+  solana-1_10 = solana-1_10_39;
+
+  solana-1_11_10 = mkSolana {
+    version = "1.11.10";
+    githubSha256 = "sha256-mHPbI0MxL1vO++iVcuvFjroLXYX+gJTAtslRhCQvVSw=";
+    cargoHashes = {
+      solana-full = "sha256-k8X0QK++g0cly79hVHlxl8zL0oZy0fYwumFTw45dADc=";
+      solana-basic = "sha256-8JBLJvYA3NA2WYSodwA5jvQwvs1ZzEFMomVpvs6X3uE=";
+    };
+  };
+  solana-1_11 = solana-1_11_10;
 
   solana = solana-1_10;
 }

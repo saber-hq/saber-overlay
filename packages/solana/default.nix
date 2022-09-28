@@ -119,10 +119,10 @@ rec {
 
   solana-1_11_10 = mkSolana {
     version = "1.11.10";
-    githubSha256 = "sha256-lR18TyJIwGcNPjCSyVzm9InlkxmnwgNd2sFE05VD99k=";
+    githubSha256 = "sha256-mHPbI0MxL1vO++iVcuvFjroLXYX+gJTAtslRhCQvVSw=";
     cargoHashes = {
-      solana-full = "sha256-cG/CxLTGqe8qku2YttTwRU1V3PJ2+mgy1NhZa8rmjBI=";
-      solana-basic = "sha256-ljoCGS4gZVEljHzf4JWrh/RSP1OgvMUPF/tcYgYavoY=";
+      solana-full = "sha256-k8X0QK++g0cly79hVHlxl8zL0oZy0fYwumFTw45dADc=";
+      solana-basic = "sha256-8JBLJvYA3NA2WYSodwA5jvQwvs1ZzEFMomVpvs6X3uE=";
     };
   };
   solana-1_11 = solana-1_11_10;

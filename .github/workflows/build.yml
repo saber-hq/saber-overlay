@@ -53,6 +53,7 @@ jobs:
           - anchor-0_23_0
           - anchor-0_24_0
           - anchor-0_24_2
+          - anchor-0_25_0
           - anchor
           - saber-devenv
           - goki-cli

@@ -132,7 +132,7 @@ rec {
     githubSha256 = "sha256-O/vy4750vM3Gk2uc2qslmPOSu4dIes/3i6CC48v072E=";
     cargoHashes = {
       solana-full = "sha256-1HXQv1/i7CT0aAwFVQq3d3LnreOxp0hvDAJmBZ4o7gU=";
-      solana-basic = "sha256-8JBLJvYA3NA2WYSodwA5jvQwvs1ZzEFMomVpvs6X3uE=";
+      solana-basic = "sha256-Tj5gZ4/9NnInRMcq4l+8WIUzlBreAU8NpKUx13IsvXA=";
     };
   };
   solana-1_13 = solana-1_13_05;

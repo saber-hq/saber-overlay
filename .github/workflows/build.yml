@@ -32,6 +32,11 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         package:
+          - solana-1_7-full
+          - solana-1_8-full
+          - solana-1_9-full
+          - solana-1_10-full
+          - solana-1_11-full
           - solana-1_13-full
           - solana-full
     steps:

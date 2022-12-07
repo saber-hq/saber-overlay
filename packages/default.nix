@@ -28,6 +28,9 @@ let
     solana-1_11-basic = solana-1_11.solana-basic;
     solana-1_11-full = solana-1_11.solana-full;
 
+    solana-1_13-basic = solana-1_13.solana-basic;
+    solana-1_13-full = solana-1_13.solana-full;
+
     solana-basic = solana.solana-basic;
     solana-full = solana.solana-full;
   };

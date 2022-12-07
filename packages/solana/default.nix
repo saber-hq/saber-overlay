@@ -127,5 +127,15 @@ rec {
   };
   solana-1_11 = solana-1_11_10;
 
+  solana-1_13_05 = mkSolana {
+    version = "1.13.5";
+    githubSha256 = "sha256-mHPbI0MxL1vO++iVcuvFjroLXYX+gJTAtslRhCQvVSw=";
+    cargoHashes = {
+      solana-full = "sha256-k8X0QK++g0cly79hVHlxl8zL0oZy0fYwumFTw45dADc=";
+      solana-basic = "sha256-8JBLJvYA3NA2WYSodwA5jvQwvs1ZzEFMomVpvs6X3uE=";
+    };
+  };
+  solana-1_13 = solana-1_13_05;
+
   solana = solana-1_10;
 }

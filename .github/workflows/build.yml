@@ -25,48 +25,6 @@ jobs:
         run: nix flake check -v --show-trace --no-update-lock-file
       - run: nix build --show-trace --print-build-logs
 
-  build-packages:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-11.0, macos-12]
-        package:
-          - solana-1_7-basic
-          - solana-1_8-basic
-          - solana-1_9-basic
-          - solana-1_10-basic
-          - solana-basic
-          - spl-token-cli
-          - anchor-0_12_0
-          - anchor-0_13_2
-          - anchor-0_15_0
-          - anchor-0_16_1
-          - anchor-0_17_0
-          - anchor-0_18_0
-          - anchor-0_18_2
-          - anchor-0_19_0
-          - anchor-0_20_0
-          - anchor-0_20_1
-          - anchor-0_21_0
-          - anchor-0_22_0
-          - anchor-0_23_0
-          - anchor-0_24_0
-          - anchor-0_24_2
-          - anchor-0_25_0
-          - anchor
-          - saber-devenv
-          - goki-cli
-    steps:
-      - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v17
-      - name: Setup Cachix
-        uses: cachix/cachix-action@v10
-        with:
-          name: saber
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-      - run: nix build --show-trace --print-build-logs .#${{ matrix.package }}
-
   build-packages-linux-only:
     runs-on: ${{ matrix.os }}
     strategy:

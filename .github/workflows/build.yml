@@ -33,6 +33,7 @@ jobs:
         os: [ubuntu-latest]
         package:
           - solana-1_13-full
+          - solana-1_13-basic
           - solana-full
     steps:
       - uses: actions/checkout@v3

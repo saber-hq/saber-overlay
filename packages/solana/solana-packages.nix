@@ -4,6 +4,7 @@
 , version
 , githubSha256
 , cargoLockFile
+, cargoOutputHashes
 }:
 let
   mkSolana = args:
@@ -14,7 +15,7 @@ let
         perl;
       inherit (pkgs.llvmPackages_12) clang llvm libclang;
       inherit darwinPackages;
-      inherit version githubSha256 cargoLockFile;
+      inherit version githubSha256 cargoLockFile cargoOutputHashes;
     } // args));
 in
 {

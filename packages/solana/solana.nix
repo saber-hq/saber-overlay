@@ -18,6 +18,7 @@
 , version
 , githubSha256
 , perl
+, cargoOutputHashes
 , # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
   solanaPkgs ? [
     "solana"
@@ -64,9 +65,7 @@ rustPlatform.buildRustPackage rec {
   # partly inspired by https://github.com/obsidiansystems/solana-bridges/blob/develop/default.nix#L29
   cargoLock = {
     lockFile = cargoLockFile;
-    outputHashes = {
-      "crossbeam-epoch-0.9.5" = "sha256-Jf0RarsgJiXiZ+ddy0vp4jQ59J9m0k3sgXhWhCdhgws=";
-    };
+    outputHashes = cargoOutputHashes;
   };
 
   cargoBuildFlags = builtins.map (n: "--bin=${n}") solanaPkgs;

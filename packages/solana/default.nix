@@ -1,9 +1,9 @@
 { pkgs, rustStable, darwinPackages, rust-1_60 }:
 let
   mkSolana = (
-    { rust ? rustStable, ... }@args:
+    { rust ? rustStable, cargoOutputHashes ? { }, ... }@args:
     import ./solana-packages.nix {
-      inherit pkgs rust darwinPackages;
+      inherit pkgs rust darwinPackages cargoOutputHashes;
       inherit (args) version githubSha256;
       cargoLockFile = ./cargo/v${args.version}.Cargo.lock;
     }
@@ -53,6 +53,9 @@ rec {
   solana-1_17_6 = mkSolana {
     version = "1.17.6";
     githubSha256 = "sha256-wkzE+sb0Dqx3cJ2ie3HWr+IVNZgrTDw1FYT3tENTFJc=";
+    cargoOutputHashes = {
+      "crossbeam-epoch-0.9.5" = "sha256-Jf0RarsgJiXiZ+ddy0vp4jQ59J9m0k3sgXhWhCdhgws=";
+    };
   };
   solana-1_17 = solana-1_17_6;
 

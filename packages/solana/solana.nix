@@ -14,7 +14,7 @@
 , darwinPackages
 , protobuf
 , rustfmt
-, cargoSha256
+, cargoLockFile
 , version
 , githubSha256
 , perl
@@ -62,8 +62,12 @@ rustPlatform.buildRustPackage rec {
   };
 
   # partly inspired by https://github.com/obsidiansystems/solana-bridges/blob/develop/default.nix#L29
-  inherit cargoSha256;
-  verifyCargoDeps = true;
+  cargoLock = {
+    lockFile = cargoLockFile;
+    outputHashes = {
+      "crossbeam-epoch-0.9.5" = "sha256-Jf0RarsgJiXiZ+ddy0vp4jQ59J9m0k3sgXhWhCdhgws=";
+    };
+  };
 
   cargoBuildFlags = builtins.map (n: "--bin=${n}") solanaPkgs;
 

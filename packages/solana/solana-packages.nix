@@ -1,4 +1,10 @@
-{ pkgs, rust, darwinPackages, version, githubSha256, cargoHashes }:
+{ pkgs
+, rust
+, darwinPackages
+, version
+, githubSha256
+, cargoLockFile
+}:
 let
   mkSolana = args:
     (pkgs.callPackage ./solana.nix ({
@@ -8,18 +14,13 @@ let
         perl;
       inherit (pkgs.llvmPackages_12) clang llvm libclang;
       inherit darwinPackages;
-      inherit version githubSha256;
+      inherit version githubSha256 cargoLockFile;
     } // args));
-  mkSolanaPackage = name: cargoSha256:
-    mkSolana {
-      inherit name cargoSha256;
-      solanaPkgs = [ name ];
-    };
 in
 {
   # This is the ideal package to use.
   # However, it does not build on Darwin.
-  solana-full = mkSolana { cargoSha256 = cargoHashes.solana-full; };
+  solana-full = mkSolana { };
 
   solana-basic = mkSolana {
     name = "solana-basic";
@@ -33,6 +34,5 @@ in
       "solana-tokens"
       # solana-test-validator fails with System.framework not found error
     ];
-    cargoSha256 = cargoHashes.solana-basic;
   };
 }

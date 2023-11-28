@@ -36,6 +36,9 @@ jobs:
           - solana-1_8-basic
           - solana-1_9-basic
           - solana-1_10-basic
+          - solana-1_11-basic
+          - solana-1_13-basic
+          - solana-1_17-basic
           - solana-basic
           - spl-token-cli
           - anchor-0_12_0

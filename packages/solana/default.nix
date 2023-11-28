@@ -33,18 +33,21 @@ rec {
   solana-1_9_28 = mkSolana {
     version = "1.9.28";
     githubSha256 = "sha256-r11K/3XajpIKuqb8mBvn0ynvMx5jtTjhOTZFxb0x2no=";
+    rust = rust-1_60;
   };
   solana-1_9 = solana-1_9_28;
 
   solana-1_10_39 = mkSolana {
     version = "1.10.39";
     githubSha256 = "sha256-3zcIIcgGcMuQz46e7lxBiOcIBi37VHQYArp6xCKGJa4=";
+    rust = rust-1_60;
   };
   solana-1_10 = solana-1_10_39;
 
   solana-1_11_10 = mkSolana {
     version = "1.11.10";
     githubSha256 = "sha256-mHPbI0MxL1vO++iVcuvFjroLXYX+gJTAtslRhCQvVSw=";
+    rust = rust-1_60;
   };
   solana-1_11 = solana-1_11_10;
 

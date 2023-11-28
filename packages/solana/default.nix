@@ -139,7 +139,7 @@ rec {
 
   solana-1_17_6 = mkSolana {
     version = "1.17.6";
-    githubSha256 = "sha256-O/xy4750vM3Gk2uc2qslmPOSu4dIes/3i6CC48v072E=";
+    githubSha256 = "sha256-wkzE+sb0Dqx3cJ2ie3HWr+IVNZgrTDw1FYT3tENTFJc=";
     cargoHashes = {
       solana-full = "sha256-1jXQv1/i7CT0aAwFVQq3d3LnreOxp0hvDAJmBZ4o7gU=";
       solana-basic = "sha256-Tk5gZ4/9NnInRMcq4l+8WIUzlBreAU8NpKUx13IsvXA=";

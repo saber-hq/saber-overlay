@@ -83,9 +83,9 @@ jobs:
           - solana-full
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v17
+      - uses: cachix/install-nix-action@v20
       - name: Setup Cachix
-        uses: cachix/cachix-action@v10
+        uses: cachix/cachix-action@v12
         with:
           name: saber
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"

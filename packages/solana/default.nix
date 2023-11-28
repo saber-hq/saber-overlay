@@ -1,4 +1,8 @@
-{ pkgs, rustStable, darwinPackages, rust-1_60 }:
+{ pkgs
+, rustStable
+, darwinPackages
+, rust-1_60
+}:
 let
   mkSolana = (
     { rust ? rustStable, cargoOutputHashes ? { }, ... }@args:
@@ -47,6 +51,7 @@ rec {
   solana-1_13_5 = mkSolana {
     version = "1.13.5";
     githubSha256 = "sha256-O/vy4750vM3Gk2uc2qslmPOSu4dIes/3i6CC48v072E=";
+    rust = rust-1_60;
   };
   solana-1_13 = solana-1_13_5;
 

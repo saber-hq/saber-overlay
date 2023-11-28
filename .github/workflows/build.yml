@@ -15,9 +15,9 @@ jobs:
         os: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v17
+      - uses: cachix/install-nix-action@v20
       - name: Setup Cachix
-        uses: cachix/cachix-action@v10
+        uses: cachix/cachix-action@v12
         with:
           name: saber
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
@@ -53,15 +53,14 @@ jobs:
           - anchor-0_23_0
           - anchor-0_24_0
           - anchor-0_24_2
-          - anchor-0_25_0
           - anchor
           - saber-devenv
           - goki-cli
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v17
+      - uses: cachix/install-nix-action@v20
       - name: Setup Cachix
-        uses: cachix/cachix-action@v10
+        uses: cachix/cachix-action@v12
         with:
           name: saber
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
@@ -80,6 +79,7 @@ jobs:
           - solana-1_10-full
           - solana-1_11-full
           - solana-1_13-full
+          - solana-1_17-full
           - solana-full
     steps:
       - uses: actions/checkout@v3

@@ -15,7 +15,7 @@ let
       pname = "anchor";
 
       src = fetchFromGitHub {
-        owner = "project-serum";
+        owner = "coral-xyz";
         repo = pname;
         rev = "v${version}";
         sha256 = srcHash;
@@ -37,12 +37,12 @@ let
     });
 in
 rec {
-  anchor-0_25_0 = makeAnchorPackage {
-    version = "0.25.0";
-    srcHash = "sha256-12Wmz7LK2ziZV94sx4tHmoj/VTO7ttxXNcGjAMQNtQI=";
-    cargoHash = "sha256-8OXkInoGAnVF37sR6o++0WZQM7r70k/hHtTKEyQ0GzA=";
-  };
-  anchor-0_25 = anchor-0_25_0;
+  # anchor-0_25_0 = makeAnchorPackage {
+  #   version = "0.25.0";
+  #   srcHash = "sha256-12Wmz7LK2ziZV94sx4tHmoj/VTO7ttxXNcGjAMQNtQI=";
+  #   cargoHash = "sha256-8OXkInoGAnVF37sR6o++0WZQM7r70k/hHtTKEyQ0GzA=";
+  # };
+  # anchor-0_25 = anchor-0_25_0;
 
   anchor-0_24_2 = makeAnchorPackage {
     version = "0.24.2";
@@ -155,5 +155,5 @@ rec {
   };
   anchor-0_12 = anchor-0_12_0;
 
-  anchor = anchor-0_25;
+  anchor = anchor-0_24;
 }

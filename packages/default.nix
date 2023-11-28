@@ -6,7 +6,7 @@ let
       ++ (pkgs.lib.optionals pkgs.stdenv.isAarch64 [ System ])));
   anchorPackages = import ./anchor {
     inherit (rustStable) rustPlatform;
-    inherit (pkgs) lib pkgconfig openssl stdenv udev fetchFromGitHub;
+    inherit (pkgs) lib pkg-config openssl stdenv udev fetchFromGitHub;
     inherit darwinPackages;
   };
   solanaPackages =
@@ -38,7 +38,7 @@ in
 anchorPackages // solanaFlattened // rec {
   spl-token-cli = pkgs.callPackage ./spl-token-cli.nix {
     inherit (rustStable) rustPlatform;
-    inherit (pkgs) lib clang llvm pkgconfig openssl zlib udev stdenv fetchCrate;
+    inherit (pkgs) lib clang llvm pkg-config openssl zlib udev stdenv fetchCrate;
     inherit (pkgs.llvmPackages) libclang;
     inherit darwinPackages;
   };
@@ -79,7 +79,7 @@ anchorPackages // solanaFlattened // rec {
       name = "saber-rust-build-common";
       meta.description = "Common utilities for building Rust packages.";
 
-      paths = [ pkgconfig openssl zlib libiconv ]
+      paths = [ pkg-config openssl zlib libiconv ]
       ++ (lib.optionals stdenv.isLinux ([ udev ]))
       ++ (lib.optionals stdenv.isDarwin
         (with darwin.apple_sdk.frameworks; [ AppKit IOKit Foundation ]));

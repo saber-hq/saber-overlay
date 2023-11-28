@@ -4,7 +4,7 @@
 , rustPlatform
 , clang
 , llvm
-, pkgconfig
+, pkg-config
 , udev
 , openssl
 , zlib
@@ -72,7 +72,7 @@ rustPlatform.buildRustPackage rec {
   BINDGEN_EXTRA_CLANG_ARGS =
     "-isystem ${libclang.lib}/lib/clang/${lib.getVersion clang}/include";
 
-  nativeBuildInputs = [ clang llvm pkgconfig protobuf rustfmt perl ];
+  nativeBuildInputs = [ clang llvm pkg-config protobuf rustfmt perl ];
   buildInputs =
     ([ openssl zlib libclang ] ++ (lib.optionals stdenv.isLinux [ udev ]))
     ++ darwinPackages;

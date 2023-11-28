@@ -1,6 +1,6 @@
 { rustPlatform
 , darwinPackages
-, pkgconfig
+, pkg-config
 , openssl
 , lib
 , udev
@@ -27,7 +27,7 @@ let
       cargoSha256 = cargoHash;
       verifyCargoDeps = false;
 
-      nativeBuildInputs = [ pkgconfig ];
+      nativeBuildInputs = [ pkg-config ];
       buildInputs = [ openssl ] ++ darwinPackages
         ++ (lib.optionals stdenv.isLinux [ udev ]);
       strictDeps = true;

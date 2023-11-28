@@ -5,7 +5,7 @@
 , clang
 , llvm
 , udev
-, pkgconfig
+, pkg-config
 , openssl
 , zlib
 , libclang
@@ -26,7 +26,7 @@ rustPlatform.buildRustPackage rec {
   verifyCargoDeps = true;
 
   LIBCLANG_PATH = "${libclang}/lib";
-  nativeBuildInputs = [ clang llvm pkgconfig ];
+  nativeBuildInputs = [ clang llvm pkg-config ];
   buildInputs = [ libclang openssl zlib ] ++ darwinPackages
     ++ (lib.optionals stdenv.isLinux [ udev ]);
   strictDeps = true;

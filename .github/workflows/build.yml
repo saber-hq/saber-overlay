@@ -59,6 +59,12 @@ jobs:
           - anchor-0_28
           - anchor-0_29
           - anchor
+          - solana-1_8-full
+          - solana-1_9-full
+          - solana-1_10-full
+          - solana-1_11-full
+          - solana-1_13-full
+          - solana-1_17-full
           - saber-devenv
     steps:
       - uses: actions/checkout@v3
@@ -77,12 +83,6 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         package:
-          - solana-1_8-full
-          - solana-1_9-full
-          - solana-1_10-full
-          - solana-1_11-full
-          - solana-1_13-full
-          - solana-1_17-full
           - solana-full
     steps:
       - uses: actions/checkout@v3

@@ -1,3 +1,4 @@
+# Some of this file is taken from https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/applications/blockchains/solana/default.nix
 { name ? "solana"
 , lib
 , validatorOnly ? false
@@ -12,6 +13,7 @@
 , fetchFromGitHub
 , stdenv
 , darwinPackages
+, darwin
 , libcxx
 , protobuf
 , rustfmt
@@ -54,7 +56,10 @@
   ]
 }:
 
-# Some of this file is taken from https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/applications/blockchains/solana/default.nix
+let
+  inherit (darwin.apple_sdk_11_0) Libsystem;
+  inherit (darwin.apple_sdk_11_0.frameworks) System IOKit AppKit Security;
+in
 rustPlatform.buildRustPackage rec {
   pname = name;
   inherit version;
@@ -80,11 +85,24 @@ rustPlatform.buildRustPackage rec {
       openssl
       rustPlatform.bindgenHook
       zlib
+      rocksdb
       libclang
     ]
-    ++ (lib.optionals stdenv.isLinux [ udev ])
-    ++ darwinPackages;
+    ++ lib.optionals stdenv.isLinux [ udev ]
+    ++ lib.optionals stdenv.isDarwin [
+      libcxx
+      IOKit
+      Security
+      AppKit
+      System
+      Libsystem
+    ];
   strictDeps = true;
+
+  postInstall = ''
+    mkdir -p $out/bin/sdk/bpf
+    cp -a ./sdk/bpf/* $out/bin/sdk/bpf/
+  '';
 
   # this is too slow
   doCheck = false;

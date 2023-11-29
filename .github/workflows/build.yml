@@ -32,7 +32,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-12]
         package:
-          - solana-1_7-basic
           - solana-1_8-basic
           - solana-1_9-basic
           - solana-1_10-basic
@@ -76,7 +75,6 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         package:
-          - solana-1_7-full
           - solana-1_8-full
           - solana-1_9-full
           - solana-1_10-full

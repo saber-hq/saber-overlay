@@ -13,9 +13,6 @@ let
     (import ./solana { inherit pkgs rustStable darwinPackages rust-1_60; });
 
   solanaFlattened = with solanaPackages; {
-    solana-1_7-basic = solana-1_7.solana-basic;
-    solana-1_7-full = solana-1_7.solana-full;
-
     solana-1_8-basic = solana-1_8.solana-basic;
     solana-1_8-full = solana-1_8.solana-full;
 

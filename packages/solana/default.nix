@@ -15,14 +15,6 @@ let
 in
 rec {
   # Don't forget to download a Cargo.lock at https://raw.githubusercontent.com/solana-labs/solana/v1.17.6/Cargo.lock
-
-  solana-1_7_17 = mkSolana {
-    version = "1.7.17";
-    githubSha256 = "sha256-PSAalxB9pHFHoUfw5UvpGWqmURT/3R3jK6PdMQoiDXc=";
-    rust = rust-1_60;
-  };
-  solana-1_7 = solana-1_7_17;
-
   solana-1_8_16 = mkSolana {
     version = "1.8.16";
     githubSha256 = "sha256-bU76hCsKlPCcTvEFJh95CIEzz47QlmU4mpFZXpP/erc=";

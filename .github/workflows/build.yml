@@ -57,7 +57,6 @@ jobs:
           - anchor-0_24_2
           - anchor
           - saber-devenv
-          - goki-cli
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v20

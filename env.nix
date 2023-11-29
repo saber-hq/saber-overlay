@@ -3,8 +3,8 @@ with pkgs;
 buildEnv {
   name = "saber-env";
   paths = [
-    # spl-token-cli
-    # saber-devenv
+    spl-token-cli
+    saber-devenv
     gnupatch
   ];
 }

@@ -1,21 +1,22 @@
-{ pkgs, rustNightly, rustStable, rust-1_60 }:
+{ pkgs
+, rustNightly
+, rustStable
+, rust-1_60
+}:
 let
   darwinPackages = pkgs.lib.optionals pkgs.stdenv.isDarwin
     (with pkgs.darwin.apple_sdk.frameworks;
     ([ IOKit Security CoreFoundation AppKit ]
       ++ (pkgs.lib.optionals pkgs.stdenv.isAarch64 [ System ])));
   anchorPackages = import ./anchor {
-    inherit (rustStable) rustPlatform;
-    inherit (pkgs) lib pkgconfig openssl stdenv udev fetchFromGitHub;
+    inherit rustStable rust-1_60;
+    inherit (pkgs) lib pkg-config openssl stdenv udev fetchFromGitHub;
     inherit darwinPackages;
   };
   solanaPackages =
     (import ./solana { inherit pkgs rustStable darwinPackages rust-1_60; });
 
   solanaFlattened = with solanaPackages; {
-    solana-1_7-basic = solana-1_7.solana-basic;
-    solana-1_7-full = solana-1_7.solana-full;
-
     solana-1_8-basic = solana-1_8.solana-basic;
     solana-1_8-full = solana-1_8.solana-full;
 
@@ -31,6 +32,9 @@ let
     solana-1_13-basic = solana-1_13.solana-basic;
     solana-1_13-full = solana-1_13.solana-full;
 
+    solana-1_17-basic = solana-1_17.solana-basic;
+    solana-1_17-full = solana-1_17.solana-full;
+
     solana-basic = solana.solana-basic;
     solana-full = solana.solana-full;
   };
@@ -38,7 +42,7 @@ in
 anchorPackages // solanaFlattened // rec {
   spl-token-cli = pkgs.callPackage ./spl-token-cli.nix {
     inherit (rustStable) rustPlatform;
-    inherit (pkgs) lib clang llvm pkgconfig openssl zlib udev stdenv fetchCrate;
+    inherit (pkgs) lib clang llvm pkg-config openssl zlib udev stdenv fetchCrate;
     inherit (pkgs.llvmPackages) libclang;
     inherit darwinPackages;
   };
@@ -79,7 +83,7 @@ anchorPackages // solanaFlattened // rec {
       name = "saber-rust-build-common";
       meta.description = "Common utilities for building Rust packages.";
 
-      paths = [ pkgconfig openssl zlib libiconv ]
+      paths = [ pkg-config openssl zlib libiconv ]
       ++ (lib.optionals stdenv.isLinux ([ udev ]))
       ++ (lib.optionals stdenv.isDarwin
         (with darwin.apple_sdk.frameworks; [ AppKit IOKit Foundation ]));

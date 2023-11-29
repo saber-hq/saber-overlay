@@ -4,7 +4,7 @@
 , rustPlatform
 , clang
 , llvm
-, pkgconfig
+, pkg-config
 , udev
 , openssl
 , zlib
@@ -14,10 +14,11 @@
 , darwinPackages
 , protobuf
 , rustfmt
-, cargoSha256
+, cargoLockFile
 , version
 , githubSha256
 , perl
+, cargoOutputHashes
 , # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
   solanaPkgs ? [
     "solana"
@@ -29,7 +30,8 @@
     "solana-ledger-tool"
     "solana-log-analyzer"
     "solana-net-shaper"
-    "solana-sys-tuner"
+    # removed; TODO(igm): should allow different versions to specify
+    # "solana-sys-tuner"
     "solana-validator"
     # "rbpf-cli"
 
@@ -62,8 +64,10 @@ rustPlatform.buildRustPackage rec {
   };
 
   # partly inspired by https://github.com/obsidiansystems/solana-bridges/blob/develop/default.nix#L29
-  inherit cargoSha256;
-  verifyCargoDeps = true;
+  cargoLock = {
+    lockFile = cargoLockFile;
+    outputHashes = cargoOutputHashes;
+  };
 
   cargoBuildFlags = builtins.map (n: "--bin=${n}") solanaPkgs;
 
@@ -72,7 +76,7 @@ rustPlatform.buildRustPackage rec {
   BINDGEN_EXTRA_CLANG_ARGS =
     "-isystem ${libclang.lib}/lib/clang/${lib.getVersion clang}/include";
 
-  nativeBuildInputs = [ clang llvm pkgconfig protobuf rustfmt perl ];
+  nativeBuildInputs = [ clang llvm pkg-config protobuf rustfmt perl ];
   buildInputs =
     ([ openssl zlib libclang ] ++ (lib.optionals stdenv.isLinux [ udev ]))
     ++ darwinPackages;

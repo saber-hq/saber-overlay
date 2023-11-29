@@ -222,7 +222,7 @@ rec {
     version = "0.13.2";
     srcHash = "sha256-qSEfapJBuQKRUeJAH66WY+ZbXPG1M1KqCgMKtTWUsW0=";
     cargoOutputHashes = {
-      "serum_dex-0.4.0" = "sha256-Nzhh3OcAFE2LcbUgrA4zE2TnUMfV0dD4iH6fTi48GcI=";
+      "serum_dex-0.4.0" = "sha256-gMS8PQC7Q4YKQALIlApu40j0hiGgEIpcaqqFcdaf2ZY=";
       "serum-common-0.1.0" = "sha256-IfPdA9Zg5x4Gd1ibhHI9JQ8ZH2q/vB1c0wBIiGaGMEY=";
     };
   };

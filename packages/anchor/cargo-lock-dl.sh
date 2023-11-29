@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash -xe
 
 VERSIONS=(
     "0.16.1"
@@ -12,9 +12,19 @@ VERSIONS=(
     "0.23.0"
     "0.24.0"
     "0.24.2"
+    "0.25.0"
 )
 
 for VERSION in "${VERSIONS[@]}"; do
     echo "Downloading Cargo.lock@$VERSION"
-    curl https://raw.githubusercontent.com/coral-xyz/anchor/v$VERSION/Cargo.lock >cargo/v$VERSION.Cargo.lock
+    mkdir -p cargo/v$VERSION
+    curl https://raw.githubusercontent.com/coral-xyz/anchor/v$VERSION/Cargo.lock >cargo/v$VERSION/Cargo.lock
+
+    PATCH_FILE=./patches/cargo-$VERSION.patch
+    if [ -f $PATCH_FILE ]; then
+        echo "We have a patch for $VERSION. Patching"
+        patch --reject-file=/dev/null --no-backup-if-mismatch -f ./cargo/v$VERSION/Cargo.lock <$PATCH_FILE || {
+            echo "Patched."
+        }
+    fi
 done

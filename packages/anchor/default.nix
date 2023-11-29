@@ -118,8 +118,8 @@ rec {
     srcHash = "sha256-uUDBTDss6cX7+v9Y9ttlp77PgeH0DQW+zluT6A8/il8=";
     cargoPatches = [ ./patches/cargo-0.22.0.patch ];
     cargoOutputHashes = {
-      "serum_dex-0.5.5" = "sha256-baVEZzGjjynhqJdte+zd2J2VL5uVOuqdk4aNHgnulIU=";
-      "serum-common-0.1.0" = "sha256-qguxDXKa3O2yaSo2YO2ff3i8JAv/iVusCJR8yiNxHZs=";
+      "serum_dex-0.5.5" = "sha256-qguxDXKa3O2yaSo2YO2ff3i8JAv/iVusCJR8yiNxHZs=";
+      "serum-common-0.1.0" = "sha256-baVEZzGjjynhqJdte+zd2J2VL5uVOuqdk4aNHgnulIU=";
     };
   };
   anchor-0_22 = anchor-0_22_0;
@@ -129,8 +129,8 @@ rec {
     srcHash = "sha256-JnW8hpor1RldWQJDcRdKbJk1jgD6SoDb23PVfR+IKBk=";
     cargoPatches = [ ./patches/cargo-0.21.0.patch ];
     cargoOutputHashes = {
-      "serum_dex-0.5.5" = "sha256-baVEZzGjjynhqJdte+zd2J2VL5uVOuqdk4aNHgnulIU=";
-      "serum-common-0.1.0" = "sha256-qguxDXKa3O2yaSo2YO2ff3i8JAv/iVusCJR8yiNxHZs=";
+      "serum_dex-0.5.5" = "sha256-qguxDXKa3O2yaSo2YO2ff3i8JAv/iVusCJR8yiNxHZs=";
+      "serum-common-0.1.0" = "sha256-baVEZzGjjynhqJdte+zd2J2VL5uVOuqdk4aNHgnulIU=";
     };
   };
   anchor-0_21 = anchor-0_21_0;
@@ -150,7 +150,7 @@ rec {
     cargoPatches = [ ./patches/cargo-0.20.0.patch ];
     cargoOutputHashes = {
       "serum_dex-0.5.2" = "sha256-YCJ0ikQqEjpO4Uc+VfXMCU+D9w3ViLEYp2dAfpelN8s=";
-      "serum-common-0.1.0" = "sha256-YCJ0ikQqEjpO4Uc+VfXMCU+D9w3ViLEYp2dAfpelN8s=";
+      "serum-common-0.1.0" = "sha256-baVEZzGjjynhqJdte+zd2J2VL5uVOuqdk4aNHgnulIU=";
     };
   };
   anchor-0_20 = anchor-0_20_1;
@@ -161,7 +161,7 @@ rec {
     cargoPatches = [ ./patches/cargo-0.19.0.patch ];
     cargoOutputHashes = {
       "serum_dex-0.5.1" = "sha256-eTcPjMeyZv6y4kMWvZ4/Y4sfA6mPwEPXLT2ZmMPpeHU=";
-      "serum-common-0.1.0" = "sha256-eTcPjMeyZv6y4kMWvZ4/Y4sfA6mPwEPXLT2ZmMPpeHU=";
+      "serum-common-0.1.0" = "sha256-baVEZzGjjynhqJdte+zd2J2VL5uVOuqdk4aNHgnulIU=";
     };
   };
   anchor-0_19 = anchor-0_19_0;
@@ -225,6 +225,7 @@ rec {
       "serum_dex-0.4.0" = "sha256-gMS8PQC7Q4YKQALIlApu40j0hiGgEIpcaqqFcdaf2ZY=";
       "serum-common-0.1.0" = "sha256-IfPdA9Zg5x4Gd1ibhHI9JQ8ZH2q/vB1c0wBIiGaGMEY=";
     };
+    rust = rust-1_60;
   };
   anchor-0_13 = anchor-0_13_2;
 

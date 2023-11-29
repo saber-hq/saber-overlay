@@ -105,6 +105,9 @@ rec {
     version = "0.23.0";
     srcHash = "sha256-P9cnFkHK3avjH/z4ptAkeZ8gG5hhi19CfbuvAJvZKo0=";
     cargoPatches = [ ./patches/cargo-0.23.0.patch ];
+    cargoOutputHashes = {
+      "serum-common-0.1.0" = "";
+    };
   };
   anchor-0_23 = anchor-0_23_0;
 
@@ -112,6 +115,10 @@ rec {
     version = "0.22.0";
     srcHash = "sha256-uUDBTDss6cX7+v9Y9ttlp77PgeH0DQW+zluT6A8/il8=";
     cargoPatches = [ ./patches/cargo-0.22.0.patch ];
+    cargoOutputHashes = {
+      "serum_dex-0.5.5" = "";
+      "serum-common-0.1.0" = "";
+    };
   };
   anchor-0_22 = anchor-0_22_0;
 
@@ -119,6 +126,10 @@ rec {
     version = "0.21.0";
     srcHash = "sha256-JnW8hpor1RldWQJDcRdKbJk1jgD6SoDb23PVfR+IKBk=";
     cargoPatches = [ ./patches/cargo-0.21.0.patch ];
+    cargoOutputHashes = {
+      "serum_dex-0.5.5" = "";
+      "serum-common-0.1.0" = "";
+    };
   };
   anchor-0_21 = anchor-0_21_0;
 
@@ -126,11 +137,19 @@ rec {
     version = "0.20.1";
     srcHash = "sha256-KPz1mZWcNmgQmw/wR99zTjbsjvwY3xlX+SGKKShFJ8U=";
     cargoPatches = [ ./patches/cargo-0.20.1.patch ];
+    cargoOutputHashes = {
+      "serum_dex-0.5.2" = "";
+      "serum-common-0.1.0" = "";
+    };
   };
   anchor-0_20_0 = makeAnchorPackage {
     version = "0.20.0";
     srcHash = "sha256-w3hqCZJZXLl3Tanx3LkrLceqOp5A8Mp+Zt05Saewa9E=";
     cargoPatches = [ ./patches/cargo-0.20.0.patch ];
+    cargoOutputHashes = {
+      "serum_dex-0.5.2" = "";
+      "serum-common-0.1.0" = "";
+    };
   };
   anchor-0_20 = anchor-0_20_1;
 
@@ -138,6 +157,10 @@ rec {
     version = "0.19.0";
     srcHash = "sha256-mQJJew66Xfj1MGI2u2iRmy3fsYqeaBXJq/S6QyHygqM=";
     cargoPatches = [ ./patches/cargo-0.19.0.patch ];
+    cargoOutputHashes = {
+      "serum_dex-0.5.1" = "";
+      "serum-common-0.1.0" = "";
+    };
   };
   anchor-0_19 = anchor-0_19_0;
 
@@ -165,6 +188,10 @@ rec {
     version = "0.17.0";
     srcHash = "sha256-jINbIWnE8IlhkRRfidGMp6RlLGpFxvy+hIWQ9CXDtPQ=";
     cargoPatches = [ ./patches/cargo-0.17.0.patch ];
+    cargoOutputHashes = {
+      "serum_dex-0.4.0" = "";
+      "serum-common-0.1.0" = "";
+    };
   };
   anchor-0_17 = anchor-0_17_0;
 
@@ -172,24 +199,39 @@ rec {
     version = "0.16.1";
     srcHash = "sha256-/u/6fX0ho9pjtGqgCro79Nchok8M//Gj60FMU/Hwwqs=";
     cargoPatches = [ ./patches/cargo-0.16.1.patch ];
+    cargoOutputHashes = {
+      "serum_dex-0.4.0" = "";
+      "serum-common-0.1.0" = "";
+    };
   };
   anchor-0_16 = anchor-0_16_1;
 
   anchor-0_15_0 = makeAnchorPackage {
     version = "0.15.0";
     srcHash = "sha256-X8omeI/WleNvi1hVbYTSwkkshINgf88wPrNyxNzMMcQ=";
+    cargoOutputHashes = {
+      "serum_dex-0.4.0" = "";
+      "serum-common-0.1.0" = "";
+    };
   };
   anchor-0_15 = anchor-0_15_0;
 
   anchor-0_13_2 = makeAnchorPackage {
     version = "0.13.2";
     srcHash = "sha256-qSEfapJBuQKRUeJAH66WY+ZbXPG1M1KqCgMKtTWUsW0=";
+    cargoOutputHashes = {
+      "serum_dex-0.4.0" = "";
+      "serum-common-0.1.0" = "";
+    };
   };
   anchor-0_13 = anchor-0_13_2;
 
   anchor-0_12_0 = makeAnchorPackage {
     version = "0.12.0";
     srcHash = "sha256-87Q/mPF/7sLDiT9N1MqjEX5E3dsLJ+oO2iyx9RcsK1g=";
+    cargoOutputHashes = {
+      "serum-common-0.1.0" = "";
+    };
   };
   anchor-0_12 = anchor-0_12_0;
 

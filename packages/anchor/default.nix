@@ -29,11 +29,10 @@ let
       cargoBuildFlags = [ "--package=anchor-cli" ];
 
       inherit cargoPatches;
-      cargoLock =
-        {
-          lockFile = ./cargo/v${version}/Cargo.lock;
-          outputHashes = cargoOutputHashes;
-        };
+      cargoLock = {
+        lockFile = ./cargo/v${version}/Cargo.lock;
+        outputHashes = cargoOutputHashes;
+      };
 
       nativeBuildInputs = [ pkg-config ];
       buildInputs = [ openssl ] ++ darwinPackages

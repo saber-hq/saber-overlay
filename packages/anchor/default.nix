@@ -44,6 +44,42 @@ let
     });
 in
 rec {
+  anchor-0_29_0 = makeAnchorPackage {
+    version = "0.29.0";
+    srcHash = "sha256-mftge1idALb4vwyF8wGo6qLmrnvCBK3l+Iw7txCyhDc=";
+    cargoOutputHashes = {
+      "serum_dex-0.4.0" = "sha256-Nzhh3OcAFE2LcbUgrA4zE2TnUMfV0dD4iH6fTi48GcI=";
+    };
+  };
+  anchor-0_29 = anchor-0_29_0;
+
+  anchor-0_28_0 = makeAnchorPackage {
+    version = "0.28.0";
+    srcHash = "sha256-WjGzFc0892LObdwwWP5uKrxwCT3y8CW8A/KvlpYGSrw=";
+    cargoOutputHashes = {
+      "serum_dex-0.4.0" = "sha256-Nzhh3OcAFE2LcbUgrA4zE2TnUMfV0dD4iH6fTi48GcI=";
+    };
+  };
+  anchor-0_28 = anchor-0_28_0;
+
+  anchor-0_27_0 = makeAnchorPackage {
+    version = "0.27.0";
+    srcHash = "sha256-Oe4amhOit4iFfbbUIzx5qJ1ldlj94lGcIuXVYHX3IM4=";
+    cargoOutputHashes = {
+      "serum_dex-0.4.0" = "sha256-Nzhh3OcAFE2LcbUgrA4zE2TnUMfV0dD4iH6fTi48GcI=";
+    };
+  };
+  anchor-0_27 = anchor-0_27_0;
+
+  anchor-0_26_0 = makeAnchorPackage {
+    version = "0.26.0";
+    srcHash = "sha256-u+M093cGy8cEWLg8oObKqSkWLyQC6G3S1TNhRBX6OV4=";
+    cargoOutputHashes = {
+      "serum_dex-0.4.0" = "sha256-Nzhh3OcAFE2LcbUgrA4zE2TnUMfV0dD4iH6fTi48GcI=";
+    };
+  };
+  anchor-0_26 = anchor-0_26_0;
+
   anchor-0_25_0 = makeAnchorPackage {
     version = "0.25.0";
     srcHash = "sha256-12Wmz7LK2ziZV94sx4tHmoj/VTO7ttxXNcGjAMQNtQI=";
@@ -109,11 +145,19 @@ rec {
     version = "0.18.2";
     srcHash = "sha256-q7Z5RFnj+pvAHitLU8A6EP8Iwqqradf5jOnZf7GiQHM=";
     cargoPatches = [ ./patches/cargo-0.18.2.patch ];
+    cargoOutputHashes = {
+      "serum_dex-0.4.0" = "sha256-+6W+aeH3s2tqf6G9i7dGCJkMP9Zps+4Pj5ps3UUsnW4=";
+      "serum-common-0.1.0" = "sha256-tbPE8BijjfQREvI01iAZ7wsJjRx6YWAS4yYVddPDHyI=";
+    };
   };
   anchor-0_18_0 = makeAnchorPackage {
     version = "0.18.0";
     srcHash = "sha256-YYt/lFJUicV1cqyM1t4sAX7+78jaQWPr1Z6vRotkP+g=";
     cargoPatches = [ ./patches/cargo-0.18.0.patch ];
+    cargoOutputHashes = {
+      "serum_dex-0.4.0" = "sha256-+6W+aeH3s2tqf6G9i7dGCJkMP9Zps+4Pj5ps3UUsnW4=";
+      "serum-common-0.1.0" = "sha256-tbPE8BijjfQREvI01iAZ7wsJjRx6YWAS4yYVddPDHyI=";
+    };
   };
   anchor-0_18 = anchor-0_18_2;
 
@@ -149,5 +193,5 @@ rec {
   };
   anchor-0_12 = anchor-0_12_0;
 
-  anchor = anchor-0_24;
+  anchor = anchor-0_29;
 }

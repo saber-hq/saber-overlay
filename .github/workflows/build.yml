@@ -55,6 +55,11 @@ jobs:
           - anchor-0_23_0
           - anchor-0_24_0
           - anchor-0_24_2
+          - anchor-0_25
+          - anchor-0_26
+          - anchor-0_27
+          - anchor-0_28
+          - anchor-0_29
           - anchor
           - saber-devenv
     steps:

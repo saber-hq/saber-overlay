@@ -218,26 +218,5 @@ rec {
   };
   anchor-0_15 = anchor-0_15_0;
 
-  anchor-0_13_2 = makeAnchorPackage {
-    version = "0.13.2";
-    srcHash = "sha256-qSEfapJBuQKRUeJAH66WY+ZbXPG1M1KqCgMKtTWUsW0=";
-    cargoOutputHashes = {
-      "serum_dex-0.4.0" = "sha256-gMS8PQC7Q4YKQALIlApu40j0hiGgEIpcaqqFcdaf2ZY=";
-      "serum-common-0.1.0" = "sha256-IfPdA9Zg5x4Gd1ibhHI9JQ8ZH2q/vB1c0wBIiGaGMEY=";
-    };
-    rust = rust-1_60;
-  };
-  anchor-0_13 = anchor-0_13_2;
-
-  anchor-0_12_0 = makeAnchorPackage {
-    version = "0.12.0";
-    srcHash = "sha256-87Q/mPF/7sLDiT9N1MqjEX5E3dsLJ+oO2iyx9RcsK1g=";
-    cargoOutputHashes = {
-      "serum-common-0.1.0" = "sha256-IfPdA9Zg5x4Gd1ibhHI9JQ8ZH2q/vB1c0wBIiGaGMEY=";
-    };
-    rust = rust-1_60;
-  };
-  anchor-0_12 = anchor-0_12_0;
-
   anchor = anchor-0_29;
 }

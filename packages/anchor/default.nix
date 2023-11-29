@@ -190,7 +190,7 @@ rec {
     cargoPatches = [ ./patches/cargo-0.17.0.patch ];
     cargoOutputHashes = {
       "serum_dex-0.4.0" = "sha256-Nzhh3OcAFE2LcbUgrA4zE2TnUMfV0dD4iH6fTi48GcI=";
-      "serum-common-0.1.0" = "";
+      "serum-common-0.1.0" = "sha256-tbPE8BijjfQREvI01iAZ7wsJjRx6YWAS4yYVddPDHyI=";
     };
   };
   anchor-0_17 = anchor-0_17_0;
@@ -201,7 +201,7 @@ rec {
     cargoPatches = [ ./patches/cargo-0.16.1.patch ];
     cargoOutputHashes = {
       "serum_dex-0.4.0" = "sha256-Nzhh3OcAFE2LcbUgrA4zE2TnUMfV0dD4iH6fTi48GcI=";
-      "serum-common-0.1.0" = "";
+      "serum-common-0.1.0" = "sha256-tbPE8BijjfQREvI01iAZ7wsJjRx6YWAS4yYVddPDHyI=";
     };
   };
   anchor-0_16 = anchor-0_16_1;
@@ -211,7 +211,7 @@ rec {
     srcHash = "sha256-X8omeI/WleNvi1hVbYTSwkkshINgf88wPrNyxNzMMcQ=";
     cargoOutputHashes = {
       "serum_dex-0.4.0" = "sha256-Nzhh3OcAFE2LcbUgrA4zE2TnUMfV0dD4iH6fTi48GcI=";
-      "serum-common-0.1.0" = "";
+      "serum-common-0.1.0" = "sha256-tbPE8BijjfQREvI01iAZ7wsJjRx6YWAS4yYVddPDHyI=";
     };
   };
   anchor-0_15 = anchor-0_15_0;
@@ -221,7 +221,7 @@ rec {
     srcHash = "sha256-qSEfapJBuQKRUeJAH66WY+ZbXPG1M1KqCgMKtTWUsW0=";
     cargoOutputHashes = {
       "serum_dex-0.4.0" = "sha256-Nzhh3OcAFE2LcbUgrA4zE2TnUMfV0dD4iH6fTi48GcI=";
-      "serum-common-0.1.0" = "";
+      "serum-common-0.1.0" = "sha256-IfPdA9Zg5x4Gd1ibhHI9JQ8ZH2q/vB1c0wBIiGaGMEY=";
     };
   };
   anchor-0_13 = anchor-0_13_2;

@@ -1,11 +1,12 @@
-{ rustPlatform
-, darwinPackages
+{ darwinPackages
 , pkg-config
 , openssl
 , lib
 , udev
 , stdenv
 , fetchFromGitHub
+, rustStable
+, rust-1_60
 }:
 
 let
@@ -14,8 +15,9 @@ let
     , srcHash
     , cargoPatches ? [ ]
     , cargoOutputHashes ? { }
+    , rust ? rustStable
     }:
-    (rustPlatform.buildRustPackage rec {
+    (rust.rustPlatform.buildRustPackage rec {
       inherit version;
       pname = "anchor";
 
@@ -116,7 +118,7 @@ rec {
     srcHash = "sha256-uUDBTDss6cX7+v9Y9ttlp77PgeH0DQW+zluT6A8/il8=";
     cargoPatches = [ ./patches/cargo-0.22.0.patch ];
     cargoOutputHashes = {
-      "serum_dex-0.5.5" = "sha256-qguxDXKa3O2yaSo2YO2ff3i8JAv/iVusCJR8yiNxHZs=";
+      "serum_dex-0.5.5" = "sha256-baVEZzGjjynhqJdte+zd2J2VL5uVOuqdk4aNHgnulIU=";
       "serum-common-0.1.0" = "sha256-qguxDXKa3O2yaSo2YO2ff3i8JAv/iVusCJR8yiNxHZs=";
     };
   };
@@ -127,7 +129,7 @@ rec {
     srcHash = "sha256-JnW8hpor1RldWQJDcRdKbJk1jgD6SoDb23PVfR+IKBk=";
     cargoPatches = [ ./patches/cargo-0.21.0.patch ];
     cargoOutputHashes = {
-      "serum_dex-0.5.5" = "sha256-qguxDXKa3O2yaSo2YO2ff3i8JAv/iVusCJR8yiNxHZs=";
+      "serum_dex-0.5.5" = "sha256-baVEZzGjjynhqJdte+zd2J2VL5uVOuqdk4aNHgnulIU=";
       "serum-common-0.1.0" = "sha256-qguxDXKa3O2yaSo2YO2ff3i8JAv/iVusCJR8yiNxHZs=";
     };
   };
@@ -138,7 +140,7 @@ rec {
     srcHash = "sha256-KPz1mZWcNmgQmw/wR99zTjbsjvwY3xlX+SGKKShFJ8U=";
     cargoPatches = [ ./patches/cargo-0.20.1.patch ];
     cargoOutputHashes = {
-      "serum_dex-0.5.2" = "sha256-baVEZzGjjynhqJdte+zd2J2VL5uVOuqdk4aNHgnulIU=";
+      "serum_dex-0.5.2" = "sha256-YCJ0ikQqEjpO4Uc+VfXMCU+D9w3ViLEYp2dAfpelN8s=";
       "serum-common-0.1.0" = "sha256-baVEZzGjjynhqJdte+zd2J2VL5uVOuqdk4aNHgnulIU=";
     };
   };
@@ -232,6 +234,7 @@ rec {
     cargoOutputHashes = {
       "serum-common-0.1.0" = "sha256-IfPdA9Zg5x4Gd1ibhHI9JQ8ZH2q/vB1c0wBIiGaGMEY=";
     };
+    rust = rust-1_60;
   };
   anchor-0_12 = anchor-0_12_0;
 

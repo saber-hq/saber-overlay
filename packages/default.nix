@@ -1,11 +1,15 @@
-{ pkgs, rustNightly, rustStable, rust-1_60 }:
+{ pkgs
+, rustNightly
+, rustStable
+, rust-1_60
+}:
 let
   darwinPackages = pkgs.lib.optionals pkgs.stdenv.isDarwin
     (with pkgs.darwin.apple_sdk.frameworks;
     ([ IOKit Security CoreFoundation AppKit ]
       ++ (pkgs.lib.optionals pkgs.stdenv.isAarch64 [ System ])));
   anchorPackages = import ./anchor {
-    inherit (rustStable) rustPlatform;
+    inherit rustStable rust-1_60;
     inherit (pkgs) lib pkg-config openssl stdenv udev fetchFromGitHub;
     inherit darwinPackages;
   };

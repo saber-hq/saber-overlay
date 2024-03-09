@@ -5,9 +5,13 @@
 }:
 let
   mkSolana = (
-    { rust ? rustStable, cargoOutputHashes ? { }, ... }@args:
+    { rust ? rustStable
+    , cargoOutputHashes ? { }
+    , useRocksDBFromNixpkgs ? false
+    , ...
+    }@args:
     import ./solana-packages.nix {
-      inherit pkgs rust darwinPackages cargoOutputHashes;
+      inherit pkgs rust darwinPackages cargoOutputHashes useRocksDBFromNixpkgs;
       inherit (args) version githubSha256;
       cargoLockFile = ./cargo/v${args.version}.Cargo.lock;
     }
@@ -56,6 +60,7 @@ rec {
     cargoOutputHashes = {
       "crossbeam-epoch-0.9.5" = "sha256-Jf0RarsgJiXiZ+ddy0vp4jQ59J9m0k3sgXhWhCdhgws=";
     };
+    useRocksDBFromNixpkgs = true;
   };
   solana-1_17 = solana-1_17_6;
 

@@ -5,6 +5,7 @@
 , githubSha256
 , cargoLockFile
 , cargoOutputHashes
+, useRocksDBFromNixpkgs
 }:
 let
   mkSolana = args:
@@ -15,7 +16,7 @@ let
         perl;
       inherit (pkgs.llvmPackages_12) clang llvm libclang;
       inherit darwinPackages;
-      inherit version githubSha256 cargoLockFile cargoOutputHashes;
+      inherit version githubSha256 cargoLockFile cargoOutputHashes useRocksDBFromNixpkgs;
     } // args));
 in
 {

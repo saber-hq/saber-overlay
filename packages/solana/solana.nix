@@ -120,6 +120,12 @@ rustPlatform.buildRustPackage rec {
   # If set, always finds OpenSSL in the system, even if the vendored feature is enabled.
   OPENSSL_NO_VENDOR = 1;
 
+  # weird errors. see https://github.com/NixOS/nixpkgs/issues/52447#issuecomment-852079285
+  LIBCLANG_PATH = lib.optionals (!useRocksDBFromNixpkgs) "${libclang.lib}/lib";
+  BINDGEN_EXTRA_CLANG_ARGS =
+    lib.optionals (!useRocksDBFromNixpkgs) "-isystem ${libclang.lib}/lib/clang/${lib.getVersion clang}/include";
+
+
   meta = with lib; {
     homepage = "https://solana.com/";
     description =

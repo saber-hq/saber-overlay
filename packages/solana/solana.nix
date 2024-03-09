@@ -86,7 +86,6 @@ rustPlatform.buildRustPackage rec {
       openssl
       rustPlatform.bindgenHook
       zlib
-      rocksdb
       libclang
     ]
     ++ lib.optionals stdenv.isLinux [ udev ]
@@ -97,7 +96,8 @@ rustPlatform.buildRustPackage rec {
       AppKit
       System
       Libsystem
-    ];
+    ]
+    ++ lib.optionals useRocksDBFromNixpkgs [ rocksdb ];
   strictDeps = true;
 
   postInstall = ''

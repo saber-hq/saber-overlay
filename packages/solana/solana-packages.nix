@@ -5,7 +5,6 @@
 , githubSha256
 , cargoLockFile
 , cargoOutputHashes
-, useRocksDBFromNixpkgs
 }:
 let
   mkSolana = args:

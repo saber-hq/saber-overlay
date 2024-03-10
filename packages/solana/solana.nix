@@ -23,7 +23,6 @@
 , perl
 , cargoOutputHashes
 , rocksdb
-, useRocksDBFromNixpkgs
 , # Taken from https://github.com/solana-labs/solana/blob/master/scripts/cargo-install-all.sh#L84
   solanaPkgs ? [
     "solana"
@@ -110,7 +109,7 @@ rustPlatform.buildRustPackage rec {
 
   # Used by build.rs in the rocksdb-sys crate. If we don't set these, it would
   # try to build RocksDB from source.
-  ROCKSDB_LIB_DIR = lib.optionals useRocksDBFromNixpkgs "${rocksdb}/lib";
+  ROCKSDB_LIB_DIR = "${rocksdb}/lib";
 
   # Require this on darwin otherwise the compiler starts rambling about missing
   # cmath functions
@@ -119,12 +118,6 @@ rustPlatform.buildRustPackage rec {
 
   # If set, always finds OpenSSL in the system, even if the vendored feature is enabled.
   OPENSSL_NO_VENDOR = 1;
-
-  # weird errors. see https://github.com/NixOS/nixpkgs/issues/52447#issuecomment-852079285
-  LIBCLANG_PATH = lib.optionals (!useRocksDBFromNixpkgs) "${libclang.lib}/lib";
-  BINDGEN_EXTRA_CLANG_ARGS =
-    lib.optionals (!useRocksDBFromNixpkgs) "-isystem ${libclang.lib}/lib/clang/${lib.getVersion clang}/include";
-
 
   meta = with lib; {
     homepage = "https://solana.com/";

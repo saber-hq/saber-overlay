@@ -60,6 +60,7 @@ jobs:
           - anchor-0_29
           - anchor
           - solana-1_17-full
+          - solana-full
           - saber-devenv
     steps:
       - uses: actions/checkout@v3
@@ -71,25 +72,24 @@ jobs:
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - run: nix build --show-trace --print-build-logs .#${{ matrix.package }}
 
-  build-packages-linux-only:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest]
-        package:
-          - solana-1_8-full
-          - solana-1_9-full
-          - solana-1_10-full
-          - solana-1_11-full
-          - solana-1_13-full
-          - solana-full
-    steps:
-      - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v26
-      - name: Setup Cachix
-        uses: cachix/cachix-action@v12
-        with:
-          name: saber
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-      - run: nix build --show-trace --print-build-logs .#${{ matrix.package }}
+  # build-packages-linux-only:
+  #   runs-on: ${{ matrix.os }}
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       os: [ubuntu-latest]
+  #       package:
+  #         - solana-1_8-full
+  #         - solana-1_9-full
+  #         - solana-1_10-full
+  #         - solana-1_11-full
+  #         - solana-1_13-full
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: cachix/install-nix-action@v26
+  #     - name: Setup Cachix
+  #       uses: cachix/cachix-action@v12
+  #       with:
+  #         name: saber
+  #         authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+  #     - run: nix build --show-trace --print-build-logs .#${{ matrix.package }}

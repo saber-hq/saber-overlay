@@ -15,7 +15,7 @@ let
         perl;
       inherit (pkgs.llvmPackages_12) clang llvm libclang;
       inherit darwinPackages;
-      inherit version githubSha256 cargoLockFile cargoOutputHashes useRocksDBFromNixpkgs;
+      inherit version githubSha256 cargoLockFile cargoOutputHashes;
     } // args));
 in
 {

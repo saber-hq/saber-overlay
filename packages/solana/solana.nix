@@ -86,6 +86,7 @@ rustPlatform.buildRustPackage rec {
       rustPlatform.bindgenHook
       zlib
       libclang
+      rocksdb
     ]
     ++ lib.optionals stdenv.isLinux [ udev ]
     ++ lib.optionals stdenv.isDarwin [
@@ -95,8 +96,7 @@ rustPlatform.buildRustPackage rec {
       AppKit
       System
       Libsystem
-    ]
-    ++ lib.optionals useRocksDBFromNixpkgs [ rocksdb ];
+    ];
   strictDeps = true;
 
   postInstall = ''

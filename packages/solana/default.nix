@@ -5,7 +5,10 @@
 }:
 let
   mkSolana = (
-    { rust ? rustStable, cargoOutputHashes ? { }, ... }@args:
+    { rust ? rustStable
+    , cargoOutputHashes ? { }
+    , ...
+    }@args:
     import ./solana-packages.nix {
       inherit pkgs rust darwinPackages cargoOutputHashes;
       inherit (args) version githubSha256;

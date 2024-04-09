@@ -9,7 +9,7 @@ let
     ([ IOKit Security CoreFoundation AppKit ]
       ++ (pkgs.lib.optionals pkgs.stdenv.isAarch64 [ System ])));
   anchorPackages = import ./anchor {
-    inherit rustStable rust-1_60;
+    inherit rustStable;
     inherit (pkgs) lib pkg-config openssl stdenv udev fetchFromGitHub;
     inherit darwinPackages;
   };

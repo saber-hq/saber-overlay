@@ -45,6 +45,15 @@ let
     });
 in
 rec {
+  anchor-0_30_0 = makeAnchorPackage {
+    version = "0.30.0";
+    srcHash = "sha256-RvYJoGmACoPfdbeXK2uYutleHPT0kAlOCDJX4NP9q4I=";
+    cargoOutputHashes = {
+      "serum_dex-0.4.0" = "sha256-Nzhh3OcAFE2LcbUgrA4zE2TnUMfV0dD4iH6fTi48GcI=";
+    };
+  };
+  anchor-0_30 = anchor-0_30_0;
+
   anchor-0_29_0 = makeAnchorPackage {
     version = "0.29.0";
     srcHash = "sha256-mftge1idALb4vwyF8wGo6qLmrnvCBK3l+Iw7txCyhDc=";
@@ -217,5 +226,5 @@ rec {
   };
   anchor-0_15 = anchor-0_15_0;
 
-  anchor = anchor-0_29;
+  anchor = anchor-0_30;
 }

@@ -58,6 +58,7 @@ jobs:
           - anchor-0_27
           - anchor-0_28
           - anchor-0_29
+          - anchor-0_30
           - anchor
           - solana-1_17-full
           - solana-full

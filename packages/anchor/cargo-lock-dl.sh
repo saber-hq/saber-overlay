@@ -21,6 +21,7 @@ VERSIONS=(
     "0.27.0"
     "0.28.0"
     "0.29.0"
+    "0.30.0"
 )
 
 for VERSION in "${VERSIONS[@]}"; do

@@ -6,7 +6,6 @@
 , stdenv
 , fetchFromGitHub
 , rustStable
-, rust-1_60
 }:
 
 let

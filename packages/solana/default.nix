@@ -62,5 +62,17 @@ rec {
   };
   solana-1_17 = solana-1_17_6;
 
-  solana = solana-1_17;
+  solana-1_18_11 = mkSolana {
+    version = "1.18.11";
+    githubSha256 = "sha256-7cFVc8IerJGChvibUMa5Uau2ClEjSOVlkXayuctCwvM=";
+    cargoOutputHashes = {
+      "aes-gcm-siv-0.10.3" = "sha256-N1ppxvew4B50JQWsC3xzP0X4jgyXZ5aOQ0oJMmArjW8=";
+      "curve25519-dalek-3.2.1" = "sha256-4MF/qaP+EhfYoRETqnwtaCKC1tnUJlBCxeOPCnKrTwQ=";
+      "crossbeam-epoch-0.9.5" = "sha256-Jf0RarsgJiXiZ+ddy0vp4jQ59J9m0k3sgXhWhCdhgws=";
+      "tokio-1.29.1" = "sha256-Z/kewMCqkPVTXdoBcSaFKG5GSQAdkdpj3mAzLLCjjGk=";
+    };
+  };
+  solana-1_18 = solana-1_18_11;
+
+  solana = solana-1_18;
 }

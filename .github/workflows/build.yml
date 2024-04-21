@@ -38,6 +38,7 @@ jobs:
           - solana-1_11-basic
           - solana-1_13-basic
           - solana-1_17-basic
+          - solana-1_18-basic
           - solana-basic
           - spl-token-cli
           - anchor-0_15_0
@@ -61,9 +62,7 @@ jobs:
           - anchor-0_30
           - anchor
           - solana-1_17-full
-          - solana-1_17-basic
           - solana-1_18-full
-          - solana-1_18-basic
           - solana-basic
           - solana-full
           - saber-devenv

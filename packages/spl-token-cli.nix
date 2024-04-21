@@ -1,6 +1,5 @@
 { fetchCrate
 , lib
-, validatorOnly ? false
 , rustPlatform
 , clang
 , llvm
@@ -15,14 +14,14 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "spl-token-cli";
-  version = "2.0.15";
+  version = "3.4.0";
 
   src = fetchCrate {
     inherit pname version;
-    sha256 = "sha256-w6ebIiI4BvAuebQLYk2uSCaVzJoFyxuBIEi9+D/pUWk=";
+    sha256 = "sha256-Ojm/zWTz7WIJ+HKXkYox5FP3vkYTR5jL5UvXrIicONQ=";
   };
 
-  cargoSha256 = "sha256-v6jWcyHzHWa39McMLMgp1bzDSfkB6WE7H8VRTg7YPXg=";
+  cargoSha256 = "sha256-GILGgcf2xo2cxKAP2gDakBwmNlhPgz/AcmbdighluSU=";
   verifyCargoDeps = true;
 
   LIBCLANG_PATH = "${libclang}/lib";

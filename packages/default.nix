@@ -1,5 +1,4 @@
 { pkgs
-, rustNightly
 , rustStable
 , rust-1_60
 }:
@@ -50,7 +49,6 @@ anchorPackages // solanaFlattened // rec {
     inherit darwinPackages;
   };
 
-  rust-nightly = rustNightly.rust;
   rust-stable = rustStable.rust;
 
   saber-dev-utilities = with pkgs;

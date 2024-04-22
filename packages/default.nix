@@ -44,7 +44,6 @@ in
 anchorPackages // solanaFlattened // rec {
   spl-token-cli = pkgs.callPackage ./spl-token-cli.nix {
     inherit (rustStable) rustPlatform;
-    inherit (pkgs) lib clang llvm pkg-config openssl zlib udev stdenv fetchCrate;
     inherit (pkgs.llvmPackages) libclang;
     inherit darwinPackages;
   };

@@ -45,6 +45,13 @@ let
     });
 in
 rec {
+  anchor-0_30_1 = makeAnchorPackage {
+    version = "0.30.1";
+    srcHash = "sha256-3fLYTJDVCJdi6o0Zd+hb9jcPDKm4M4NzpZ8EUVW/GVw=";
+    cargoOutputHashes = {
+      "serum_dex-0.4.0" = "sha256-Nzhh3OcAFE2LcbUgrA4zE2TnUMfV0dD4iH6fTi48GcI=";
+    };
+  };
   anchor-0_30_0 = makeAnchorPackage {
     version = "0.30.0";
     srcHash = "sha256-RvYJoGmACoPfdbeXK2uYutleHPT0kAlOCDJX4NP9q4I=";
@@ -52,7 +59,7 @@ rec {
       "serum_dex-0.4.0" = "sha256-Nzhh3OcAFE2LcbUgrA4zE2TnUMfV0dD4iH6fTi48GcI=";
     };
   };
-  anchor-0_30 = anchor-0_30_0;
+  anchor-0_30 = anchor-0_30_1;
 
   anchor-0_29_0 = makeAnchorPackage {
     version = "0.29.0";

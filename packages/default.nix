@@ -58,7 +58,7 @@ anchorPackages // solanaFlattened // rec {
       paths = [
         cargo-workspaces
         cargo-expand
-        cargo-deps
+        # cargo-deps
         cargo-readme
 
         curl

@@ -12,7 +12,7 @@ let
     import ./solana-packages.nix {
       inherit pkgs rust darwinPackages cargoOutputHashes;
       inherit (args) version githubSha256;
-      cargoLockFile = ./cargo/v${args.version}.Cargo.lock;
+      cargoLockFile = ./cargo/v${args.version}/Cargo.lock;
     }
   );
 in
@@ -72,7 +72,17 @@ rec {
       "tokio-1.29.1" = "sha256-Z/kewMCqkPVTXdoBcSaFKG5GSQAdkdpj3mAzLLCjjGk=";
     };
   };
-  solana-1_18 = solana-1_18_11;
+  solana-1_18_23 = mkSolana {
+    version = "1.18.23";
+    githubSha256 = "sha256-ha+0P/XTI05LUd8CCzKMxrRkLThRN6jj6fn3d03HFyk=";
+    cargoOutputHashes = {
+      "aes-gcm-siv-0.10.3" = "sha256-N1ppxvew4B50JQWsC3xzP0X4jgyXZ5aOQ0oJMmArjW8=";
+      "curve25519-dalek-3.2.1" = "sha256-FuVNFuGCyHXqKqg+sn3hocZf1KMCI092Ohk7cvLPNjQ=";
+      "crossbeam-epoch-0.9.5" = "sha256-Jf0RarsgJiXiZ+ddy0vp4jQ59J9m0k3sgXhWhCdhgws=";
+      "tokio-1.29.1" = "sha256-Z/kewMCqkPVTXdoBcSaFKG5GSQAdkdpj3mAzLLCjjGk=";
+    };
+  };
+  solana-1_18 = solana-1_18_23;
 
   solana = solana-1_18;
 }
